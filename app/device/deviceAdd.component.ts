@@ -1,6 +1,4 @@
-/**
- * Created by marek.hrvol on 15. 12. 2016.
- */
+
 /**
  * Created by skytzi on 15.12.16.
  */

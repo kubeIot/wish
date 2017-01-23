@@ -5,3 +5,10 @@
   4. Type npm install
   5. Type npm start
 
+# What Is Happening?
+
+Tento repozitář obsahuje zdrojový kód bakalářské práce ** Marka Hrvola ** psanou v roce 2016/2017.
+
+V budoucnosti bude tento repozitář obsahovat taktéž Backend implementovaný ** Mirkem Jarošem **.
+
+

@@ -9,9 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 /**
- * Created by marek.hrvol on 15. 12. 2016.
- */
-/**
  * Created by skytzi on 15.12.16.
  */
 var core_1 = require('@angular/core');

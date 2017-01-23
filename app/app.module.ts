@@ -8,6 +8,8 @@ import { DashboardComponent } from './dashboard.component';
 import { DeviceComponent } from './device.component';
 import { eventsLogComponent } from './eventsLog.component';
 
+// device profile
+import { DeviceProfileComponent } from './device/deviceProfile.component';
 // device folder
 import { DeviceThumbComponent } from './device/deviceThumb.component';
 // device add
@@ -27,6 +29,7 @@ const appRoutes: Routes = [
     { path: 'device', component: DeviceComponent },
     { path: 'events-log', component: eventsLogComponent },
     { path: 'device-add', component: DeviceAddComponent },
+    { path: 'device-profile', component: DeviceProfileComponent },
     { path: 'about', component: AboutComponent },
     { path: '**', redirectTo: '/dashboard' }
 ];
@@ -44,6 +47,7 @@ const appRoutes: Routes = [
       eventsLogComponent,
       DeviceThumbComponent,
       DeviceAddComponent,
+      DeviceProfileComponent,
       AboutComponent
   ],
   bootstrap:    [ AppComponent ]

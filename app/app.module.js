@@ -16,6 +16,8 @@ var app_component_1 = require('./app.component');
 var dashboard_component_1 = require('./dashboard.component');
 var device_component_1 = require('./device.component');
 var eventsLog_component_1 = require('./eventsLog.component');
+// device profile
+var deviceProfile_component_1 = require('./device/deviceProfile.component');
 // device folder
 var deviceThumb_component_1 = require('./device/deviceThumb.component');
 // device add
@@ -31,6 +33,7 @@ var appRoutes = [
     { path: 'device', component: device_component_1.DeviceComponent },
     { path: 'events-log', component: eventsLog_component_1.eventsLogComponent },
     { path: 'device-add', component: deviceAdd_component_1.DeviceAddComponent },
+    { path: 'device-profile', component: deviceProfile_component_1.DeviceProfileComponent },
     { path: 'about', component: about_component_1.AboutComponent },
     { path: '**', redirectTo: '/dashboard' }
 ];
@@ -50,6 +53,7 @@ var AppModule = (function () {
                 eventsLog_component_1.eventsLogComponent,
                 deviceThumb_component_1.DeviceThumbComponent,
                 deviceAdd_component_1.DeviceAddComponent,
+                deviceProfile_component_1.DeviceProfileComponent,
                 about_component_1.AboutComponent
             ],
             bootstrap: [app_component_1.AppComponent]

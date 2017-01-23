@@ -32,8 +32,8 @@ Server zastavíte manualně klávesovou zkratkou 'Ctrl-C'
 Nejdůležitejší příkazy obsažené v 'package.json'.
 
 * 'npm start' - zkompiluje aplikaci a zároveň spustí server. Veškeré změny souborů jsou ihned zaznamenány ('watch-mode').
-* 'npm run tsc' - Spustí kompilátor TypeScriptu.
-* 'npm run tsc:w' - Spustí kompilátor TypeScriptu ve 'watch-mode'.
-* 'npm run lite' - Spustí server
+* 'npm run tsc' - spustí kompilátor TypeScriptu.
+* 'npm run tsc:w' - spustí kompilátor TypeScriptu ve 'watch-mode'.
+* 'npm run lite' - spustí server
 
 

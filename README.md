@@ -1,10 +1,3 @@
-# How to install this project:
-  1. Install nodejs on your machine. www.nodejs.org
-  2. Open command prompt on Windows, or command line on Mac or Linux
-  3. Go to the project folder and type: npm install -g typescript (on Linux/ Mac you may need to use sudo)
-  4. Type npm install
-  5. Type npm start
-
 # What Is Happening?
 
 Tento repozitář obsahuje zdrojový kód bakalářské práce ** Marka Hrvola ** psanou v roce 2016/2017.
@@ -15,5 +8,32 @@ V budoucnosti bude tento repozitář obsahovat taktéž Backend implementovaný 
 
 Node.js a npm jsou nezbytné pro spuštění tohoto projektu.
 
-Pokud nemáte nainstalovaný node.js, nainstalujte ho dle návodu na <a href="www.google.cz">www.nodejs.org</a> nebo https://docs.npmjs.com/getting-started/installing-node
+Pokud nemáte nainstalovaný node.js, nainstalujte ho dle návodu na www.nodejs.org nebo https://docs.npmjs.com/getting-started/installing-node
+
+**Ověřte, že máte verzi node alespoň 'v4.x.x' a npm '3.x.x'**
+spuštěním příkazů 'node -v' a 'npm -v' v terminálu. Starší verze mohou způsobovat chyby.
+
+## Instalace npm balíčků
+
+Nainstalujte balíčky specifikované v 'package.json' a ověřte že fungují:
+
+```bash
+npm install
+npm start
+```
+
+Příkaz 'npm start' zkompiluje aplikaci a zároveň spustí server. Veškeré změny souborů jsou ihned zaznamenány.
+
+Server zastavíte manualně klávesovou zkratkou 'Ctrl-C'
+
+
+### npm scripts
+
+Nejdůležitejší příkazy obsažené v 'package.json'.
+
+* 'npm start' - zkompiluje aplikaci a zároveň spustí server. Veškeré změny souborů jsou ihned zaznamenány ('watch-mode').
+* 'npm run tsc' - Spustí kompilátor TypeScriptu.
+* 'npm run tsc:w' - Spustí kompilátor TypeScriptu ve 'watch-mode'.
+* 'npm run lite' - Spustí server
+
 

@@ -27,7 +27,7 @@ Příkaz 'npm start' zkompiluje aplikaci a zároveň spustí server. Veškeré z
 Server zastavíte manualně klávesovou zkratkou 'Ctrl-C'
 
 
-### npm scripts
+### npm skripty
 
 Nejdůležitejší příkazy obsažené v 'package.json'.
 

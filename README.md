@@ -11,4 +11,9 @@ Tento repozitář obsahuje zdrojový kód bakalářské práce ** Marka Hrvola *
 
 V budoucnosti bude tento repozitář obsahovat taktéž Backend implementovaný ** Mirkem Jarošem **.
 
+## Požadavky
+
+Node.js a npm jsou nezbytné pro spuštění tohoto projektu.
+
+Pokud nemáte nainstalovaný node.js, nainstalujte ho dle návodu na <a href="www.google.cz">www.nodejs.org</a> nebo https://docs.npmjs.com/getting-started/installing-node
 

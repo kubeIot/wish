@@ -13,10 +13,61 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var test_service_1 = require("./test.service");
+var forms_1 = require('@angular/forms');
 var testComponent = (function () {
-    function testComponent(_httpService) {
+    function testComponent(_httpService, _fb) {
         this._httpService = _httpService;
+        this._fb = _fb;
     }
+    testComponent.prototype.ngOnInit = function () {
+        // we will initialize our form here
+        this.addDeviceForm = this._fb.group({
+            name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
+            addresses: this._fb.array([
+                this.initAddress(),
+            ]),
+            orders: this._fb.array([
+                this.initOrder(),
+            ])
+        });
+    };
+    testComponent.prototype.initOrder = function () {
+        // initialize our order
+        return this._fb.group({
+            order: ['', forms_1.Validators.required]
+        });
+    };
+    testComponent.prototype.addOrder = function () {
+        // add order to the list
+        var control = this.addDeviceForm.controls['orders'];
+        control.push(this.initOrder());
+    };
+    testComponent.prototype.removeOrder = function (j) {
+        // remove address from the list
+        var control = this.addDeviceForm.controls['orders'];
+        control.removeAt(j);
+    };
+    testComponent.prototype.initAddress = function () {
+        // initialize our address
+        return this._fb.group({
+            street: ['', forms_1.Validators.required],
+            postcode: ['']
+        });
+    };
+    testComponent.prototype.addAddress = function () {
+        // add address to the list
+        var control = this.addDeviceForm.controls['addresses'];
+        control.push(this.initAddress());
+    };
+    testComponent.prototype.removeAddress = function (i) {
+        // remove address from the list
+        var control = this.addDeviceForm.controls['addresses'];
+        control.removeAt(i);
+    };
+    testComponent.prototype.save = function (model) {
+        // call API to save customer
+        console.log(JSON.stringify(model._value));
+    };
     testComponent.prototype.onTestGet = function () {
         var _this = this;
         console.log("get request starting");
@@ -38,7 +89,7 @@ var testComponent = (function () {
             styleUrls: ['../../../assets/css/app.css'],
             providers: [test_service_1.testService],
         }), 
-        __metadata('design:paramtypes', [test_service_1.testService])
+        __metadata('design:paramtypes', [test_service_1.testService, forms_1.FormBuilder])
     ], testComponent);
     return testComponent;
 }());

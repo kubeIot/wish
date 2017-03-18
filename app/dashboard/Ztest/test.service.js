@@ -37,6 +37,16 @@ var testService = (function () {
         })
             .map(function (res) { return res.json(); });
     };
+    testService.prototype.postDevice = function (data) {
+        var json = JSON.stringify(data);
+        var params = 'json=' + json;
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        return this._http.post('http://validate.jsontest.com', params, {
+            headers: headers
+        })
+            .map(function (res) { return res.json(); });
+    };
     testService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

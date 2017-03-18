@@ -14,6 +14,7 @@ var dashboard_routes_1 = require('./dashboard.routes');
 var http_1 = require("@angular/http");
 var platform_browser_1 = require("@angular/platform-browser");
 var alert_module_1 = require("../login/alert/alert.module");
+var forms_1 = require("@angular/forms");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -23,6 +24,7 @@ var DashboardModule = (function () {
                 http_1.HttpModule,
                 platform_browser_1.BrowserModule,
                 alert_module_1.AlertModule,
+                forms_1.ReactiveFormsModule,
                 router_1.RouterModule.forChild(dashboard_routes_1.MODULE_ROUTES)
             ],
             declarations: [dashboard_routes_1.MODULE_COMPONENTS]

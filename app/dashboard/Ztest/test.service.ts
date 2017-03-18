@@ -32,4 +32,16 @@ export class testService {
         })
             .map(res => res.json());
     }
+
+    postDevice(data:string) {
+        var json = JSON.stringify(data)
+        var params='json=' + json;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+        return this._http.post('http://validate.jsontest.com', params, {
+            headers: headers
+        })
+            .map(res => res.json());
+    }
 }

@@ -5,6 +5,11 @@ import {Component, OnInit,AfterViewInit,trigger,state,style,transition,animate,k
 import {FormsModule} from '@angular/forms'
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { NewDeviceService } from "./newDevice.service"
+
+
+//TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
+
+
 @Component({
     moduleId: module.id,
     selector: 'device-add',

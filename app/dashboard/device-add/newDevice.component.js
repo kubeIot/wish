@@ -14,6 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var newDevice_service_1 = require("./newDevice.service");
+//TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
 var NewDeviceComponent = (function () {
     function NewDeviceComponent(_httpService, _fb) {
         this._httpService = _httpService;

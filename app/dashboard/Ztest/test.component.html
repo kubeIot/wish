@@ -1,0 +1,32 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <button (click)="onTestGet()"> Test GET Request </button>
+                    <p>Output: {{getData}}</p>
+                    <button (click)="onTestPost()">Test Post Request</button>
+                    <p> Output {{postData}}</p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="product-tabs">
+                <ul class="nav nav-tabs">
+                    <li routerLinkActive="active active-link" class="nav-option">
+                        <a routerLink="/test/test1">devices</a>
+                    </li>
+                    <li routerLinkActive="active active-link" class="nav-option">
+                        <a routerLink="/test/test2" > applications</a>
+                    </li>
+                    <li routerLinkActive="active active-link" class="nav-option">
+                        <a routerLink="/test/test3" > devices2</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+    <div class="sidebar-wrapper">
+        <div class="logo">
+            <a href="#" class="simple-text">
+                What Is Happening?
+            </a>
+        </div>
+        <ul class="nav">
+            <li routerLinkActive="active" *ngFor="let menuItem of menuItems">
+                <a  [routerLink]="[menuItem.path]">
+                    <i class="{{menuItem.icon}}"></i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </li>
+            <li class="active active-pro">
+                <a>
+                    <i class="pe-7s-clock"></i>
+                    <p>{{ today | date: 'dd.MM.yyyy HH:mm:ss' }}</p>
+                </a>
+            </li>
+        </ul>
+    </div>

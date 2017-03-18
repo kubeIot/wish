@@ -36,4 +36,3 @@ Nejdůležitejší příkazy obsažené v 'package.json'.
 * 'npm run tsc:w' - spustí kompilátor TypeScriptu ve 'watch-mode'.
 * 'npm run lite' - spustí server
 
-

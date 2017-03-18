@@ -9,22 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Rx_1 = require('rxjs/Rx');
 var AppComponent = (function () {
     function AppComponent() {
-        this.name = 'Angular';
-        this.today = new Date();
     }
     AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        var timer = Rx_1.Observable.timer(1000, 1000);
-        timer.subscribe(function (t) { return _this.today = new Date(); });
+        $.getScript('../assets/js/light-bootstrap-dashboard.js');
+    };
+    AppComponent.prototype.isMaps = function (path) {
+        if (path == window.location.pathname) {
+            return true;
+        }
+        else {
+            return false;
+        }
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            templateUrl: '../html/app.component.html',
-            styleUrls: ['../css/app.component.css']
+            templateUrl: 'app/app.component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

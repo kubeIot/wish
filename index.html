@@ -1,65 +1,74 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+
+<html>
 <head>
-    <base href="/">
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-    <title>What is happening?</title>
+    <meta charset="utf-8" />
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--css files-->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-    <link href="css/pe-icon-7-stroke.css" rel="stylesheet"/>
-    <link href="css/spinner.css" rel="stylesheet">
-    <link href="jqueryui.css" rel="stylesheet">
+    <title>What is Happening?</title>
 
-    <!--fonts-->
-    <!--<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>-->
-    <!--<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Polyfill(s) for older browsers -->
+    <!-- Animation library for notifications   -->
+    <!--<link href="assets/css/animate.min.css" rel="stylesheet"/>-->
 
+    <!--  Light Bootstrap css  -->
+    <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
+    <link href="assets/css/spinner.css" rel="stylesheet">
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+    <!-- Polyfill for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
-
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
 
+    <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
-    <script src="jquery.js"></script>
-    <script src="jqueryui.js"></script>
-    <script src="scripts.js"></script>
-
-
-    <!-- TODO: npm install ng2-charts --save
-         TODO: npm install chart.js --save -->
-    <!--<script src="node_modules/chart.js/src/chart.js"></script>-->
-
-
-
     <script>
-        System.import('app').catch(function (err) {
-            console.error(err);
-        });
+    System.import('app').catch(function(err){ console.error(err); });
     </script>
 
-
-
 </head>
-
+<!-- 3. Display the application -->
 <body>
-<my-app>
-    <div class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-    </div>
-</my-app>
+    <base href='/'>
+    <my-app>
+        <div class="center" alt="loading...">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+    </my-app>
 </body>
+<!--   Core JS Files   -->
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script src="assets/js/navbar.js" type="text/javascript"></script>
+
+<!--  Checkbox, Radio & Switch Plugins -->
+<!--<script src="assets/js/bootstrap-checkbox-radio-switch.js" type="text/javascript"></script>-->
+<!--  Charts Plugin -->
+<!--<script src="assets/js/chartist.min.js" type="text/javascript"></script>-->
+<!--  Notifications Plugin    -->
+<!--<script src="assets/js/bootstrap-notify.js" type="text/javascript"></script>-->
+<!--<script src="https://code.angularjs.org/2.0.0-beta.0/http.dev.js"></script>-->
+
+
 </html>

@@ -1,18 +1,22 @@
-import { Component } from '@angular/core';
-import {Observable} from 'rxjs/Rx';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 
 @Component({
-  selector: 'my-app',
-  templateUrl: '../html/app.component.html',
-  styleUrls: ['../css/app.component.css']
+    selector: 'my-app',
+    templateUrl: 'app/app.component.html'
 })
-export class AppComponent  {
-  name = 'Angular';
-  today = new Date();
-  ngOnInit(){
-    let timer = Observable.timer(1000,1000);
-    timer.subscribe(t=>this.today = new Date());
-  }
 
-
+export class AppComponent implements OnInit{
+    ngOnInit(){
+        $.getScript('../assets/js/light-bootstrap-dashboard.js');
+    }
+    public isMaps(path){
+        if(path == window.location.pathname){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

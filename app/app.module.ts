@@ -1,58 +1,33 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes }   from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
 
-// all components
-import { AppComponent }  from './app.component';
-import { DashboardComponent } from './dashboard.component';
-import { DeviceComponent } from './device.component';
-import { eventsLogComponent } from './eventsLog.component';
+import { AppComponent }   from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-// device profile
-import { DeviceProfileComponent } from './device/deviceProfile.component';
-// device folder
-import { DeviceThumbComponent } from './device/deviceThumb.component';
-// device add
-import { DeviceAddComponent } from './device/deviceAdd.component';
-// about
-import {AboutComponent} from "./about.component";
-/*FIXME: http://valor-software.com/ng2-charts/ */
-// import { ChartsModule } from 'ng2-charts/ng2-charts';
-// import { BarChartComponent } from './charts.component';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { SidebarModule } from './sidebar/sidebar.module';
+import { FooterModule } from './shared/footer/footer.module';
+import { NavbarModule} from './shared/navbar/navbar.module';
 
-
-
-
-const appRoutes: Routes = [
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'device', component: DeviceComponent },
-    { path: 'events-log', component: eventsLogComponent },
-    { path: 'device-add', component: DeviceAddComponent },
-    { path: 'device-profile', component: DeviceProfileComponent },
-    { path: 'about', component: AboutComponent },
-    { path: '**', redirectTo: '/dashboard' }
-];
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+// import {InMemoryWebApiModule} from "angular-in-memory-web-api";
+// import {InMemoryDataService} from "./dashboard/inMemoryDataService.service";
 
 @NgModule({
-  imports:      [
-      BrowserModule,
-      RouterModule.forRoot(appRoutes),
-  ],
-  declarations: [
-      AppComponent,
-      DashboardComponent,
-      DeviceComponent,
-      eventsLogComponent,
-      DeviceThumbComponent,
-      DeviceAddComponent,
-      DeviceProfileComponent,
-      AboutComponent
-  ],
-  bootstrap:    [ AppComponent ]
+    imports:      [
+        BrowserModule,
+        DashboardModule,
+        SidebarModule,
+        NavbarModule,
+        FooterModule,
+        RouterModule.forRoot([]),
+        HttpModule,
+        // InMemoryWebApiModule.forRoot(InMemoryDataService)
+    ],
+    declarations: [ AppComponent, DashboardComponent ],
+    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+    bootstrap:    [ AppComponent ]
 })
-
-
 export class AppModule { }
-

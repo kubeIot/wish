@@ -11,32 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
-// all components
+var http_1 = require('@angular/http');
 var app_component_1 = require('./app.component');
-var dashboard_component_1 = require('./dashboard.component');
-var device_component_1 = require('./device.component');
-var eventsLog_component_1 = require('./eventsLog.component');
-// device profile
-var deviceProfile_component_1 = require('./device/deviceProfile.component');
-// device folder
-var deviceThumb_component_1 = require('./device/deviceThumb.component');
-// device add
-var deviceAdd_component_1 = require('./device/deviceAdd.component');
-// about
-var about_component_1 = require("./about.component");
-/*FIXME: http://valor-software.com/ng2-charts/ */
-// import { ChartsModule } from 'ng2-charts/ng2-charts';
-// import { BarChartComponent } from './charts.component';
-var appRoutes = [
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
-    { path: 'device', component: device_component_1.DeviceComponent },
-    { path: 'events-log', component: eventsLog_component_1.eventsLogComponent },
-    { path: 'device-add', component: deviceAdd_component_1.DeviceAddComponent },
-    { path: 'device-profile', component: deviceProfile_component_1.DeviceProfileComponent },
-    { path: 'about', component: about_component_1.AboutComponent },
-    { path: '**', redirectTo: '/dashboard' }
-];
+var dashboard_component_1 = require('./dashboard/dashboard.component');
+var dashboard_module_1 = require('./dashboard/dashboard.module');
+var sidebar_module_1 = require('./sidebar/sidebar.module');
+var footer_module_1 = require('./shared/footer/footer.module');
+var navbar_module_1 = require('./shared/navbar/navbar.module');
+var common_1 = require('@angular/common');
+// import {InMemoryWebApiModule} from "angular-in-memory-web-api";
+// import {InMemoryDataService} from "./dashboard/inMemoryDataService.service";
 var AppModule = (function () {
     function AppModule() {
     }
@@ -44,18 +28,15 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
-                router_1.RouterModule.forRoot(appRoutes),
+                dashboard_module_1.DashboardModule,
+                sidebar_module_1.SidebarModule,
+                navbar_module_1.NavbarModule,
+                footer_module_1.FooterModule,
+                router_1.RouterModule.forRoot([]),
+                http_1.HttpModule,
             ],
-            declarations: [
-                app_component_1.AppComponent,
-                dashboard_component_1.DashboardComponent,
-                device_component_1.DeviceComponent,
-                eventsLog_component_1.eventsLogComponent,
-                deviceThumb_component_1.DeviceThumbComponent,
-                deviceAdd_component_1.DeviceAddComponent,
-                deviceProfile_component_1.DeviceProfileComponent,
-                about_component_1.AboutComponent
-            ],
+            declarations: [app_component_1.AppComponent, dashboard_component_1.DashboardComponent],
+            providers: [{ provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

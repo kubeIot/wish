@@ -1,0 +1,61 @@
+<div class="main-content" [@applications]>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">
+                            <div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>
+                        </div>
+                        <h4 class="title">Applications</h4>
+                        <p class="category">You can find all of your applications here!</p>
+
+                    </div>
+                    <div class="content">
+                        <div class="row">
+
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label><b>Application</b></label>
+                                    <input class="form-control" placeholder="A321" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label><b>Device</b></label>
+                                    <input class="form-control" placeholder="RPi 3.0"  type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="form-group">
+                                    <label><b>Show only</b></label>
+                                    <select class="form-control" value="Present">
+                                        <option selected> All </option>
+                                        <option> Active </option>
+                                        <option> Inactive </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="row product-tabs">-->
+                    <!--<ul class="nav nav-tabs">-->
+                        <!--<li class=""> ttt</li>-->
+                        <!--&lt;!&ndash;<button class="btn-primary"> devices</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button class="btn-navbar"> applications</button>&ndash;&gt;-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="card">-->
+                    <!--<div class="row">-->
+
+                        <!--<device-thumb *ngFor="let dev of devices" [device]="dev"></device-thumb>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>

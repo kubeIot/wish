@@ -1,0 +1,56 @@
+<div class="main-content" [@devices]>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <a routerLink="/device-add">
+                            <button style="float: right;" class="btn btn-primary">Add Device</button>
+                        </a>
+                        <div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">
+                            <div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>
+                        </div>
+                        <h4 class="title">Devices</h4>
+                        <p class="category">You can find any device here!</p>
+
+                    </div>
+                    <div class="content">
+                        <div class="row">
+
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Name of the Device</label>
+                                    <input class="form-control" placeholder="A321" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Type of the Device</label>
+                                    <input class="form-control" placeholder="RPi 3.0"  type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="form-group">
+                                    <label><b>Show only</b></label>
+                                    <select class="form-control" value="Present">
+                                        <option selected> All </option>
+                                        <option> Active </option>
+                                        <option> Inactive </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row">
+
+                        <device-thumb *ngFor="let dev of devices" [device]="dev"></device-thumb>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

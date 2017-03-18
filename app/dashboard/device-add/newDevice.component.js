@@ -12,15 +12,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by skylele on 5.3.17.
  */
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
+var newDevice_service_1 = require("./newDevice.service");
 var NewDeviceComponent = (function () {
-    function NewDeviceComponent() {
+    function NewDeviceComponent(_httpService, _fb) {
+        this._httpService = _httpService;
+        this._fb = _fb;
     }
+    NewDeviceComponent.prototype.ngOnInit = function () {
+        // we will initialize our form here
+        this.addDeviceForm = this._fb.group({
+            address: ['', [forms_1.Validators.required]],
+            device_vendor: ['', [forms_1.Validators.required]],
+            device_version: ['', [forms_1.Validators.required]],
+            id: ['', [forms_1.Validators.required]],
+            kernel_version: ['', [forms_1.Validators.required]],
+            number_of_applications: ['', [forms_1.Validators.required]],
+            os_distribution: ['', [forms_1.Validators.required]],
+            system_info: ['']
+        });
+    };
+    NewDeviceComponent.prototype.addDevice = function (model) {
+        // call API to save customer
+        console.log(JSON.stringify(model._value));
+    };
     NewDeviceComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'device-add',
             templateUrl: 'newDevice.component.html',
             styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
+            providers: [newDevice_service_1.NewDeviceService],
             animations: [
                 core_1.trigger('newdevice', [
                     core_1.state('*', core_1.style({
@@ -43,7 +65,7 @@ var NewDeviceComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [newDevice_service_1.NewDeviceService, forms_1.FormBuilder])
     ], NewDeviceComponent);
     return NewDeviceComponent;
 }());

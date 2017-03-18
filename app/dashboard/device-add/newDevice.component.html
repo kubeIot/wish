@@ -13,24 +13,70 @@
                     <h4 class="title">Add Device</h4>
                 </div>
                 <div class="content">
-                    <!--<form>-->
+                    <form [formGroup]="addDeviceForm" novalidate (ngSubmit)="addDevice(addDeviceForm)">
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label><b>Name of the Device</b></label>
-                                    <input type="text" class="form-control" placeholder="A310">
+                                    <label><b>Address</b></label>
+                                    <input type="text" class="form-control" formControlName="address">
+                                    <small *ngIf="!addDeviceForm.controls.address.valid" class="text-danger">
+                                        Address is required.
+                                    </small>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label><b>Type of the Device</b></label>
-                                    <input type="text" class="form-control" placeholder="RPi 3.0">
+                                    <label><b>Device Vendor</b></label>
+                                    <input type="text" class="form-control" formControlName="device_vendor">
+                                    <small *ngIf="!addDeviceForm.controls.device_vendor.valid" class="text-danger">
+                                        Device Vendor is required.
+                                    </small>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label><b>Location of the device</b></label>
-                                    <input class="form-control" placeholder="Kitchen">
+                                    <label><b>Device Version</b></label>
+                                    <input type="text" class="form-control" formControlName="device_version">
+                                    <small *ngIf="!addDeviceForm.controls.device_version.valid" class="text-danger">
+                                        Device Version is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label><b>ID</b></label>
+                                    <input type="text" class="form-control" formControlName="id">
+                                    <small *ngIf="!addDeviceForm.controls.id.valid" class="text-danger">
+                                        ID is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label><b>Kernel Version</b></label>
+                                    <input type="text" class="form-control" formControlName="kernel_version">
+                                    <small *ngIf="!addDeviceForm.controls.kernel_version.valid" class="text-danger">
+                                        Kernel Version is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label><b>Number of Applications</b></label>
+                                    <input type="text" class="form-control" formControlName="number_of_applications">
+                                    <small *ngIf="!addDeviceForm.controls.number_of_applications.valid" class="text-danger">
+                                        Number of Applications is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label><b>OS Distribution</b></label>
+                                    <input type="text" class="form-control" formControlName="os_distribution">
+                                    <small *ngIf="!addDeviceForm.controls.os_distribution.valid" class="text-danger">
+                                        OS Distribution is required.
+                                    </small>
                                 </div>
                             </div>
                         </div>
@@ -38,25 +84,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label><b>Application</b></label>
-                                    <input type="text" class="form-control" placeholder="Drag 'n Drop Application Here">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label><b>Additional Information</b></label>
-                                    <textarea rows="5" class="form-control" placeholder="Additional description"></textarea>
+                                    <label><b>System Information</b></label>
+                                    <input type="text" class="form-control" formControlName="system_info">
                                 </div>
                             </div>
                         </div>
                         <a routerLink="/device">
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Add Device</button>
+                            <button type="submit" class="btn btn-info btn-fill pull-right" [disabled]="!addDeviceForm.valid">Add Device</button>
                         </a>
                         <div class="clearfix"></div>
-                    <!--</form>-->
+                    </form>
                 </div>
             </div>
         </div>

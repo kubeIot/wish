@@ -57,9 +57,78 @@ export class NewDeviceComponent implements OnInit {
             kernel_version: ['', [Validators.required]],
             number_of_applications: ['', [Validators.required]],
             os_distribution: ['', [Validators.required]],
-            system_info: ['']
+            system_info: [''],
+            applications: this._fb.array([
+                this.initApplication(),
+
+            ]),
+            installed_capabilities: this._fb.array([
+                this.initInstalledCapability(),
+
+            ]),
+            used_capabilities: this._fb.array([
+                this.initUsedCapability(),
+
+            ]),
         });
     }
+
+
+    initApplication() {
+        // initialize our order
+        return this._fb.group({
+            application: ['', Validators.required]
+        });
+    }
+    addApplication() {
+        // add order to the list
+        const control = <FormArray>this.addDeviceForm.controls['applications'];
+        control.push(this.initApplication());
+    }
+
+    removeApplication(i: number) {
+        // remove address from the list
+        const control = <FormArray>this.addDeviceForm.controls['applications'];
+        control.removeAt(i);
+    }
+
+    initInstalledCapability() {
+        // initialize our order
+        return this._fb.group({
+            installed_capability: ['', Validators.required]
+        });
+    }
+    addInstalledCapability() {
+        // add order to the list
+        const control = <FormArray>this.addDeviceForm.controls['installed_capabilities'];
+        control.push(this.initInstalledCapability());
+    }
+
+    removeInstalledCapability(i: number) {
+        // remove address from the list
+        const control = <FormArray>this.addDeviceForm.controls['installed_capabilities'];
+        control.removeAt(i);
+    }
+
+    initUsedCapability() {
+        // initialize our order
+        return this._fb.group({
+            application_id: [''],
+            capability_id: ['']
+        });
+    }
+    addUsedCapability() {
+        // add order to the list
+        const control = <FormArray>this.addDeviceForm.controls['used_capabilities'];
+        control.push(this.initUsedCapability());
+    }
+
+    removeUsedCapability(i: number) {
+        // remove address from the list
+        const control = <FormArray>this.addDeviceForm.controls['used_capabilities'];
+        control.removeAt(i);
+    }
+
 
     addDevice(model:any) {
         // call API to save customer

@@ -30,8 +30,66 @@ var NewDeviceComponent = (function () {
             kernel_version: ['', [forms_1.Validators.required]],
             number_of_applications: ['', [forms_1.Validators.required]],
             os_distribution: ['', [forms_1.Validators.required]],
-            system_info: ['']
+            system_info: [''],
+            applications: this._fb.array([
+                this.initApplication(),
+            ]),
+            installed_capabilities: this._fb.array([
+                this.initInstalledCapability(),
+            ]),
+            used_capabilities: this._fb.array([
+                this.initUsedCapability(),
+            ]),
         });
+    };
+    NewDeviceComponent.prototype.initApplication = function () {
+        // initialize our order
+        return this._fb.group({
+            application: ['', forms_1.Validators.required]
+        });
+    };
+    NewDeviceComponent.prototype.addApplication = function () {
+        // add order to the list
+        var control = this.addDeviceForm.controls['applications'];
+        control.push(this.initApplication());
+    };
+    NewDeviceComponent.prototype.removeApplication = function (i) {
+        // remove address from the list
+        var control = this.addDeviceForm.controls['applications'];
+        control.removeAt(i);
+    };
+    NewDeviceComponent.prototype.initInstalledCapability = function () {
+        // initialize our order
+        return this._fb.group({
+            installed_capability: ['', forms_1.Validators.required]
+        });
+    };
+    NewDeviceComponent.prototype.addInstalledCapability = function () {
+        // add order to the list
+        var control = this.addDeviceForm.controls['installed_capabilities'];
+        control.push(this.initInstalledCapability());
+    };
+    NewDeviceComponent.prototype.removeInstalledCapability = function (i) {
+        // remove address from the list
+        var control = this.addDeviceForm.controls['installed_capabilities'];
+        control.removeAt(i);
+    };
+    NewDeviceComponent.prototype.initUsedCapability = function () {
+        // initialize our order
+        return this._fb.group({
+            application_id: [''],
+            capability_id: ['']
+        });
+    };
+    NewDeviceComponent.prototype.addUsedCapability = function () {
+        // add order to the list
+        var control = this.addDeviceForm.controls['used_capabilities'];
+        control.push(this.initUsedCapability());
+    };
+    NewDeviceComponent.prototype.removeUsedCapability = function (i) {
+        // remove address from the list
+        var control = this.addDeviceForm.controls['used_capabilities'];
+        control.removeAt(i);
     };
     NewDeviceComponent.prototype.addDevice = function (model) {
         // call API to save customer

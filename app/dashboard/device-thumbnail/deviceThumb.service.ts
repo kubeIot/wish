@@ -2,28 +2,28 @@
  * Created by skylele on 3.3.17.
  */
 import { Injectable } from '@angular/core';
-import { Http } from "@angular/http";
+import { Http,Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import { Device } from "./deviceThumb.metadata";
-
+import 'rxjs/add/operator/map';
 @Injectable()
 export class DeviceThumbService {
     private devicesUrl = 'http://127.0.0.1:8080/device';  // URL to web api
 
     constructor(private http: Http) { }
 
-    getDevices(): Promise<Device[]> {
+    getDevices() {
         return this.http.get(this.devicesUrl)
-            .toPromise()
-            .then(response => response.json().data as Device[]);
+            .map((response:Response) => response.json());
     }
 
-    getDevice(id: number): Promise<Device> {
+
+    getDevice(id: number) {
         const url = `${this.devicesUrl}/${id}`;
         return this.http.get(url)
-            .toPromise()
-            .then(response => response.json().data as Device);
+            .map((response:Response) => response.json());
     }
+
 
 
 

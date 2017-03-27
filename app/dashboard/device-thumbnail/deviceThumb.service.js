@@ -14,6 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require("@angular/http");
 require('rxjs/add/operator/toPromise');
+require('rxjs/add/operator/map');
 var DeviceThumbService = (function () {
     function DeviceThumbService(http) {
         this.http = http;
@@ -21,14 +22,12 @@ var DeviceThumbService = (function () {
     }
     DeviceThumbService.prototype.getDevices = function () {
         return this.http.get(this.devicesUrl)
-            .toPromise()
-            .then(function (response) { return response.json().data; });
+            .map(function (response) { return response.json(); });
     };
     DeviceThumbService.prototype.getDevice = function (id) {
         var url = this.devicesUrl + "/" + id;
         return this.http.get(url)
-            .toPromise()
-            .then(function (response) { return response.json().data; });
+            .map(function (response) { return response.json(); });
     };
     DeviceThumbService = __decorate([
         core_1.Injectable(), 

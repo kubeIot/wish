@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class testService {
 
-    private _url: string = "http://date.jsontest.com";
+    private _url: string = "http://127.0.0.1:8080/device/1";
     constructor (private _http: Http) {
     }
 

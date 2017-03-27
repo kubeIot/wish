@@ -18,8 +18,21 @@ var DevicesComponent = (function () {
         var _this = this;
         this.deviceThumbService
             .getDevices()
-            .then(function (devices) { return _this.devices = devices; });
+            .subscribe(function (data) { return _this.devicesData = data; }, function (error) { return alert(error); }, function () { return console.log("get request is completed"); });
     };
+    // onTestGet() {
+    //     console.log("get request starting");
+    //     this._httpService.getCurrentTime()
+    //     // .subscribe(data => this.getData = JSON.stringify(data));
+    //         .subscribe(
+    //             data => this.getData = data,
+    //             error => alert(error),
+    //             () => console.log("get request is completed")
+    //         );
+    //
+    //     console.log(this.getData);;
+    //     console.log("get request is completed");
+    // }
     DevicesComponent.prototype.ngOnInit = function () {
         this.getDevices();
     };

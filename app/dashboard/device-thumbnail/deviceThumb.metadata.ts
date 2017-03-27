@@ -16,3 +16,14 @@ export interface Device {
     system_info: string;
     used_capabilities: string[];
 }
+// export interface RootObject {
+//     applications: number[];
+//     device_vendor: string;
+//     id: number;
+//     installed_capabilities: number[];
+//     kernel_version: string;
+//     os_distribution: string;
+//     owner: number;
+//     system_info: string;
+//     used_capabilities: any[];
+// }

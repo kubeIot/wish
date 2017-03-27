@@ -8,9 +8,9 @@
                         <a routerLink="/device-add">
                             <button style="float: right;" class="btn btn-primary">Add Device</button>
                         </a>
-                        <div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">
-                            <div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>
-                        </div>
+                        <!--<div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">-->
+                            <!--<div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>-->
+                        <!--</div>-->
                         <h4 class="title">Devices</h4>
                         <p class="category">You can find any device here!</p>
 
@@ -47,7 +47,7 @@
                 <div class="card">
                     <div class="row">
 
-                        <device-thumb *ngFor="let dev of devices" [device]="dev"></device-thumb>
+                        <device-thumb *ngFor="let dev of devicesData" [device]="dev"></device-thumb>
                     </div>
                 </div>
             </div>

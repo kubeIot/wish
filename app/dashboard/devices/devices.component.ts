@@ -33,7 +33,7 @@ import { DeviceThumbService } from "../device-thumbnail/deviceThumb.service";
 export class DevicesComponent implements OnInit {
 
     devices: Device[];
-
+    devicesData:any;
     constructor (private deviceThumbService: DeviceThumbService) {
 
     }
@@ -41,8 +41,27 @@ export class DevicesComponent implements OnInit {
     getDevices(): void {
         this.deviceThumbService
             .getDevices()
-            .then(devices => this.devices = devices);
+            .subscribe(
+                data => this.devicesData = data,
+                error => alert(error),
+                () => console.log("get request is completed")
+            );
     }
+
+
+    // onTestGet() {
+    //     console.log("get request starting");
+    //     this._httpService.getCurrentTime()
+    //     // .subscribe(data => this.getData = JSON.stringify(data));
+    //         .subscribe(
+    //             data => this.getData = data,
+    //             error => alert(error),
+    //             () => console.log("get request is completed")
+    //         );
+    //
+    //     console.log(this.getData);;
+    //     console.log("get request is completed");
+    // }
 
     ngOnInit(): void {
         this.getDevices();

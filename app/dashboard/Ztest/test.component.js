@@ -72,7 +72,9 @@ var testComponent = (function () {
         var _this = this;
         console.log("get request starting");
         this._httpService.getCurrentTime()
-            .subscribe(function (data) { return _this.getData = JSON.stringify(data); }, function (error) { return alert(error); }, function () { return console.log("get request is completed"); });
+            .subscribe(function (data) { return _this.getData = data; }, function (error) { return alert(error); }, function () { return console.log("get request is completed"); });
+        console.log(this.getData);
+        ;
         console.log("get request is completed");
     };
     testComponent.prototype.onTestPost = function () {

@@ -20,7 +20,7 @@ require('rxjs/add/operator/map');
 var testService = (function () {
     function testService(_http) {
         this._http = _http;
-        this._url = "http://date.jsontest.com";
+        this._url = "http://127.0.0.1:8080/device/1";
     }
     testService.prototype.getCurrentTime = function () {
         console.log("getting the time from " + this._url);

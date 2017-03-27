@@ -8,7 +8,7 @@ import {BrowserModule} from '@angular/platform-browser'
 import {FormsModule} from '@angular/forms'
 import {testService} from "./test.service";
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-
+import {Device} from '../device-thumbnail/deviceThumb.metadata'
 export interface Customer {
     name: string; // required field with minimum 5 characters
     orders: string[];
@@ -32,13 +32,13 @@ export class testComponent implements OnInit {
 
 
 
-
+    device : Device;
     public addDeviceForm: FormGroup;
-    getData: string;
+    getData: any;
     postData: string;
 
-    constructor(private _httpService: testService, private _fb: FormBuilder) {
 
+    constructor(private _httpService: testService, private _fb: FormBuilder) {
     }
 
 
@@ -119,12 +119,15 @@ export class testComponent implements OnInit {
         this._httpService.getCurrentTime()
             // .subscribe(data => this.getData = JSON.stringify(data));
                 .subscribe(
-                data => this.getData = JSON.stringify(data),
+                data => this.getData = data,
                 error => alert(error),
                 () => console.log("get request is completed")
             );
+
+        console.log(this.getData);;
         console.log("get request is completed");
     }
+
 
     onTestPost() {
         console.log("post request starting");

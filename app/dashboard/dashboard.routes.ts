@@ -11,6 +11,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {testComponent} from "./Ztest/test.component";
 import {LoginComponent} from "../login/login/login.component";
 import {ApplicationsComponent} from "./Applications/applications.component";
+import {authComponent} from "../auth/auth.component";
 
 export const MODULE_COMPONENTS = [
     AboutComponent,
@@ -23,7 +24,8 @@ export const MODULE_COMPONENTS = [
     DeviceProfileComponent,
     LoginComponent,
     ApplicationsComponent,
-    testComponent
+    testComponent,
+    authComponent
 ]
 
 export const MODULE_ROUTES: Route[] =[
@@ -41,6 +43,8 @@ export const MODULE_ROUTES: Route[] =[
     { path: 'test/test1', component: testComponent },
     { path: 'test/test2', component: testComponent },
     { path: 'test/test3', component: testComponent },
+    { path: 'auth', component: authComponent },
+
     { path: '**', redirectTo: '/dashboard' }
 
 

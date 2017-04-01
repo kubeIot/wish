@@ -1,0 +1,11 @@
+<div class="panel-body" [formGroupName]="i">
+    <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.applications.controls.length > 1" (click)="removeApplication(i)"></span>
+    <div class="form-group col-xs-12">
+        <label><b>Applications</b></label>
+        <input type="text" class="form-control" formControlName="application">
+        <small [hidden]="addDeviceForm.controls.applications.controls[i].controls.application.valid" class="text-danger">
+            Application is required
+        </small>
+    </div>
+
+</div>

@@ -21,7 +21,7 @@
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label>Name of the Device</label>
-                                    <input class="form-control" placeholder="A321" type="text">
+                                    <input class="form-control" placeholder="A321" type="text" [formControl]="searchNameInput">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -47,7 +47,8 @@
                 <div class="card">
                     <div class="row">
 
-                        <device-thumb *ngFor="let dev of devicesData" [device]="dev"></device-thumb>
+
+                        <device-thumb *ngFor="let dev of devices | async" [device]="dev"></device-thumb>
                     </div>
                 </div>
             </div>

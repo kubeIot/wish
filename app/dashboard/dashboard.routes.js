@@ -10,6 +10,7 @@ var profile_component_1 = require("./profile/profile.component");
 var test_component_1 = require("./Ztest/test.component");
 var login_component_1 = require("../login/login/login.component");
 var applications_component_1 = require("./Applications/applications.component");
+var auth_component_1 = require("../auth/auth.component");
 exports.MODULE_COMPONENTS = [
     about_component_1.AboutComponent,
     eventsLog_component_1.EventsLogComponent,
@@ -21,7 +22,8 @@ exports.MODULE_COMPONENTS = [
     deviceProfile_component_1.DeviceProfileComponent,
     login_component_1.LoginComponent,
     applications_component_1.ApplicationsComponent,
-    test_component_1.testComponent
+    test_component_1.testComponent,
+    auth_component_1.authComponent
 ];
 exports.MODULE_ROUTES = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -38,6 +40,7 @@ exports.MODULE_ROUTES = [
     { path: 'test/test1', component: test_component_1.testComponent },
     { path: 'test/test2', component: test_component_1.testComponent },
     { path: 'test/test3', component: test_component_1.testComponent },
+    { path: 'auth', component: auth_component_1.authComponent },
     { path: '**', redirectTo: '/dashboard' }
 ];
 //# sourceMappingURL=dashboard.routes.js.map

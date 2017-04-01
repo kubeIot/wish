@@ -15,14 +15,25 @@ var core_1 = require('@angular/core');
 var http_1 = require("@angular/http");
 require('rxjs/add/operator/toPromise');
 require('rxjs/add/operator/map');
+var rxjs_1 = require("rxjs");
 var DeviceThumbService = (function () {
     function DeviceThumbService(http) {
         this.http = http;
         this.devicesUrl = 'http://127.0.0.1:8080/device'; // URL to web api
+        this.devicesList = this.http.get(this.devicesUrl)
+            .map(function (res) { return res.json(); })
+            .catch(function (error) { return rxjs_1.Observable.throw(error.json().error || 'Server error'); })
+            .publishReplay(1)
+            .refCount();
     }
-    DeviceThumbService.prototype.getDevices = function () {
-        return this.http.get(this.devicesUrl)
-            .map(function (response) { return response.json(); });
+    DeviceThumbService.prototype.getList = function () {
+        return this.devicesList;
+    };
+    DeviceThumbService.prototype.getDevices = function (text) {
+        // console.log("devices - search: ", text);
+        var lowerCaseText = text.toLowerCase();
+        return this.getList()
+            .map(function (devices) { return devices.filter(function (item) { return item.device_vendor.toLowerCase().indexOf(lowerCaseText) !== -1; }); });
     };
     DeviceThumbService.prototype.getDevice = function (id) {
         var url = this.devicesUrl + "/" + id;

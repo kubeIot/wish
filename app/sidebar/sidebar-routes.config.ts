@@ -20,6 +20,8 @@ export const ROUTES: RouteInfo[] = [
     { path: 'device-add', title: 'New device', menuType: MenuType.LEFT, icon:'pe-7s-plus' },
     { path: 'about', title: 'About', menuType: MenuType.LEFT, icon:'pe-7s-info' },
     { path: 'test', title: 'Test', menuType: MenuType.LEFT, icon:'pe-7s-attention' },
+    { path: 'auth', title: 'Auth - TEST', menuType: MenuType.LEFT, icon:'pe-7s-attention' },
+
     { path: 'profile', title: 'Profile', menuType: MenuType.BRAND, icon:'' },
     { path: 'device-profile', title: 'Device Profile', menuType: MenuType.BRAND, icon:'' },
     { path: 'login', title: 'Login', menuType: MenuType.BRAND, icon:'' },

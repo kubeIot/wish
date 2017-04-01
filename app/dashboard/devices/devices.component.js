@@ -10,31 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
+var forms_1 = require("@angular/forms");
+var rxjs_1 = require("rxjs");
 var DevicesComponent = (function () {
     function DevicesComponent(deviceThumbService) {
         this.deviceThumbService = deviceThumbService;
+        this.searchNameInput = new forms_1.FormControl();
     }
-    DevicesComponent.prototype.getDevices = function () {
-        var _this = this;
-        this.deviceThumbService
-            .getDevices()
-            .subscribe(function (data) { return _this.devicesData = data; }, function (error) { return alert(error); }, function () { return console.log("get request is completed"); });
-    };
-    // onTestGet() {
-    //     console.log("get request starting");
-    //     this._httpService.getCurrentTime()
-    //     // .subscribe(data => this.getData = JSON.stringify(data));
-    //         .subscribe(
-    //             data => this.getData = data,
-    //             error => alert(error),
-    //             () => console.log("get request is completed")
-    //         );
-    //
-    //     console.log(this.getData);;
-    //     console.log("get request is completed");
-    // }
     DevicesComponent.prototype.ngOnInit = function () {
-        this.getDevices();
+        var _this = this;
+        this.devices = this.searchNameInput.valueChanges
+            .startWith('')
+            .debounce(function () { return rxjs_1.Observable.interval(200); })
+            .distinctUntilChanged()
+            .flatMap(function (term) { return _this.deviceThumbService.getDevices(term); });
     };
     DevicesComponent = __decorate([
         core_1.Component({

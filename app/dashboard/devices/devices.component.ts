@@ -1,6 +1,8 @@
 import { Component, trigger,transition,style,animate,group,state, OnInit } from '@angular/core';
 import { Device } from "../device-thumbnail/deviceThumb.metadata"
 import { DeviceThumbService } from "../device-thumbnail/deviceThumb.service";
+import {FormControl} from "@angular/forms";
+import {Observable} from "rxjs";
 
 @Component({
     moduleId: module.id,
@@ -31,40 +33,22 @@ import { DeviceThumbService } from "../device-thumbnail/deviceThumb.service";
 })
 
 export class DevicesComponent implements OnInit {
-
-    devices: Device[];
-    devicesData:any;
+    searchNameInput = new FormControl();
+    devices: Observable<Device[]>;
     constructor (private deviceThumbService: DeviceThumbService) {
 
     }
 
-    getDevices(): void {
-        this.deviceThumbService
-            .getDevices()
-            .subscribe(
-                data => this.devicesData = data,
-                error => alert(error),
-                () => console.log("get request is completed")
-            );
-    }
 
 
-    // onTestGet() {
-    //     console.log("get request starting");
-    //     this._httpService.getCurrentTime()
-    //     // .subscribe(data => this.getData = JSON.stringify(data));
-    //         .subscribe(
-    //             data => this.getData = data,
-    //             error => alert(error),
-    //             () => console.log("get request is completed")
-    //         );
-    //
-    //     console.log(this.getData);;
-    //     console.log("get request is completed");
-    // }
 
     ngOnInit(): void {
-        this.getDevices();
+        this.devices = this.searchNameInput.valueChanges
+            .startWith('')
+            .debounce(() => Observable.interval(200))
+            .distinctUntilChanged()
+            .flatMap(term => this.deviceThumbService.getDevices(term));
     }
+
 
 }

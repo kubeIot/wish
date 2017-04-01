@@ -21,12 +21,14 @@ var navbar_module_1 = require('./shared/navbar/navbar.module');
 var common_1 = require('@angular/common');
 // import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 // import {InMemoryDataService} from "./dashboard/inMemoryDataService.service";
+var ng2_bs3_modal_1 = require('ng2-bs3-modal/ng2-bs3-modal');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
+                ng2_bs3_modal_1.Ng2Bs3ModalModule,
                 platform_browser_1.BrowserModule,
                 dashboard_module_1.DashboardModule,
                 sidebar_module_1.SidebarModule,

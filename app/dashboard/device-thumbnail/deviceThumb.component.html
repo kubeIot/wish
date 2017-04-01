@@ -1,9 +1,9 @@
 <a [routerLink]="['/device-profile', device.id]">
-    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 menu-item" align="center">
 
             <img src="../../../assets/img/250x250.png" class="img-circle">
-            <p> <b>{{ device?.address }}</b> <br /> {{ device?.id }} </p>
+            <p> <b>{{ device?.address }}</b> <br /> {{ device?.id }} <br/> {{device?.device_vendor}} </p>
         </div>
     </div>
 </a>

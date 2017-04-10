@@ -39,11 +39,14 @@ export class DevicesComponent implements OnInit {
     devices: Observable<Device[]>;
     sortItem = "device_vendor";
     revert = false;
+    tableView = false;
     constructor (private deviceThumbService: DeviceThumbService) {
 
     }
 
-
+    changeLayout(): void {
+        this.tableView = !this.tableView;
+    }
     changeSort(sort: string): void {
         if(this.sortItem == sort)
             this.revert = !this.revert;

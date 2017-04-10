@@ -8,6 +8,7 @@
                         <a routerLink="/device-add">
                             <button style="float: right;" class="btn btn-primary">Add Device</button>
                         </a>
+                        <button style="float: right;" class="btn btn-primary" (click)="changeLayout()">Change Layout</button>
                         <!--<div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">-->
                             <!--<div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>-->
                         <!--</div>-->
@@ -20,7 +21,7 @@
 
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div   class="form-group">
-                                    <label class="pointer" (click)="changeSort('device_vendor')">Device Vendor
+                                    <label class="pointer" (click)="changeSort('device_vendor')"><b>Device Vendor</b>
                                         <img *ngIf="sortItem != 'device_vendor'" class="sorted" src="../../../assets/img/both.png">
                                         <img *ngIf="sortItem == 'device_vendor' && revert" class="sorted" src="../../../assets/img/down.gif">
                                         <img *ngIf="sortItem == 'device_vendor' && !revert" class="sorted" src="../../../assets/img/up.gif">
@@ -30,7 +31,7 @@
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label class="pointer" (click)="changeSort('address')">Address of the Device
+                                    <label class="pointer" (click)="changeSort('address')"><b>Address of the Device</b>
                                         <img *ngIf="sortItem != 'address'" class="sorted" src="../../../assets/img/both.png">
                                         <img *ngIf="sortItem == 'address' && revert" class="sorted" src="../../../assets/img/down.gif">
                                         <img *ngIf="sortItem == 'address' && !revert" class="sorted" src="../../../assets/img/up.gif">
@@ -52,14 +53,41 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="row">
-
-
-                        <device-thumb *ngFor="let dev of devices | async | sortBy : sortItem : revert" [device]="dev"></device-thumb>
-
+                    <div class="card" *ngIf="!tableView">
+                        <div>
+                            <div class="row">
+                                <device-thumb *ngFor="let dev of devices | async | sortBy : sortItem : revert" [device]="dev"></device-thumb>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="card " *ngIf="tableView">
+                        <div class="content">
+                            <div class="content table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th><b>Id</b></th>
+                                        <th><b>Address</b></th>
+                                        <th><b>Device vendor</b></th>
+                                        <th><b>Device Version</b></th>
+                                        <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
+                                    </tr>
+                                    </thead>
+                                    <tbody *ngFor="let dev of devices | async | sortBy : sortItem : revert"  >
+                                     <tr>
+                                        <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.id}} </a> </td>
+                                        <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.address}}</a> </td>
+                                        <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_vendor}}</a> </td>
+                                        <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_version}} </a></td>
+                                     </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
             </div>
         </div>
     </div>

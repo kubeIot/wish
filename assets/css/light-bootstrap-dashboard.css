@@ -2004,7 +2004,7 @@ input:focus {
 }
 .card .category,
 .card label {
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 400;
   color: #9A9A9A;
   margin-bottom: 0px;
@@ -2014,7 +2014,7 @@ input:focus {
   font-size: 16px;
 }
 .card label {
-  font-size: 12px;
+  font-size: 11px;
   margin-bottom: 5px;
   text-transform: uppercase;
 }

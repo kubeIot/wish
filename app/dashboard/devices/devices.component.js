@@ -19,7 +19,11 @@ var DevicesComponent = (function () {
         this.searchNameInput = new forms_1.FormControl();
         this.sortItem = "device_vendor";
         this.revert = false;
+        this.tableView = false;
     }
+    DevicesComponent.prototype.changeLayout = function () {
+        this.tableView = !this.tableView;
+    };
     DevicesComponent.prototype.changeSort = function (sort) {
         if (this.sortItem == sort)
             this.revert = !this.revert;

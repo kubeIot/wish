@@ -3,12 +3,14 @@ import { Device } from "../device-thumbnail/deviceThumb.metadata"
 import { DeviceThumbService } from "../device-thumbnail/deviceThumb.service";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs";
-
+// import {sortPipe} from "../sorting.pipe";
 @Component({
     moduleId: module.id,
     selector: 'devices',
     templateUrl: 'devices.component.html',
     providers: [DeviceThumbService],
+    styleUrls: ['../../../assets/css/device.css' , '../../../assets/css/app.css'],
+    // pipes: [sortPipe],
     animations: [
         trigger('devices', [
             state('*', style({
@@ -35,12 +37,19 @@ import {Observable} from "rxjs";
 export class DevicesComponent implements OnInit {
     searchNameInput = new FormControl();
     devices: Observable<Device[]>;
+    sortItem = "device_vendor";
+    revert = false;
     constructor (private deviceThumbService: DeviceThumbService) {
 
     }
 
 
-
+    changeSort(sort: string): void {
+        if(this.sortItem == sort)
+            this.revert = !this.revert;
+        else
+            this.sortItem = sort;
+    }
 
     ngOnInit(): void {
         this.devices = this.searchNameInput.valueChanges

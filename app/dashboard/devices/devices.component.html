@@ -19,14 +19,22 @@
                         <div class="row">
 
                             <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label>Name of the Device</label>
+                                <div   class="form-group">
+                                    <label class="pointer" (click)="changeSort('device_vendor')">Device Vendor
+                                        <img *ngIf="sortItem != 'device_vendor'" class="sorted" src="../../../assets/img/both.png">
+                                        <img *ngIf="sortItem == 'device_vendor' && revert" class="sorted" src="../../../assets/img/down.gif">
+                                        <img *ngIf="sortItem == 'device_vendor' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                                    </label>
                                     <input class="form-control" placeholder="A321" type="text" [formControl]="searchNameInput">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label>Type of the Device</label>
+                                    <label class="pointer" (click)="changeSort('address')">Address of the Device
+                                        <img *ngIf="sortItem != 'address'" class="sorted" src="../../../assets/img/both.png">
+                                        <img *ngIf="sortItem == 'address' && revert" class="sorted" src="../../../assets/img/down.gif">
+                                        <img *ngIf="sortItem == 'address' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                                    </label>
                                     <input class="form-control" placeholder="RPi 3.0"  type="text">
                                 </div>
                             </div>
@@ -48,7 +56,8 @@
                     <div class="row">
 
 
-                        <device-thumb *ngFor="let dev of devices | async" [device]="dev"></device-thumb>
+                        <device-thumb *ngFor="let dev of devices | async | sortBy : sortItem : revert" [device]="dev"></device-thumb>
+
                     </div>
                 </div>
             </div>

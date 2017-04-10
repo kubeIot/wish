@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms"
         BrowserModule,
         AlertModule,
         ReactiveFormsModule,
-        RouterModule.forChild(MODULE_ROUTES)
+        RouterModule.forChild(MODULE_ROUTES),
     ],
     declarations: [  MODULE_COMPONENTS ]
 })

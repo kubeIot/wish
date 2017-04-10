@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import { Device } from "./deviceThumb.metadata";
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
+
 @Injectable()
 export class DeviceThumbService {
     private devicesUrl = 'http://127.0.0.1:8080/device';  // URL to web api
@@ -23,7 +24,7 @@ export class DeviceThumbService {
         return this.devicesList;
     }
 
-    getDevices(text: string): Observable<Device> {
+    getDevices(text: string): Observable<Device[]> {
         // console.log("devices - search: ", text);
 
         const lowerCaseText = text.toLowerCase();

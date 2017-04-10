@@ -25,7 +25,7 @@ var DashboardModule = (function () {
                 platform_browser_1.BrowserModule,
                 alert_module_1.AlertModule,
                 forms_1.ReactiveFormsModule,
-                router_1.RouterModule.forChild(dashboard_routes_1.MODULE_ROUTES)
+                router_1.RouterModule.forChild(dashboard_routes_1.MODULE_ROUTES),
             ],
             declarations: [dashboard_routes_1.MODULE_COMPONENTS]
         }), 

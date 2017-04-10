@@ -12,7 +12,7 @@ import {testComponent} from "./Ztest/test.component";
 import {LoginComponent} from "../login/login/login.component";
 import {ApplicationsComponent} from "./Applications/applications.component";
 import {authComponent} from "../auth/auth.component";
-
+import {sortPipe} from "./sorting.pipe";
 export const MODULE_COMPONENTS = [
     AboutComponent,
     EventsLogComponent,
@@ -25,7 +25,9 @@ export const MODULE_COMPONENTS = [
     LoginComponent,
     ApplicationsComponent,
     testComponent,
-    authComponent
+    authComponent,
+    sortPipe
+
 ]
 
 export const MODULE_ROUTES: Route[] =[

@@ -11,6 +11,7 @@ var test_component_1 = require("./Ztest/test.component");
 var login_component_1 = require("../login/login/login.component");
 var applications_component_1 = require("./Applications/applications.component");
 var auth_component_1 = require("../auth/auth.component");
+var sorting_pipe_1 = require("./sorting.pipe");
 exports.MODULE_COMPONENTS = [
     about_component_1.AboutComponent,
     eventsLog_component_1.EventsLogComponent,
@@ -23,7 +24,8 @@ exports.MODULE_COMPONENTS = [
     login_component_1.LoginComponent,
     applications_component_1.ApplicationsComponent,
     test_component_1.testComponent,
-    auth_component_1.authComponent
+    auth_component_1.authComponent,
+    sorting_pipe_1.sortPipe
 ];
 exports.MODULE_ROUTES = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

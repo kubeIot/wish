@@ -12,11 +12,20 @@ var core_1 = require('@angular/core');
 var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
 var forms_1 = require("@angular/forms");
 var rxjs_1 = require("rxjs");
+// import {sortPipe} from "../sorting.pipe";
 var DevicesComponent = (function () {
     function DevicesComponent(deviceThumbService) {
         this.deviceThumbService = deviceThumbService;
         this.searchNameInput = new forms_1.FormControl();
+        this.sortItem = "device_vendor";
+        this.revert = false;
     }
+    DevicesComponent.prototype.changeSort = function (sort) {
+        if (this.sortItem == sort)
+            this.revert = !this.revert;
+        else
+            this.sortItem = sort;
+    };
     DevicesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.devices = this.searchNameInput.valueChanges
@@ -31,6 +40,8 @@ var DevicesComponent = (function () {
             selector: 'devices',
             templateUrl: 'devices.component.html',
             providers: [deviceThumb_service_1.DeviceThumbService],
+            styleUrls: ['../../../assets/css/device.css', '../../../assets/css/app.css'],
+            // pipes: [sortPipe],
             animations: [
                 core_1.trigger('devices', [
                     core_1.state('*', core_1.style({

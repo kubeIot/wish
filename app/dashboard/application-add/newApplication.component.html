@@ -42,12 +42,8 @@
                                 <div class="form-group">
                                     <label><b>Device </b></label>
                                     <input list="devices" name="devices" class="form-control" formControlName="device_id">
-                                    <datalist id="devices">
-                                        <option value="Internet Explorer">
-                                        <option value="Firefox">
-                                        <option value="Chrome">
-                                        <option value="Opera">
-                                        <option value="Safari">
+                                    <datalist id="devices" >
+                                        <option  *ngFor="let dev of listOfDevices | async" value="{{dev.device_vendor}} {{dev.address}}">
                                     </datalist>
                                     <small *ngIf="!addApplicationForm.controls.device_id.valid" class="text-danger">
                                         Device is required.

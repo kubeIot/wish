@@ -5,10 +5,12 @@
  * Created by skylele on 5.3.17.
  */
 import {Component, OnInit,AfterViewInit,trigger,state,style,transition,animate,keyframes} from '@angular/core';
-import {FormsModule} from '@angular/forms'
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { NewApplicationService } from "./newApplication.service";
 import { Location } from '@angular/common';
+import {Device} from "../device-thumbnail/deviceThumb.metadata";
+import {Observable} from "rxjs";
+import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
 
 
 
@@ -20,7 +22,7 @@ import { Location } from '@angular/common';
     selector: 'application-add',
     templateUrl: 'newApplication.component.html',
     styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-    providers: [NewApplicationService],
+    providers: [NewApplicationService, DeviceThumbService],
     animations: [
         trigger('newapplication', [
             state('*', style({
@@ -45,16 +47,22 @@ import { Location } from '@angular/common';
 })
 
 export class NewApplicationComponent implements OnInit {
+    listOfDevices: Observable<Device[]>;
 
     public addApplicationForm: FormGroup;
 
     constructor(private _httpService: NewApplicationService,
                 private _fb: FormBuilder,
-                private location: Location) {
+                private location: Location,
+                private deviceThumbService: DeviceThumbService) {
 
     }
 
     ngOnInit() {
+
+        this.listOfDevices = this.deviceThumbService.getDevices("");
+
+        console.log(this.listOfDevices);
         // we will initialize our form here
         this.addApplicationForm = this._fb.group({
             base_image: ['', [Validators.required]],

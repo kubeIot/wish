@@ -59,6 +59,7 @@ ul hr {
     display: block;
     margin: 0 auto;
     object-fit: cover;
+    padding-bottom: 5px;
 }
 
 .right-button {
@@ -142,3 +143,7 @@ ul hr {
     /*border-radius: 4px;*/
     /*padding: 1px;*/
 /*}*/
+
+.maxwidth {
+    max-width: 50px;
+}

@@ -75,6 +75,7 @@
                                     </tr>
                                     </thead>
                                     <tbody *ngFor="let dev of devices | async | sortBy : sortItem : revert"  >
+
                                      <tr>
                                         <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.id}} </a> </td>
                                         <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.address}}</a> </td>

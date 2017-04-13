@@ -12,13 +12,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by skylele on 14.3.17.
  */
 var core_1 = require('@angular/core');
+var forms_1 = require("@angular/forms");
+var rxjs_1 = require("rxjs");
+var applications_service_1 = require("./applications.service");
 var ApplicationsComponent = (function () {
-    function ApplicationsComponent() {
+    function ApplicationsComponent(applicationService) {
+        this.applicationService = applicationService;
+        this.searchNameInput = new forms_1.FormControl();
+        this.sortItem = "device_vendor";
+        this.revert = false;
+        this.tableView = true;
     }
+    ApplicationsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.applications = this.searchNameInput.valueChanges
+            .startWith('')
+            .debounce(function () { return rxjs_1.Observable.interval(200); })
+            .distinctUntilChanged()
+            .flatMap(function (term) { return _this.applicationService.getApplications(term); });
+    };
+    ApplicationsComponent.prototype.changeLayout = function () {
+        this.tableView = !this.tableView;
+    };
+    ApplicationsComponent.prototype.changeSort = function (sort) {
+        if (this.sortItem == sort)
+            this.revert = !this.revert;
+        else
+            this.sortItem = sort;
+    };
     ApplicationsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'applications',
+            providers: [applications_service_1.ApplicationService],
             templateUrl: 'applications.component.html',
             styleUrls: ['../../../assets/css/app.css'],
             animations: [
@@ -43,7 +69,7 @@ var ApplicationsComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [applications_service_1.ApplicationService])
     ], ApplicationsComponent);
     return ApplicationsComponent;
 }());

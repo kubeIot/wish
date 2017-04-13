@@ -61,12 +61,20 @@ ul hr {
     object-fit: cover;
     padding-bottom: 5px;
 }
+.header a button {
+    margin-left: 5px;
+}
 
 .right-button {
     float: right;
     margin-right: 0px;
     margin-bottom: 5px;
 }
+.sorted{
+    height: 13px;
+    margin-bottom: 2px;
+}
+
 
 .product-tabs ul.nav li a, .product-tabs ul.nav li a:hover, .product-tabs ul.nav li a:focus{
     padding: 8px 13px 5px 14px;

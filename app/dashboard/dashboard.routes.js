@@ -12,12 +12,16 @@ var login_component_1 = require("../login/login/login.component");
 var applications_component_1 = require("./Applications/applications.component");
 var auth_component_1 = require("../auth/auth.component");
 var sorting_pipe_1 = require("./sorting.pipe");
+var applicationThumb_component_1 = require("./application-thumbnail/applicationThumb.component");
+var newApplication_component_1 = require("./application-add/newApplication.component");
 exports.MODULE_COMPONENTS = [
     about_component_1.AboutComponent,
     eventsLog_component_1.EventsLogComponent,
     newDevice_component_1.NewDeviceComponent,
+    newApplication_component_1.NewApplicationComponent,
     profile_component_1.ProfileComponent,
     deviceThumb_component_1.DeviceThumbComponent,
+    applicationThumb_component_1.ApplicationThumbComponent,
     dashboard_component_1.DashboadrComponent,
     devices_component_1.DevicesComponent,
     deviceProfile_component_1.DeviceProfileComponent,
@@ -33,6 +37,7 @@ exports.MODULE_ROUTES = [
     { path: 'events-log', component: eventsLog_component_1.EventsLogComponent },
     { path: 'devices', component: devices_component_1.DevicesComponent },
     { path: 'device-add', component: newDevice_component_1.NewDeviceComponent },
+    { path: 'application-add', component: newApplication_component_1.NewApplicationComponent },
     { path: 'device-profile/:id', component: deviceProfile_component_1.DeviceProfileComponent },
     { path: 'profile', component: profile_component_1.ProfileComponent },
     { path: 'dashboard', component: dashboard_component_1.DashboadrComponent },

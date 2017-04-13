@@ -14,11 +14,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var newDevice_service_1 = require("./newDevice.service");
+var common_1 = require('@angular/common');
 //TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
 var NewDeviceComponent = (function () {
-    function NewDeviceComponent(_httpService, _fb) {
+    function NewDeviceComponent(_httpService, _fb, location) {
         this._httpService = _httpService;
         this._fb = _fb;
+        this.location = location;
     }
     NewDeviceComponent.prototype.ngOnInit = function () {
         // we will initialize our form here
@@ -95,6 +97,9 @@ var NewDeviceComponent = (function () {
         // call API to save customer
         console.log(JSON.stringify(model._value));
     };
+    NewDeviceComponent.prototype.goBack = function () {
+        this.location.back();
+    };
     NewDeviceComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -124,7 +129,7 @@ var NewDeviceComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [newDevice_service_1.NewDeviceService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [newDevice_service_1.NewDeviceService, forms_1.FormBuilder, common_1.Location])
     ], NewDeviceComponent);
     return NewDeviceComponent;
 }());

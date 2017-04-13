@@ -13,12 +13,16 @@ import {LoginComponent} from "../login/login/login.component";
 import {ApplicationsComponent} from "./Applications/applications.component";
 import {authComponent} from "../auth/auth.component";
 import {sortPipe} from "./sorting.pipe";
+import {ApplicationThumbComponent} from "./application-thumbnail/applicationThumb.component";
+import {NewApplicationComponent} from "./application-add/newApplication.component";
 export const MODULE_COMPONENTS = [
     AboutComponent,
     EventsLogComponent,
     NewDeviceComponent,
+    NewApplicationComponent,
     ProfileComponent,
     DeviceThumbComponent,
+    ApplicationThumbComponent,
     DashboadrComponent,
     DevicesComponent,
     DeviceProfileComponent,
@@ -36,6 +40,7 @@ export const MODULE_ROUTES: Route[] =[
     { path: 'events-log', component: EventsLogComponent },
     { path: 'devices', component: DevicesComponent},
     { path: 'device-add', component: NewDeviceComponent},
+    { path: 'application-add', component: NewApplicationComponent},
     { path: 'device-profile/:id', component: DeviceProfileComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'dashboard', component: DashboadrComponent },

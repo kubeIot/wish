@@ -39,7 +39,7 @@ export class DevicesComponent implements OnInit {
     devices: Observable<Device[]>;
     sortItem = "device_vendor";
     revert = false;
-    tableView = false;
+    tableView = true;
     constructor (private deviceThumbService: DeviceThumbService) {
 
     }

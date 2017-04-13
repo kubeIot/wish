@@ -5,7 +5,7 @@ import {Component, OnInit,AfterViewInit,trigger,state,style,transition,animate,k
 import {FormsModule} from '@angular/forms'
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { NewDeviceService } from "./newDevice.service"
-
+import { Location } from '@angular/common';
 
 //TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
 
@@ -43,7 +43,9 @@ export class NewDeviceComponent implements OnInit {
 
     public addDeviceForm: FormGroup;
 
-    constructor(private _httpService: NewDeviceService, private _fb: FormBuilder) {
+    constructor(private _httpService: NewDeviceService,
+                private _fb: FormBuilder,
+                private location: Location) {
 
     }
 
@@ -134,6 +136,10 @@ export class NewDeviceComponent implements OnInit {
         // call API to save customer
 
         console.log(JSON.stringify(model._value));
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 
 

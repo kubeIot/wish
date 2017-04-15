@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import { ROUTES } from './sidebar-routes.config';
 import { MenuType } from './sidebar-routes.config';
 import {Observable} from 'rxjs/Rx';
+import {Location} from '@angular/common';
 
 @Component({
     moduleId: module.id,
@@ -9,14 +10,25 @@ import {Observable} from 'rxjs/Rx';
     templateUrl: 'sidebar.component.html',
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, DoCheck {
 
     name = 'Angular';
     today = new Date();
 
     public menuItems: any[];
     isCollapsed = true;
-    constructor() {}
+    loggedIn: any;
+
+
+    ngDoCheck() {
+        this.loggedIn = localStorage.getItem('isLoggedIn');
+
+    }
+    constructor(location:Location) {
+        this.loggedIn = localStorage.getItem('isLoggedIn');
+
+    }
+
     ngOnInit() {
         let timer = Observable.timer(1000,1000);
         timer.subscribe(t=>this.today = new Date());

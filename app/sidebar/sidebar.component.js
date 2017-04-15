@@ -12,12 +12,17 @@ var core_1 = require('@angular/core');
 var sidebar_routes_config_1 = require('./sidebar-routes.config');
 var sidebar_routes_config_2 = require('./sidebar-routes.config');
 var Rx_1 = require('rxjs/Rx');
+var common_1 = require('@angular/common');
 var SidebarComponent = (function () {
-    function SidebarComponent() {
+    function SidebarComponent(location) {
         this.name = 'Angular';
         this.today = new Date();
         this.isCollapsed = true;
+        this.loggedIn = localStorage.getItem('isLoggedIn');
     }
+    SidebarComponent.prototype.ngDoCheck = function () {
+        this.loggedIn = localStorage.getItem('isLoggedIn');
+    };
     SidebarComponent.prototype.ngOnInit = function () {
         var _this = this;
         var timer = Rx_1.Observable.timer(1000, 1000);
@@ -42,7 +47,7 @@ var SidebarComponent = (function () {
             selector: 'sidebar-cmp',
             templateUrl: 'sidebar.component.html',
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [common_1.Location])
     ], SidebarComponent);
     return SidebarComponent;
 }());

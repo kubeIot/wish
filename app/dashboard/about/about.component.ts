@@ -2,6 +2,7 @@
  * Created by skylele on 5.3.17.
  */
 import {Component, OnInit,AfterViewInit,trigger,state,style,transition,animate,keyframes} from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
     moduleId: module.id,
@@ -30,4 +31,16 @@ import {Component, OnInit,AfterViewInit,trigger,state,style,transition,animate,k
     ]
 })
 
-export class AboutComponent{ }
+export class AboutComponent{
+
+
+    constructor(
+        private location: Location
+) {
+
+    }
+
+    goBack(): void {
+        this.location.back();
+    }
+}

@@ -4,17 +4,19 @@
         <div class="row">
             <div *ngIf="device">
                 <div class="row">
-                    <div class="col-md-12 col-lg-12 col-xs-12">
-                        <div class="col-md-10 col-lg-10 col-xs-10">
+                    <div class=" col-xs-12">
+                        <div class="col-xs-5">
                             <a class="pointer"  (click)="goBack()">
                                 <span class="icon-back"><span><i class="pe-icon pe-7s-angle-left pe-icon-back"></i>Return to Devices</span></span>
                             </a>
                         </div>
-                        <div class="col-md-2 col-lg-2 col-xs-2">
+                        <a [routerLink]="['/device-add', device?.id]">
+                                <button class="btn right-button btn-primary" data-toggle="modal">Edit Device</button>
+                            </a>
+
                             <a>
                                 <button class="btn right-button btn-danger" data-toggle="modal" data-target="#deleteDevice">Remove Device</button>
                             </a>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12">
@@ -230,7 +232,7 @@
                                         <td>{{app.service_ip}}</td>
                                         <td *ngIf="app.ports.length < 1">None</td>
                                         <td *ngFor="let port of app.ports"> {{port}} <br/> </td>
-                                        <td class="maxwidth">app.status_message</td>
+                                        <td class="maxwidth">app.status message</td>
                                     </tr>
                                     </tbody>
                                 </table>

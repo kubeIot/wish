@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnChanges, OnInit} from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar-routes.config';
 import { MenuType } from '../../sidebar/sidebar-routes.config';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
@@ -10,11 +10,21 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
     styleUrls: ['../../../assets/css/navbar.css']
 })
 
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit, DoCheck{
     private listTitles: any[];
     location: Location;
+    loggedIn: any;
+
     constructor(location:Location) {
         this.location = location;
+        this.loggedIn = localStorage.getItem('isLoggedIn');
+
+
+    }
+
+    ngDoCheck() {
+        this.loggedIn = localStorage.getItem('isLoggedIn');
+
     }
     ngOnInit(){
         // this.listTitles = ROUTES.filter(listTitle => listTitle.menuType !== MenuType.BRAND);
@@ -31,5 +41,11 @@ export class NavbarComponent implements OnInit{
             }
         }
         return 'Dashboard';
+    }
+
+    logout() {
+        this.loggedIn = false;
+        localStorage.removeItem("isLoggedIn");
+        // location.reload();
     }
 }

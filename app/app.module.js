@@ -19,6 +19,7 @@ var sidebar_module_1 = require('./sidebar/sidebar.module');
 var footer_module_1 = require('./shared/footer/footer.module');
 var navbar_module_1 = require('./shared/navbar/navbar.module');
 var common_1 = require('@angular/common');
+var login_module_1 = require("./login/login/login.module");
 // import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 // import {InMemoryDataService} from "./dashboard/inMemoryDataService.service";
 // import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
@@ -34,6 +35,7 @@ var AppModule = (function () {
                 sidebar_module_1.SidebarModule,
                 navbar_module_1.NavbarModule,
                 footer_module_1.FooterModule,
+                login_module_1.LoginModule,
                 router_1.RouterModule.forRoot([]),
                 http_1.HttpModule,
             ],

@@ -14,7 +14,11 @@ var common_1 = require('@angular/common');
 var NavbarComponent = (function () {
     function NavbarComponent(location) {
         this.location = location;
+        this.loggedIn = localStorage.getItem('isLoggedIn');
     }
+    NavbarComponent.prototype.ngDoCheck = function () {
+        this.loggedIn = localStorage.getItem('isLoggedIn');
+    };
     NavbarComponent.prototype.ngOnInit = function () {
         // this.listTitles = ROUTES.filter(listTitle => listTitle.menuType !== MenuType.BRAND);
         this.listTitles = sidebar_routes_config_1.ROUTES;
@@ -30,6 +34,11 @@ var NavbarComponent = (function () {
             }
         }
         return 'Dashboard';
+    };
+    NavbarComponent.prototype.logout = function () {
+        this.loggedIn = false;
+        localStorage.removeItem("isLoggedIn");
+        // location.reload();
     };
     NavbarComponent = __decorate([
         core_1.Component({

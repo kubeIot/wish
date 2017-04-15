@@ -8,7 +8,6 @@ var newDevice_component_1 = require("./device-add/newDevice.component");
 var about_component_1 = require("./about/about.component");
 var profile_component_1 = require("./profile/profile.component");
 var test_component_1 = require("./Ztest/test.component");
-var login_component_1 = require("../login/login/login.component");
 var applications_component_1 = require("./Applications/applications.component");
 var auth_component_1 = require("../auth/auth.component");
 var sorting_pipe_1 = require("./sorting.pipe");
@@ -25,7 +24,7 @@ exports.MODULE_COMPONENTS = [
     dashboard_component_1.DashboadrComponent,
     devices_component_1.DevicesComponent,
     deviceProfile_component_1.DeviceProfileComponent,
-    login_component_1.LoginComponent,
+    // LoginComponent,
     applications_component_1.ApplicationsComponent,
     test_component_1.testComponent,
     auth_component_1.authComponent,
@@ -37,12 +36,13 @@ exports.MODULE_ROUTES = [
     { path: 'events-log', component: eventsLog_component_1.EventsLogComponent },
     { path: 'devices', component: devices_component_1.DevicesComponent },
     { path: 'device-add', component: newDevice_component_1.NewDeviceComponent },
+    { path: 'device-add/:id', component: newDevice_component_1.NewDeviceComponent },
     { path: 'application-add', component: newApplication_component_1.NewApplicationComponent },
     { path: 'application-add/:id', component: newApplication_component_1.NewApplicationComponent },
     { path: 'device-profile/:id', component: deviceProfile_component_1.DeviceProfileComponent },
     { path: 'profile', component: profile_component_1.ProfileComponent },
     { path: 'dashboard', component: dashboard_component_1.DashboadrComponent },
-    { path: 'login', component: login_component_1.LoginComponent },
+    // { path: 'login', component: LoginComponent },
     { path: 'applications', component: applications_component_1.ApplicationsComponent },
     { path: 'test', component: test_component_1.testComponent },
     { path: 'test/test1', component: test_component_1.testComponent },

@@ -6,6 +6,9 @@ import {FormsModule} from '@angular/forms'
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { NewDeviceService } from "./newDevice.service"
 import { Location } from '@angular/common';
+import {ActivatedRoute, Params} from "@angular/router";
+import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
+import {Device} from "../device-thumbnail/deviceThumb.metadata";
 
 //TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
 
@@ -15,7 +18,7 @@ import { Location } from '@angular/common';
     selector: 'device-add',
     templateUrl: 'newDevice.component.html',
     styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-    providers: [NewDeviceService],
+    providers: [NewDeviceService, DeviceThumbService],
     animations: [
         trigger('newdevice', [
             state('*', style({
@@ -42,10 +45,12 @@ import { Location } from '@angular/common';
 export class NewDeviceComponent implements OnInit {
 
     public addDeviceForm: FormGroup;
-
+    public device: Device;
     constructor(private _httpService: NewDeviceService,
                 private _fb: FormBuilder,
-                private location: Location) {
+                private location: Location,
+                private route: ActivatedRoute,
+                private deviceThumbService: DeviceThumbService) {
 
     }
 
@@ -73,6 +78,12 @@ export class NewDeviceComponent implements OnInit {
 
             ]),
         });
+
+        this.route.params
+            .switchMap((params: Params) => this.deviceThumbService.getDevice(+params['id']))
+            // .subscribe(device => this.doMagic(device),
+            .subscribe(dev => this.device = dev,
+                () => console.log("finished"));
     }
 
 

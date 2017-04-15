@@ -12,6 +12,7 @@ import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {LoginModule} from "./login/login/login.module";
 // import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 // import {InMemoryDataService} from "./dashboard/inMemoryDataService.service";
 // import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
@@ -24,6 +25,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
         SidebarModule,
         NavbarModule,
         FooterModule,
+        LoginModule,
         RouterModule.forRoot([]),
         HttpModule,
         // InMemoryWebApiModule.forRoot(InMemoryDataService)

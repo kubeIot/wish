@@ -12,9 +12,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by skylele on 5.3.17.
  */
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var AboutComponent = (function () {
-    function AboutComponent() {
+    function AboutComponent(location) {
+        this.location = location;
     }
+    AboutComponent.prototype.goBack = function () {
+        this.location.back();
+    };
     AboutComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -42,7 +47,7 @@ var AboutComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [common_1.Location])
     ], AboutComponent);
     return AboutComponent;
 }());

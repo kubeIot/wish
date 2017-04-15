@@ -15,14 +15,19 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var newDevice_service_1 = require("./newDevice.service");
 var common_1 = require('@angular/common');
+var router_1 = require("@angular/router");
+var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
 //TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
 var NewDeviceComponent = (function () {
-    function NewDeviceComponent(_httpService, _fb, location) {
+    function NewDeviceComponent(_httpService, _fb, location, route, deviceThumbService) {
         this._httpService = _httpService;
         this._fb = _fb;
         this.location = location;
+        this.route = route;
+        this.deviceThumbService = deviceThumbService;
     }
     NewDeviceComponent.prototype.ngOnInit = function () {
+        var _this = this;
         // we will initialize our form here
         this.addDeviceForm = this._fb.group({
             address: ['', [forms_1.Validators.required]],
@@ -43,6 +48,9 @@ var NewDeviceComponent = (function () {
                 this.initUsedCapability(),
             ]),
         });
+        this.route.params
+            .switchMap(function (params) { return _this.deviceThumbService.getDevice(+params['id']); })
+            .subscribe(function (dev) { return _this.device = dev; }, function () { return console.log("finished"); });
     };
     NewDeviceComponent.prototype.initApplication = function () {
         // initialize our order
@@ -106,7 +114,7 @@ var NewDeviceComponent = (function () {
             selector: 'device-add',
             templateUrl: 'newDevice.component.html',
             styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-            providers: [newDevice_service_1.NewDeviceService],
+            providers: [newDevice_service_1.NewDeviceService, deviceThumb_service_1.DeviceThumbService],
             animations: [
                 core_1.trigger('newdevice', [
                     core_1.state('*', core_1.style({
@@ -129,7 +137,7 @@ var NewDeviceComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [newDevice_service_1.NewDeviceService, forms_1.FormBuilder, common_1.Location])
+        __metadata('design:paramtypes', [newDevice_service_1.NewDeviceService, forms_1.FormBuilder, common_1.Location, router_1.ActivatedRoute, deviceThumb_service_1.DeviceThumbService])
     ], NewDeviceComponent);
     return NewDeviceComponent;
 }());

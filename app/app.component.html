@@ -1,6 +1,6 @@
 <div class="wrapper">
     <!--<div class="sidebar" data-color="red" data-image="../../assets/img/redhat.jpg">-->
-        <div class="sidebar" data-color="red">
+        <div *ngIf="loggedIn" class="sidebar" data-color="red">
 
         <sidebar-cmp></sidebar-cmp>
         <!--<div class="sidebar-background" style="background-image: url(/assets/img/sidebar-5.jpg)"></div>-->
@@ -8,9 +8,11 @@
 
         </div>
 
+
     <div class="main-panel">
         <navbar-cmp></navbar-cmp>
-        <dashboard-cmp></dashboard-cmp>
+        <dashboard-cmp *ngIf="loggedIn"></dashboard-cmp>
+        <login *ngIf="!loggedIn"></login>
         <footer-cmp></footer-cmp>
     </div>
 </div>

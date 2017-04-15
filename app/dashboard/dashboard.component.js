@@ -9,8 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var DashboardComponent = (function () {
-    function DashboardComponent() {
+    function DashboardComponent(router) {
+        this.router = router;
+        this.loggedIn = localStorage.getItem('isLoggedIn');
     }
     DashboardComponent = __decorate([
         core_1.Component({
@@ -18,7 +21,7 @@ var DashboardComponent = (function () {
             selector: 'dashboard-cmp',
             templateUrl: 'dashboard.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], DashboardComponent);
     return DashboardComponent;
 }());

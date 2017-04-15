@@ -19,6 +19,9 @@ var FooterComponent = (function () {
         var timer = Rx_1.Observable.timer(1000, 1000);
         timer.subscribe(function (t) { return _this.today = new Date(); });
     };
+    FooterComponent.prototype.ngDoCheck = function () {
+        this.loggedIn = localStorage.getItem('isLoggedIn');
+    };
     FooterComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

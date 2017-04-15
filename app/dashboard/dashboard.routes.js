@@ -38,6 +38,7 @@ exports.MODULE_ROUTES = [
     { path: 'devices', component: devices_component_1.DevicesComponent },
     { path: 'device-add', component: newDevice_component_1.NewDeviceComponent },
     { path: 'application-add', component: newApplication_component_1.NewApplicationComponent },
+    { path: 'application-add/:id', component: newApplication_component_1.NewApplicationComponent },
     { path: 'device-profile/:id', component: deviceProfile_component_1.DeviceProfileComponent },
     { path: 'profile', component: profile_component_1.ProfileComponent },
     { path: 'dashboard', component: dashboard_component_1.DashboadrComponent },

@@ -22,7 +22,7 @@ var rxjs_1 = require("rxjs");
 var ApplicationService = (function () {
     function ApplicationService(http) {
         this.http = http;
-        this.applicationsUrl = 'http://127.0.0.1:8080/application'; // URL to web api
+        this.applicationsUrl = 'http://127.0.0.1:8080/application/'; // URL to web api
         this.applicationsList = this.http.get(this.applicationsUrl)
             .map(function (res) { return res.json(); })
             .catch(function (error) { return rxjs_1.Observable.throw(error.json().error || 'Server error'); })
@@ -36,6 +36,11 @@ var ApplicationService = (function () {
         var lowerCaseText = text.toLowerCase();
         return this.getList()
             .map(function (applications) { return applications.filter(function (item) { return item.name.toLowerCase().indexOf(lowerCaseText) !== -1; }); });
+    };
+    ApplicationService.prototype.getApplication = function (applicationsId) {
+        var url = "" + this.applicationsUrl + applicationsId;
+        return this.http.get(url)
+            .map(function (response) { return response.json(); });
     };
     ApplicationService = __decorate([
         core_1.Injectable(), 

@@ -44,8 +44,8 @@
                                     <label><b>Show only</b></label>
                                     <select class="form-control" value="Present">
                                         <option selected> All </option>
-                                        <option> Active </option>
-                                        <option> Inactive </option>
+                                        <option> Running </option>
+                                        <option> Not running </option>
                                     </select>
                                 </div>
                             </div>
@@ -71,16 +71,19 @@
                                         <th><b>Address</b></th>
                                         <th><b>Device vendor</b></th>
                                         <th><b>Device Version</b></th>
+                                        <th><b>System information</b></th>
+
                                         <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
                                     </tr>
                                     </thead>
                                     <tbody *ngFor="let dev of devices | async | sortBy : sortItem : revert"  >
+                                     <tr class="activity-ok">
+                                        <td >  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.id}} </a> </td>
+                                        <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.address}}</a> </td>
+                                        <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_vendor}}</a> </td>
+                                        <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_version}} </a></td>
+                                         <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.system_info}} </a></td>
 
-                                     <tr>
-                                        <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.id}} </a> </td>
-                                        <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.address}}</a> </td>
-                                        <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_vendor}}</a> </td>
-                                        <td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_version}} </a></td>
                                      </tr>
                                     </tbody>
                                 </table>

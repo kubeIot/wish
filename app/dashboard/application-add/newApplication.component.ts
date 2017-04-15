@@ -11,6 +11,9 @@ import { Location } from '@angular/common';
 import {Device} from "../device-thumbnail/deviceThumb.metadata";
 import {Observable} from "rxjs";
 import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
+import {ActivatedRoute, Params} from "@angular/router";
+import {ApplicationService} from "../Applications/applications.service";
+import {Application} from "../Applications/applications.metadata";
 
 
 
@@ -22,7 +25,7 @@ import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
     selector: 'application-add',
     templateUrl: 'newApplication.component.html',
     styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-    providers: [NewApplicationService, DeviceThumbService],
+    providers: [NewApplicationService, DeviceThumbService, ApplicationService],
     animations: [
         trigger('newapplication', [
             state('*', style({
@@ -48,13 +51,15 @@ import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
 
 export class NewApplicationComponent implements OnInit {
     listOfDevices: Observable<Device[]>;
-
+    application: Application;
     public addApplicationForm: FormGroup;
 
     constructor(private _httpService: NewApplicationService,
                 private _fb: FormBuilder,
                 private location: Location,
-                private deviceThumbService: DeviceThumbService) {
+                private deviceThumbService: DeviceThumbService,
+                private applicationService: ApplicationService,
+                private route: ActivatedRoute) {
 
     }
 
@@ -62,7 +67,8 @@ export class NewApplicationComponent implements OnInit {
 
         this.listOfDevices = this.deviceThumbService.getDevices("");
 
-        console.log(this.listOfDevices);
+
+
         // we will initialize our form here
         this.addApplicationForm = this._fb.group({
             base_image: ['', [Validators.required]],
@@ -80,6 +86,18 @@ export class NewApplicationComponent implements OnInit {
 
             ]),
         });
+
+        this.route.params
+            .switchMap((params: Params) => this.applicationService.getApplication(+params['id']))
+            // .subscribe(device => this.doMagic(device),
+            .subscribe(application => this.application = application,
+                () => console.log("finished"));
+        //
+        // this.route.params
+        //     .switchMap((params: Params) => this.applicationService.getApplication(+params['id']))
+        //     // .subscribe(device => this.doMagic(device),
+        //     .subscribe(application => this.application = application,
+        //         () => console.log("finished"));
     }
 
 
@@ -96,6 +114,7 @@ export class NewApplicationComponent implements OnInit {
     }
 
     removeCapability(i: number) {
+
         // remove address from the list
         const control = <FormArray>this.addApplicationForm.controls['capabilities'];
         control.removeAt(i);
@@ -108,6 +127,8 @@ export class NewApplicationComponent implements OnInit {
         });
     }
     addPort() {
+
+
         // add order to the list
         const control = <FormArray>this.addApplicationForm.controls['ports'];
         control.push(this.initPort());

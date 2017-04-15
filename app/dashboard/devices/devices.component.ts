@@ -54,6 +54,10 @@ export class DevicesComponent implements OnInit {
             this.sortItem = sort;
     }
 
+    findClass(status: string): void {
+
+    }
+
     ngOnInit(): void {
         this.devices = this.searchNameInput.valueChanges
             .startWith('')

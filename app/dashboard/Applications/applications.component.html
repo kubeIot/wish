@@ -78,16 +78,20 @@
                                     <th><b>Base Image</b></th>
                                     <th><b>Service IP</b></th>
                                     <th><b>Status Message</b></th>
+                                    <th><b>Edit</b></th>
+                                    <th><b>Delete</b></th>
                                     <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
                                 </tr>
                                 </thead>
                                 <tbody *ngFor="let app of applications | async | sortBy : sortItem : revert"  >
 
-                                <tr>
-                                    <td class="activity-ok">   {{app?.name}} </td>
-                                    <td class="activity-ok">   {{app?.base_image}} </td>
-                                    <td class="activity-ok">   {{app?.service_ip}} </td>
-                                    <td class="activity-ok maxwidth">   {{app?.status_message}} </td>
+                                <tr class="activity-ok">
+                                    <td >   {{app?.name}} </td>
+                                    <td >   {{app?.base_image}} </td>
+                                    <td >   {{app?.service_ip}} </td>
+                                    <td class=" maxwidth">   {{app?.status_message}} </td>
+                                    <td> <a [routerLink]="['/application-add', app?.id]"> Edit </a> </td>
+                                    <td> <i class="pe-7s-close"></i> </td>
                                     <!--<td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.id}} </a> </td>-->
                                     <!--<td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.address}}</a> </td>-->
                                     <!--<td class="activity-ok">  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_vendor}}</a> </td>-->

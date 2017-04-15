@@ -41,6 +41,7 @@ export const MODULE_ROUTES: Route[] =[
     { path: 'devices', component: DevicesComponent},
     { path: 'device-add', component: NewDeviceComponent},
     { path: 'application-add', component: NewApplicationComponent},
+    { path: 'application-add/:id', component: NewApplicationComponent},
     { path: 'device-profile/:id', component: DeviceProfileComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'dashboard', component: DashboadrComponent },

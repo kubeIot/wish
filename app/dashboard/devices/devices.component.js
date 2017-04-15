@@ -30,6 +30,8 @@ var DevicesComponent = (function () {
         else
             this.sortItem = sort;
     };
+    DevicesComponent.prototype.findClass = function (status) {
+    };
     DevicesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.devices = this.searchNameInput.valueChanges

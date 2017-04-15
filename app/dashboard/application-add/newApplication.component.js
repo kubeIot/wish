@@ -19,17 +19,21 @@ var forms_1 = require('@angular/forms');
 var newApplication_service_1 = require("./newApplication.service");
 var common_1 = require('@angular/common');
 var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
+var router_1 = require("@angular/router");
+var applications_service_1 = require("../Applications/applications.service");
 //TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
 var NewApplicationComponent = (function () {
-    function NewApplicationComponent(_httpService, _fb, location, deviceThumbService) {
+    function NewApplicationComponent(_httpService, _fb, location, deviceThumbService, applicationService, route) {
         this._httpService = _httpService;
         this._fb = _fb;
         this.location = location;
         this.deviceThumbService = deviceThumbService;
+        this.applicationService = applicationService;
+        this.route = route;
     }
     NewApplicationComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.listOfDevices = this.deviceThumbService.getDevices("");
-        console.log(this.listOfDevices);
         // we will initialize our form here
         this.addApplicationForm = this._fb.group({
             base_image: ['', [forms_1.Validators.required]],
@@ -44,6 +48,15 @@ var NewApplicationComponent = (function () {
                 this.initPort(),
             ]),
         });
+        this.route.params
+            .switchMap(function (params) { return _this.applicationService.getApplication(+params['id']); })
+            .subscribe(function (application) { return _this.application = application; }, function () { return console.log("finished"); });
+        //
+        // this.route.params
+        //     .switchMap((params: Params) => this.applicationService.getApplication(+params['id']))
+        //     // .subscribe(device => this.doMagic(device),
+        //     .subscribe(application => this.application = application,
+        //         () => console.log("finished"));
     };
     NewApplicationComponent.prototype.initCapability = function () {
         // initialize our order
@@ -90,7 +103,7 @@ var NewApplicationComponent = (function () {
             selector: 'application-add',
             templateUrl: 'newApplication.component.html',
             styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-            providers: [newApplication_service_1.NewApplicationService, deviceThumb_service_1.DeviceThumbService],
+            providers: [newApplication_service_1.NewApplicationService, deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService],
             animations: [
                 core_1.trigger('newapplication', [
                     core_1.state('*', core_1.style({
@@ -113,7 +126,7 @@ var NewApplicationComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [newApplication_service_1.NewApplicationService, forms_1.FormBuilder, common_1.Location, deviceThumb_service_1.DeviceThumbService])
+        __metadata('design:paramtypes', [newApplication_service_1.NewApplicationService, forms_1.FormBuilder, common_1.Location, deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService, router_1.ActivatedRoute])
     ], NewApplicationComponent);
     return NewApplicationComponent;
 }());

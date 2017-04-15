@@ -13,7 +13,7 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class ApplicationService {
-    private applicationsUrl = 'http://127.0.0.1:8080/application';  // URL to web api
+    private applicationsUrl = 'http://127.0.0.1:8080/application/';  // URL to web api
     private applicationsList: Observable < Application[] > = this.http.get(this.applicationsUrl)
         .map((res: Response) => res.json())
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
@@ -32,6 +32,13 @@ export class ApplicationService {
             .map(applications => applications.filter(item => item.name.toLowerCase().indexOf(lowerCaseText) !== -1));
     }
 
+    getApplication(applicationsId: any) {
+
+        const url = `${this.applicationsUrl}${applicationsId}`;
+        return this.http.get(url)
+            .map((response:Response) => response.json());
+
+    }
 
     // getApplication(id: number) {
     //     const url = `${this.applicationsUrl}/${id}`;

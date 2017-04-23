@@ -50,7 +50,18 @@ var NewDeviceComponent = (function () {
         });
         this.route.params
             .switchMap(function (params) { return _this.deviceThumbService.getDevice(+params['id']); })
-            .subscribe(function (dev) { return _this.device = dev; }, function () { return console.log("finished"); });
+            .subscribe(function (dev) { return _this.setVariables(dev); }, function () { return console.log("finished"); });
+    };
+    NewDeviceComponent.prototype.setVariables = function (device) {
+        this.device = device;
+        this.addDeviceForm.patchValue({ address: device.adress,
+            device_vendor: device.device_vendor,
+            device_version: device.device_version,
+            kernel_version: device.kernel_version,
+            number_of_applications: device.number_of_applications,
+            os_distribution: device.os_distribution,
+            system_info: device.system_info,
+        });
     };
     NewDeviceComponent.prototype.initApplication = function () {
         // initialize our order
@@ -106,7 +117,11 @@ var NewDeviceComponent = (function () {
         console.log(JSON.stringify(model._value));
     };
     NewDeviceComponent.prototype.goBack = function () {
-        this.location.back();
+        //this.location.back();
+        console.log("text");
+        for (var i in this.addDeviceForm.controls) {
+            this.addDeviceForm.controls[i].markAsTouched();
+        }
     };
     NewDeviceComponent = __decorate([
         core_1.Component({

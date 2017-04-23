@@ -10,10 +10,13 @@ import 'rxjs/add/operator/toPromise';
 import { Application } from "./applications.metadata";
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
+import {applicationsUrl} from "../../configuration"
+
 
 @Injectable()
 export class ApplicationService {
-    private applicationsUrl = 'http://127.0.0.1:8080/application/';  // URL to web api
+    private applicationsUrl = applicationsUrl;  // URL to web api
+
     private applicationsList: Observable < Application[] > = this.http.get(this.applicationsUrl)
         .map((res: Response) => res.json())
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
@@ -39,6 +42,8 @@ export class ApplicationService {
             .map((response:Response) => response.json());
 
     }
+
+
 
     // getApplication(id: number) {
     //     const url = `${this.applicationsUrl}/${id}`;

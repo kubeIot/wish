@@ -90,7 +90,7 @@ export class NewApplicationComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.applicationService.getApplication(+params['id']))
             // .subscribe(device => this.doMagic(device),
-            .subscribe(application => this.application = application,
+            .subscribe(application => this.setVariables(application),
                 () => console.log("finished"));
         //
         // this.route.params
@@ -99,18 +99,40 @@ export class NewApplicationComponent implements OnInit {
         //     .subscribe(application => this.application = application,
         //         () => console.log("finished"));
     }
+    //Any parameter - can be number or string
+    setVariables(application: Application) {
+        this.application = application;
+        this.addApplicationForm.patchValue({base_image: application.base_image,
+            device_id: application.device_id,
+            name: application.name,
+            service_ip:application.service_ip,
+           // system_info: application.system_info,
+        });
 
+        application.ports.forEach((item, index) => {
+           this.addPort(item);
+            if(index == 0)
+                this.removePort(index);
+        });
 
-    initCapability() {
-        // initialize our order
-        return this._fb.group({
-            capability: ['', Validators.required]
+        application.capabilities.forEach((item, index) => {
+            this.addCapability(item);
+            if(index == 0)
+                this.removeCapability(index);
         });
     }
-    addCapability() {
+
+
+    initCapability(value:string = "") {
+        // initialize our order
+        return this._fb.group({
+            capability: [value, Validators.required]
+        });
+    }
+    addCapability(value:string = "") {
         // add order to the list
         const control = <FormArray>this.addApplicationForm.controls['capabilities'];
-        control.push(this.initCapability());
+        control.push(this.initCapability(value));
     }
 
     removeCapability(i: number) {
@@ -120,18 +142,18 @@ export class NewApplicationComponent implements OnInit {
         control.removeAt(i);
     }
 
-    initPort() {
+    initPort(value: string = "") {
         // initialize our order
         return this._fb.group({
-            port: ['', Validators.required]
+            port: [value, Validators.required]
         });
     }
-    addPort() {
+    addPort(value: string = "") {
 
 
         // add order to the list
         const control = <FormArray>this.addApplicationForm.controls['ports'];
-        control.push(this.initPort());
+        control.push(this.initPort(value));
     }
 
     removePort(i: number) {

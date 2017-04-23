@@ -82,10 +82,22 @@ export class NewDeviceComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.deviceThumbService.getDevice(+params['id']))
             // .subscribe(device => this.doMagic(device),
-            .subscribe(dev => this.device = dev,
+            .subscribe(dev => this.setVariables(dev),
                 () => console.log("finished"));
     }
 
+    setVariables(device: Device) {
+        this.device = device;
+        this.addDeviceForm.patchValue({address: device.adress,
+            device_vendor: device.device_vendor,
+            device_version: device.device_version,
+            kernel_version:device.kernel_version,
+            number_of_applications: device.number_of_applications,
+            os_distribution: device.os_distribution,
+            system_info: device.system_info,
+
+    });
+    }
 
     initApplication() {
         // initialize our order
@@ -150,7 +162,11 @@ export class NewDeviceComponent implements OnInit {
     }
 
     goBack(): void {
-        this.location.back();
+        //this.location.back();
+        console.log("text");
+        for (var i in this.addDeviceForm.controls) {
+            this.addDeviceForm.controls[i].markAsTouched();
+        }
     }
 
 

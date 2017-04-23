@@ -16,17 +16,17 @@ var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 var deviceThumb_service_1 = require('../device-thumbnail/deviceThumb.service');
 require('rxjs/add/operator/switchMap');
-var deviceProfile_service_1 = require("./deviceProfile.service");
 var forms_1 = require("@angular/forms");
+var applications_service_1 = require("../Applications/applications.service");
 (function (profileSubPages) {
     profileSubPages[profileSubPages["logging"] = 1] = "logging";
     profileSubPages[profileSubPages["loadedApplications"] = 2] = "loadedApplications";
 })(exports.profileSubPages || (exports.profileSubPages = {}));
 var profileSubPages = exports.profileSubPages;
 var DeviceProfileComponent = (function () {
-    function DeviceProfileComponent(deviceThumbService, deviceProfileService, route, location) {
+    function DeviceProfileComponent(deviceThumbService, applicationService, route, location) {
         this.deviceThumbService = deviceThumbService;
-        this.deviceProfileService = deviceProfileService;
+        this.applicationService = applicationService;
         this.route = route;
         this.location = location;
         this.subPage = profileSubPages.logging;
@@ -50,28 +50,11 @@ var DeviceProfileComponent = (function () {
         var _this = this;
         this.device = device;
         this.device.applications.forEach(function (appId, index) {
-            _this.deviceProfileService.getApplication(appId)
+            _this.applicationService.getApplication(appId)
                 .subscribe(function (app) { _this.apps[index] = app; }, function () { return console.log("finished"); });
-            // ((data) => {
-            //     this.doctors.push(data);
-            // })
         });
         console.log(this.apps);
     };
-    //
-    // getApplications(applicationsIds: string[]): Observable<Application> {
-    //     if(applicationsIds == null || applicationsIds == [])
-    //         return;
-    //
-    //     this.apps = this.deviceProfileService.getApplications(applicationsIds);
-    //
-    //     // this.apps = this.searchInput.valueChanges
-    //     //     .startWith('')
-    //     //     .debounce(() => Observable.interval(200))
-    //     //     .distinctUntilChanged()
-    //     //     .flatMap(term => this.deviceProfileService.getApplications(term, applicationsIds));
-    //     // return this.apps;
-    // }
     DeviceProfileComponent.prototype.goBack = function () {
         this.location.back();
     };
@@ -80,7 +63,7 @@ var DeviceProfileComponent = (function () {
             moduleId: module.id,
             selector: 'device-profile',
             templateUrl: 'deviceProfile.component.html',
-            providers: [deviceThumb_service_1.DeviceThumbService, deviceProfile_service_1.DeviceProfileService],
+            providers: [deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService],
             styleUrls: ['../../../assets/css/device.css', '../../../assets/css/app.css'],
             animations: [
                 core_1.trigger('profile', [
@@ -94,7 +77,7 @@ var DeviceProfileComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [deviceThumb_service_1.DeviceThumbService, deviceProfile_service_1.DeviceProfileService, router_1.ActivatedRoute, common_1.Location])
+        __metadata('design:paramtypes', [deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService, router_1.ActivatedRoute, common_1.Location])
     ], DeviceProfileComponent);
     return DeviceProfileComponent;
 }());

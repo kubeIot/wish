@@ -7,10 +7,11 @@ import 'rxjs/add/operator/toPromise';
 import { Device } from "./deviceThumb.metadata";
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
+import {devicesUrl} from "../../configuration"
 
 @Injectable()
 export class DeviceThumbService {
-    private devicesUrl = 'http://127.0.0.1:8080/device';  // URL to web api
+     private devicesUrl = devicesUrl;  // URL to web api
     private devicesList: Observable < Device[] > = this.http.get(this.devicesUrl)
         .map((res: Response) => res.json())
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'))

@@ -16,10 +16,11 @@ var http_1 = require("@angular/http");
 require('rxjs/add/operator/toPromise');
 require('rxjs/add/operator/map');
 var rxjs_1 = require("rxjs");
+var configuration_1 = require("../../configuration");
 var DeviceThumbService = (function () {
     function DeviceThumbService(http) {
         this.http = http;
-        this.devicesUrl = 'http://127.0.0.1:8080/device'; // URL to web api
+        this.devicesUrl = configuration_1.devicesUrl; // URL to web api
         this.devicesList = this.http.get(this.devicesUrl)
             .map(function (res) { return res.json(); })
             .catch(function (error) { return rxjs_1.Observable.throw(error.json().error || 'Server error'); })

@@ -19,10 +19,11 @@ var http_1 = require("@angular/http");
 require('rxjs/add/operator/toPromise');
 require('rxjs/add/operator/map');
 var rxjs_1 = require("rxjs");
+var configuration_1 = require("../../configuration");
 var ApplicationService = (function () {
     function ApplicationService(http) {
         this.http = http;
-        this.applicationsUrl = 'http://127.0.0.1:8080/application/'; // URL to web api
+        this.applicationsUrl = configuration_1.applicationsUrl; // URL to web api
         this.applicationsList = this.http.get(this.applicationsUrl)
             .map(function (res) { return res.json(); })
             .catch(function (error) { return rxjs_1.Observable.throw(error.json().error || 'Server error'); })

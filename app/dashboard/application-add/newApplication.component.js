@@ -50,7 +50,7 @@ var NewApplicationComponent = (function () {
         });
         this.route.params
             .switchMap(function (params) { return _this.applicationService.getApplication(+params['id']); })
-            .subscribe(function (application) { return _this.application = application; }, function () { return console.log("finished"); });
+            .subscribe(function (application) { return _this.setVariables(application); }, function () { return console.log("finished"); });
         //
         // this.route.params
         //     .switchMap((params: Params) => this.applicationService.getApplication(+params['id']))
@@ -58,32 +58,56 @@ var NewApplicationComponent = (function () {
         //     .subscribe(application => this.application = application,
         //         () => console.log("finished"));
     };
-    NewApplicationComponent.prototype.initCapability = function () {
-        // initialize our order
-        return this._fb.group({
-            capability: ['', forms_1.Validators.required]
+    //Any parameter - can be number or string
+    NewApplicationComponent.prototype.setVariables = function (application) {
+        var _this = this;
+        this.application = application;
+        this.addApplicationForm.patchValue({ base_image: application.base_image,
+            device_id: application.device_id,
+            name: application.name,
+            service_ip: application.service_ip,
+        });
+        application.ports.forEach(function (item, index) {
+            _this.addPort(item);
+            if (index == 0)
+                _this.removePort(index);
+        });
+        application.capabilities.forEach(function (item, index) {
+            _this.addCapability(item);
+            if (index == 0)
+                _this.removeCapability(index);
         });
     };
-    NewApplicationComponent.prototype.addCapability = function () {
+    NewApplicationComponent.prototype.initCapability = function (value) {
+        if (value === void 0) { value = ""; }
+        // initialize our order
+        return this._fb.group({
+            capability: [value, forms_1.Validators.required]
+        });
+    };
+    NewApplicationComponent.prototype.addCapability = function (value) {
+        if (value === void 0) { value = ""; }
         // add order to the list
         var control = this.addApplicationForm.controls['capabilities'];
-        control.push(this.initCapability());
+        control.push(this.initCapability(value));
     };
     NewApplicationComponent.prototype.removeCapability = function (i) {
         // remove address from the list
         var control = this.addApplicationForm.controls['capabilities'];
         control.removeAt(i);
     };
-    NewApplicationComponent.prototype.initPort = function () {
+    NewApplicationComponent.prototype.initPort = function (value) {
+        if (value === void 0) { value = ""; }
         // initialize our order
         return this._fb.group({
-            port: ['', forms_1.Validators.required]
+            port: [value, forms_1.Validators.required]
         });
     };
-    NewApplicationComponent.prototype.addPort = function () {
+    NewApplicationComponent.prototype.addPort = function (value) {
+        if (value === void 0) { value = ""; }
         // add order to the list
         var control = this.addApplicationForm.controls['ports'];
-        control.push(this.initPort());
+        control.push(this.initPort(value));
     };
     NewApplicationComponent.prototype.removePort = function (i) {
         // remove address from the list

@@ -145,6 +145,9 @@ ul hr {
     position: relative;
 }
 
+span.icon-back span {
+    padding-right: 8px;
+}
 
 /*.nav-option {*/
     /*background-color: #cc0000;*/

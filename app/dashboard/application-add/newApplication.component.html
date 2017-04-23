@@ -20,7 +20,7 @@
                             <div class=" col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Name of the Application</b></label>
-                                    <input type="text" class="form-control" formControlName="name" value={{application?.name}}>
+                                    <input type="text" class="form-control" formControlName="name">
                                     <small *ngIf="!addApplicationForm.controls.name.valid" class="text-danger">
                                         Name of the Application is required.
                                     </small>
@@ -30,7 +30,7 @@
                             <div class="col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Base Image</b></label>
-                                    <input type="text" class="form-control" formControlName="base_image" value={{application?.base_image}}>
+                                    <input type="text" class="form-control" formControlName="base_image" >
                                     <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
                                         Base Image is required.
                                     </small>
@@ -41,7 +41,7 @@
                             <div class=" col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Device </b></label>
-                                    <input list="devices" name="devices" class="form-control" formControlName="device_id" value={{application?.device_id}}>
+                                    <input list="devices" name="devices" class="form-control" formControlName="device_id" >
                                     <datalist id="devices" >
                                         <option  *ngFor="let dev of listOfDevices | async" value="{{dev.device_vendor}} {{dev.address}}">
                                     </datalist>
@@ -54,7 +54,7 @@
                             <div class=" col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Service IP</b></label>
-                                    <input type="text" class="form-control" formControlName="service_ip" value={{application?.service_ip}}>
+                                    <input type="text" class="form-control" formControlName="service_ip" >
                                     <small *ngIf="!addApplicationForm.controls.service_ip.valid" class="text-danger">
                                         Service IP is required.
                                     </small>
@@ -66,7 +66,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label><b>System Information</b></label>
-                                    <input type="text" class="form-control" formControlName="system_info" value={{application?.system_info}}>
+                                    <input type="text" class="form-control" formControlName="system_info" >
                                 </div>
                             </div>
 
@@ -79,8 +79,7 @@
                                                 <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addApplicationForm.controls.capabilities.controls.length > 1" (click)="removeCapability(i)"></span>
                                                 <div class="form-group col-xs-12">
                                                     <label>Capability {{i + 1}}</label>
-                                                    <input *ngIf="application?.capabilities.length > i" type="text" class="form-control" formControlName="capability" value={{application?.capabilities[i]}}>
-                                                    <input *ngIf="application?.capabilities.length <= i" type="text" class="form-control" formControlName="capability">
+                                                    <input type="text" class="form-control" formControlName="capability">
                                                     <small [hidden]="addApplicationForm.controls.capabilities.controls[i].controls.capability.valid" class="text-danger">
                                                         Capability is required
                                                     </small>
@@ -108,8 +107,7 @@
                                                 <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addApplicationForm.controls.ports.controls.length > 1" (click)="removePort(i)"></span>
                                                 <div class="form-group col-xs-12">
                                                     <label>Port {{i + 1}}</label>
-                                                    <input *ngIf="application?.ports.length > i" type="text" class="form-control" formControlName="port" value={{application?.ports[i]}}>
-                                                    <input *ngIf="application?.ports.length <= i" type="text" class="form-control" formControlName="port">
+                                                    <input type="text" class="form-control" formControlName="port">
 
                                                     <small [hidden]="addApplicationForm.controls.ports.controls[i].controls.port.valid" class="text-danger">
                                                         Port is required

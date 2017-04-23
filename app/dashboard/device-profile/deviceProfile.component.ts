@@ -17,8 +17,8 @@ import {Observable} from "rxjs";
 
 
 import {Device} from "../device-thumbnail/deviceThumb.metadata";
-import {DeviceProfileService} from "./deviceProfile.service";
 import {FormControl} from "@angular/forms";
+import {ApplicationService} from "../Applications/applications.service";
 
 export enum profileSubPages {
     logging = 1,
@@ -28,7 +28,7 @@ export enum profileSubPages {
     moduleId: module.id,
     selector: 'device-profile',
     templateUrl: 'deviceProfile.component.html',
-    providers: [DeviceThumbService, DeviceProfileService],
+    providers: [DeviceThumbService, ApplicationService],
     styleUrls: ['../../../assets/css/device.css' , '../../../assets/css/app.css'],
     animations: [
         trigger('profile', [
@@ -52,7 +52,7 @@ export class DeviceProfileComponent implements OnInit {
 
     constructor(
         private deviceThumbService: DeviceThumbService,
-        private deviceProfileService: DeviceProfileService,
+        private applicationService: ApplicationService,
         private route: ActivatedRoute,
         private location: Location
     ) {}
@@ -80,32 +80,14 @@ export class DeviceProfileComponent implements OnInit {
         this.device = device;
         this.device.applications.forEach((appId, index) => {
 
-            this.deviceProfileService.getApplication(appId)
+            this.applicationService.getApplication(appId)
                 .subscribe((app) => {this.apps[index] = app},
                     () => console.log("finished"));
-
-            // ((data) => {
-            //     this.doctors.push(data);
-            // })
         });
 
         console.log(this.apps);
 
     }
-    //
-    // getApplications(applicationsIds: string[]): Observable<Application> {
-    //     if(applicationsIds == null || applicationsIds == [])
-    //         return;
-    //
-    //     this.apps = this.deviceProfileService.getApplications(applicationsIds);
-    //
-    //     // this.apps = this.searchInput.valueChanges
-    //     //     .startWith('')
-    //     //     .debounce(() => Observable.interval(200))
-    //     //     .distinctUntilChanged()
-    //     //     .flatMap(term => this.deviceProfileService.getApplications(term, applicationsIds));
-    //     // return this.apps;
-    // }
 
 
 

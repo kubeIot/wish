@@ -28,7 +28,7 @@
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Device Vendor</b></label>
-                                    <input value={{device?.device_vendor}} type="text" class="form-control" formControlName="device_vendor">
+                                    <input type="text" class="form-control" formControlName="device_vendor">
                                     <small *ngIf="!addDeviceForm.controls.device_vendor.valid" class="text-danger">
                                         Device Vendor is required.
                                     </small>
@@ -37,7 +37,7 @@
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Device Version</b></label>
-                                    <input value={{device?.device_version}} type="text" class="form-control" formControlName="device_version">
+                                    <input  type="text" class="form-control" formControlName="device_version">
                                     <small *ngIf="!addDeviceForm.controls.device_version.valid" class="text-danger">
                                         Device Version is required.
                                     </small>
@@ -55,7 +55,7 @@
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Kernel Version</b></label>
-                                    <input value={{device?.kernel_version}} type="text" class="form-control" formControlName="kernel_version">
+                                    <input type="text" class="form-control" formControlName="kernel_version">
                                     <small *ngIf="!addDeviceForm.controls.kernel_version.valid" class="text-danger">
                                         Kernel Version is required.
                                     </small>
@@ -64,7 +64,7 @@
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Number of Applications</b></label>
-                                    <input value={{device?.number_of_applications}} type="text" class="form-control" formControlName="number_of_applications">
+                                    <input type="text" class="form-control" formControlName="number_of_applications">
                                     <small *ngIf="!addDeviceForm.controls.number_of_applications.valid" class="text-danger">
                                         Number of Applications is required.
                                     </small>
@@ -73,7 +73,7 @@
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>OS Distribution</b></label>
-                                    <input value={{device?.os_distribution}} type="text" class="form-control" formControlName="os_distribution">
+                                    <input  type="text" class="form-control" formControlName="os_distribution">
                                     <small *ngIf="!addDeviceForm.controls.os_distribution.valid" class="text-danger">
                                         OS Distribution is required.
                                     </small>
@@ -85,7 +85,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label><b>System Information</b></label>
-                                    <input value={{device?.system_info}} type="text" class="form-control" formControlName="system_info">
+                                    <input type="text" class="form-control" formControlName="system_info">
                                 </div>
                             </div>
 

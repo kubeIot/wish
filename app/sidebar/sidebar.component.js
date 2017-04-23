@@ -29,18 +29,6 @@ var SidebarComponent = (function () {
         timer.subscribe(function (t) { return _this.today = new Date(); });
         this.menuItems = sidebar_routes_config_1.ROUTES.filter(function (menuItem) { return menuItem.menuType !== sidebar_routes_config_2.MenuType.BRAND; });
     };
-    Object.defineProperty(SidebarComponent.prototype, "menuIcon", {
-        get: function () {
-            return this.isCollapsed ? '☰' : '✖';
-        },
-        enumerable: true,
-        configurable: true
-    });
-    SidebarComponent.prototype.getMenuItemClasses = function (menuItem) {
-        return {
-            'pull-xs-right': this.isCollapsed && menuItem.menuType === sidebar_routes_config_2.MenuType.RIGHT
-        };
-    };
     SidebarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

@@ -122,14 +122,14 @@ export class NewApplicationComponent implements OnInit {
         });
     }
 
-
-    initCapability(value:string = "") {
+    //Any because it accepts strings as well as numbers
+    initCapability(value:any = "") {
         // initialize our order
         return this._fb.group({
             capability: [value, Validators.required]
         });
     }
-    addCapability(value:string = "") {
+    addCapability(value:any = "") {
         // add order to the list
         const control = <FormArray>this.addApplicationForm.controls['capabilities'];
         control.push(this.initCapability(value));
@@ -141,14 +141,15 @@ export class NewApplicationComponent implements OnInit {
         const control = <FormArray>this.addApplicationForm.controls['capabilities'];
         control.removeAt(i);
     }
+    //Any because it accepts strings as well as numbers
 
-    initPort(value: string = "") {
+    initPort(value: any = "") {
         // initialize our order
         return this._fb.group({
             port: [value, Validators.required]
         });
     }
-    addPort(value: string = "") {
+    addPort(value: any = "") {
 
 
         // add order to the list

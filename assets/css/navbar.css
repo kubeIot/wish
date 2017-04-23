@@ -3,6 +3,14 @@
     /*padding: 0;*/
 /*}*/
 
+#profile-navbar > img {
+    margin-left: 32px;
+}
+
+#profile-navbar > p {
+    margin: 0px 0px 0px 10px;
+}
+
 .user .no-margin {
     margin: 0;
     padding: 0;

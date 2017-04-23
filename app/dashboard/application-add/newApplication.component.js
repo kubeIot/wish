@@ -78,6 +78,7 @@ var NewApplicationComponent = (function () {
                 _this.removeCapability(index);
         });
     };
+    //Any because it accepts strings as well as numbers
     NewApplicationComponent.prototype.initCapability = function (value) {
         if (value === void 0) { value = ""; }
         // initialize our order
@@ -96,6 +97,7 @@ var NewApplicationComponent = (function () {
         var control = this.addApplicationForm.controls['capabilities'];
         control.removeAt(i);
     };
+    //Any because it accepts strings as well as numbers
     NewApplicationComponent.prototype.initPort = function (value) {
         if (value === void 0) { value = ""; }
         // initialize our order

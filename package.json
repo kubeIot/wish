@@ -27,6 +27,7 @@
     "@angular/router": "~3.4.9",
     "@angular/upgrade": "~2.4.9",
     "@types/jquery": "^2.0.41",
+    "@types/node": "^6.0.71",
     "@types/underscore": "^1.8.0",
     "angular2-jwt": "^0.2.0",
     "bootstrap": "^3.3.7",

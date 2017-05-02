@@ -160,3 +160,16 @@ span.icon-back span {
 }
 
 .pointer{cursor: pointer !important;}
+
+
+.pager-align{
+  float:right;
+  position:relative;
+  left:-37%;
+  text-align:left;
+}
+.pager-align ul{
+  list-style:none;
+  position:relative;
+  left:37%;
+}

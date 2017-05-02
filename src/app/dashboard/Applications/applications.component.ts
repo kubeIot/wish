@@ -7,10 +7,11 @@ import {Observable} from "rxjs";
 import { Application } from "./applications.metadata";
 import {ApplicationService} from "./applications.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {PagerService} from "../../helper-services/pager.service";
 @Component({
     moduleId: module.id,
     selector: 'applications',
-    providers: [ApplicationService],
+    providers: [ApplicationService, PagerService],
     templateUrl: 'applications.component.html',
     styleUrls: ['../../../assets/css/app.css'],
     animations: [
@@ -42,24 +43,32 @@ export class ApplicationsComponent  implements OnInit{
     sortItem = "device_vendor";
     revert = false;
     tableView = true;
+  //pager variables
+  // array of all items to be paged
+  private allItems: any[];
+  // pager object
+  pager: any = {};
+  // paged items
+  pagedItems: any[];
+  //end of pager variables
+
+  //modal variables
   @ViewChild('modal')
   modal: ModalComponent;
-  items: string[] = ['item1', 'item2', 'item3'];
   selected: string;
 
   index: number = 0;
   backdropOptions = [true, false, 'static'];
-  cssClass: string = '';
 
-  animation: boolean = true;
-  keyboard: boolean = true;
-  backdrop: string | boolean = true;
-  css: boolean = false;
+   animation: boolean = true;
+   keyboard: boolean = true;
+   backdrop: string | boolean = true;
 
   nameInModal: string;
   idInModal: number | string;
+  //modal variables
 
-  constructor (private applicationService: ApplicationService) {
+  constructor (private applicationService: ApplicationService, private pagerService: PagerService) {
 
   }
   deleteApplication() {
@@ -80,6 +89,8 @@ export class ApplicationsComponent  implements OnInit{
             .debounce(() => Observable.interval(200))
             .distinctUntilChanged()
             .flatMap(term => this.applicationService.getApplications(term));
+      this.applications.subscribe(result => {this.pagedItems = result;
+        this.setPage(1);});
     }
 
     changeLayout(): void {
@@ -91,6 +102,19 @@ export class ApplicationsComponent  implements OnInit{
         else
             this.sortItem = sort;
     }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.pagedItems.length, page, 20);
+
+    // get current page of items
+    this.pagedItems = this.pagedItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
+
 
 
 }

@@ -6,12 +6,13 @@ import {Observable} from "rxjs";
 import {PagerService} from "../../helper-services/pager.service";
 
 import * as _ from 'underscore';
+import {UserService} from "../profile/profile.service";
 // import {sortPipe} from "../sorting.pipe";
 @Component({
     moduleId: module.id,
     selector: 'devices',
     templateUrl: 'devices.component.html',
-    providers: [DeviceThumbService, PagerService],
+    providers: [DeviceThumbService, PagerService, UserService],
     styleUrls: ['../../../assets/css/device.css' , '../../../assets/css/app.css'],
     // pipes: [sortPipe],
     animations: [
@@ -43,8 +44,11 @@ export class DevicesComponent implements OnInit {
     sortItem = "device_vendor";
     revert = false;
     tableView = true;
+    devs: Device[];
+  private loggedInUser: any;
 
-    //pager variables
+
+//pager variables
   // array of all items to be paged
   private allItems: any[];
   // pager object
@@ -54,7 +58,9 @@ export class DevicesComponent implements OnInit {
   //end of pager variables
 
 
-    constructor (private deviceThumbService: DeviceThumbService, private pagerService: PagerService) {
+    constructor (private deviceThumbService: DeviceThumbService,
+                 private pagerService: PagerService,
+                  private userService: UserService) {
 
     }
 
@@ -66,6 +72,7 @@ export class DevicesComponent implements OnInit {
             this.revert = !this.revert;
         else
             this.sortItem = sort;
+
     }
 
     findClass(status: string): void {
@@ -73,12 +80,15 @@ export class DevicesComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.userService.getUser(1).subscribe(user => {this.loggedInUser = user;
+      console.log(this.loggedInUser);});
+
         this.devices = this.searchNameInput.valueChanges
             .startWith('')
             .debounce(() => Observable.interval(200))
             .distinctUntilChanged()
             .flatMap(term => this.deviceThumbService.getDevices(term));
-      this.devices.subscribe(result => {this.pagedItems = result;
+      this.devices.subscribe(result => {this.devs = result;
         this.setPage(1);});
     }
 
@@ -89,10 +99,10 @@ export class DevicesComponent implements OnInit {
     }
 
     // get pager object from service
-    this.pager = this.pagerService.getPager(this.pagedItems.length, page, 20);
+    this.pager = this.pagerService.getPager(this.devs.length, page, 20);
 
     // get current page of items
-    this.pagedItems = this.pagedItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    this.pagedItems = this.devs.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
 

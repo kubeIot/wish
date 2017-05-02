@@ -10,19 +10,30 @@ import 'rxjs/add/operator/toPromise';
 import { Application } from "./applications.metadata";
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
-import {applicationsUrl} from "../../configuration"
+import {applicationsUrl, imagesUrl} from "../../configuration"
 
 
 @Injectable()
 export class ApplicationService {
-    private applicationsUrl = applicationsUrl;  // URL to web api
 
-    private applicationsList: Observable < Application[] > = this.http.get(this.applicationsUrl)
+    private applicationsUrl = applicationsUrl;  // URL to web api
+  private imagesUrl = imagesUrl;  // URL to web api
+
+
+  private applicationsList: Observable < Application[] > = this.http.get(this.applicationsUrl)
         .map((res: Response) => res.json())
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
 
         .publishReplay(1)
         .refCount();
+
+  private imagesList: Observable < any[] > = this.http.get(this.imagesUrl)
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+    // .do(console.log(Response))
+    // .do(console.log("yea"))
+    .publishReplay(1)
+    .refCount();
     constructor(private http: Http) { }
 
     getList(): Observable<Application[]> {
@@ -42,6 +53,12 @@ export class ApplicationService {
             .map((response:Response) => response.json());
 
     }
+
+  getImages(): Observable<any[]> {//Todo create image structure
+    // console.log("devices - search: ", text);
+    return this.imagesList
+      .map(images => images);
+  }
 
 
 

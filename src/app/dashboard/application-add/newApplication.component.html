@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" id="newApplication">
     <div class="container-fluid">
 
         <div class="col-md-3" >
@@ -30,8 +30,11 @@
                             <div class="col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Base Image</b></label>
-                                    <input type="text" class="form-control" formControlName="base_image" >
-                                    <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
+                                    <input list="base-image" name="base-image" class="form-control" formControlName="base_image" >
+                                  <datalist id="base-image" >
+                                    <option  *ngFor="let image of listOfImages | async" value="{{image.name}}">
+                                  </datalist>
+                                  <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
                                         Base Image is required.
                                     </small>
                                 </div>
@@ -43,7 +46,7 @@
                                     <label><b>Device </b></label>
                                     <input list="devices" name="devices" class="form-control" formControlName="device_id" >
                                     <datalist id="devices" >
-                                        <option  *ngFor="let dev of listOfDevices | async" value="{{dev.device_vendor}} {{dev.address}}">
+                                        <option  *ngFor="let dev of listOfDevices | async" value="{{dev.device_vendor}} - {{dev.address}}">
                                     </datalist>
                                     <small *ngIf="!addApplicationForm.controls.device_id.valid" class="text-danger">
                                         Device is required.

@@ -51,6 +51,7 @@ import {Application} from "../Applications/applications.metadata";
 
 export class NewApplicationComponent implements OnInit {
     listOfDevices: Observable<Device[]>;
+  listOfImages: Observable<any[]>;
     application: Application;
     public addApplicationForm: FormGroup;
 
@@ -66,6 +67,7 @@ export class NewApplicationComponent implements OnInit {
     ngOnInit() {
 
         this.listOfDevices = this.deviceThumbService.getDevices("");
+      this.listOfImages = this.applicationService.getImages();
 
 
 

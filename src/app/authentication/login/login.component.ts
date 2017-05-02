@@ -66,6 +66,8 @@ export class LoginComponent implements OnInit, DoCheck{
     login() {
         console.log(this.currentUser);
         localStorage.setItem('isLoggedIn', 'true');
+      this.router.navigateByUrl('/'); // tells them they've been logged out (somehow)
+
     }
 
   newRegistration() {

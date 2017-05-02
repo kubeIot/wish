@@ -3,152 +3,152 @@
         <div class="row">
 
         <div class="col-lg-12">
-          <iframe src="http://localhost:5601/app/kibana#/dashboard?embed=true&_g=()&_a=(filters:!(),options:(darkTheme:!f),panels:!((col:1,id:cfc781e0-2f2a-11e7-ac5c-d30f8136720c,panelIndex:1,row:1,size_x:6,size_y:3,type:visualization),(col:7,id:'6e3c1520-2f2b-11e7-8bf2-691b3f9e24bf',panelIndex:2,row:1,size_x:6,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:'New+Dashboard',uiState:())"
-                  frameborder="0" [style.height.px]="0.66 * height" style="width: 100%; position:absolute; "></iframe>
+          <!--<iframe src="http://localhost:5601/app/kibana#/dashboard?embed=true&_g=()&_a=(filters:!(),options:(darkTheme:!f),panels:!((col:1,id:cfc781e0-2f2a-11e7-ac5c-d30f8136720c,panelIndex:1,row:1,size_x:6,size_y:3,type:visualization),(col:7,id:'6e3c1520-2f2b-11e7-8bf2-691b3f9e24bf',panelIndex:2,row:1,size_x:6,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:'New+Dashboard',uiState:())"-->
+                  <!--frameborder="0" [style.height.px]="0.66 * height" style="width: 100%; position:absolute; "></iframe>-->
           <!--<iframe frameborder="0" [style.height.px]="0.66 * height" style="width: 100%; position:absolute; " src="https://petrvocelka.cz/">-->
             <!--wtf-->
           <!--</iframe>-->
         </div>
-        </div> <!-- zakomentovat kdyz se bude zbytek odkomentovavat -->
-          <!--<p>-->
-            <!--<button type="button" class="btn btn-default" (click)="modal.open()">Open me!</button>-->
-            <!--<button type="button" class="btn btn-default" (click)="modal.open('lg')">Large modal</button>-->
-            <!--<button type="button" class="btn btn-default" (click)="modal.open('sm')">Small modal</button>-->
-          <!--</p>-->
-          <!--<br />-->
+        <!--</div> &lt;!&ndash; zakomentovat kdyz se bude zbytek odkomentovavat &ndash;&gt;-->
+          <p>
+            <button type="button" class="btn btn-default" (click)="modal.open()">Open me!</button>
+            <button type="button" class="btn btn-default" (click)="modal.open('lg')">Large modal</button>
+            <button type="button" class="btn btn-default" (click)="modal.open('sm')">Small modal</button>
+          </p>
+          <br />
 
 
-          <!--<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop"-->
-                  <!--[cssClass]="cssClass" #modal  >-->
-            <!--<modal-header [show-close]="true">-->
-              <!--<h4 class="modal-title">I'm a modal!</h4>-->
-            <!--</modal-header>-->
-            <!--<modal-body>-->
-              <!--<ul>-->
-                <!--<li *ngFor="let item of items">-->
-                  <!--<a href="#" (click)="$event.preventDefault(); selected = item">{{ item }}</a>-->
-                <!--</li>-->
-              <!--</ul>-->
-              <!--<p *ngIf="selected">Selected: <b>{{ selected }}</b></p>-->
-            <!--</modal-body>-->
-            <!--<modal-footer [show-default-buttons]="true"></modal-footer>-->
-          <!--</modal>-->
+          <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop"
+                  [cssClass]="cssClass" #modal  >
+            <modal-header [show-close]="true">
+              <h4 class="modal-title">I'm a modal!</h4>
+            </modal-header>
+            <modal-body>
+              <ul>
+                <li *ngFor="let item of items">
+                  <a href="#" (click)="$event.preventDefault(); selected = item">{{ item }}</a>
+                </li>
+              </ul>
+              <p *ngIf="selected">Selected: <b>{{ selected }}</b></p>
+            </modal-body>
+            <modal-footer [show-default-buttons]="true"></modal-footer>
+          </modal>
 
 
 
 
 
-            <!--<div class="col-md-12">-->
-                <!--<div class="card">-->
-                    <!--<button (click)="onTestGet()"> Test GET Request </button>-->
-                    <!--<p>Output: {{getData}}  <br> {{getData?.device_vendor}}</p>-->
-                    <!--<button (click)="onTestPost()">Test Post Request</button>-->
-                    <!--<p> Output {{postData}}</p>-->
+            <div class="col-md-12">
+                <div class="card">
+                    <button (click)="onTestGet()"> Test GET Request </button>
+                    <p>Output: {{getData}}  <br> {{getData?.device_vendor}}</p>
+                    <button (click)="onTestPost()">Test Post Request</button>
+                    <p> Output {{postData}}</p>
 
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+                </div>
+            </div>
+        </div>
 
-        <!--<div class="row">-->
-            <!--<div class="product-tabs">-->
-                <!--<ul class="nav nav-tabs">-->
-                    <!--<li routerLinkActive="active active-link" class="nav-option">-->
-                        <!--<a routerLink="/test/test1">devices</a>-->
-                    <!--</li>-->
-                    <!--<li routerLinkActive="active active-link" class="nav-option">-->
-                        <!--<a routerLink="/test/test2" > applications</a>-->
-                    <!--</li>-->
-                    <!--<li routerLinkActive="active active-link" class="nav-option">-->
-                        <!--<a routerLink="/test/test3" > devices2</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
- <!--<br/> <br/><br/>-->
-            <!--<div class="row">-->
-                <!--<div class="col-md-12">-->
-                    <!--<div class="margin-20">-->
-                        <!--<h4>Add customer</h4>-->
-                    <!--</div>-->
-                    <!--<form [formGroup]="addDeviceForm" novalidate (ngSubmit)="save(addDeviceForm)">-->
-                        <!--<div class="form-group">-->
-                            <!--<label>Name</label>-->
-                            <!--<input type="text" class="form-control" formControlName="name">-->
-                            <!--<small *ngIf="!addDeviceForm.controls.name.valid" class="text-danger">-->
-                                <!--Name is required (minimum 5 characters).-->
-                            <!--</small>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;addresses&ndash;&gt;-->
+        <div class="row">
+            <div class="product-tabs">
+                <ul class="nav nav-tabs">
+                    <li routerLinkActive="active active-link" class="nav-option">
+                        <a routerLink="/test/test1">devices</a>
+                    </li>
+                    <li routerLinkActive="active active-link" class="nav-option">
+                        <a routerLink="/test/test2" > applications</a>
+                    </li>
+                    <li routerLinkActive="active active-link" class="nav-option">
+                        <a routerLink="/test/test3" > devices2</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+ <br/> <br/><br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="margin-20">
+                        <h4>Add customer</h4>
+                    </div>
+                    <form [formGroup]="addDeviceForm" novalidate (ngSubmit)="save(addDeviceForm)">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" formControlName="name">
+                            <small *ngIf="!addDeviceForm.controls.name.valid" class="text-danger">
+                                Name is required (minimum 5 characters).
+                            </small>
+                        </div>
+                        <!--addresses-->
 
-                        <!--<div formArrayName="addresses">-->
-                            <!--<div *ngFor="let address of addDeviceForm.controls.addresses.controls; let i=index" class="panel panel-default">-->
-                                <!--&lt;!&ndash;<div class="panel-heading">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<span>Address {{i + 1}}</span>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>&ndash;&gt;-->
-                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                <!--<div class="panel-body" [formGroupName]="i">-->
+                        <div formArrayName="addresses">
+                            <div *ngFor="let address of addDeviceForm.controls.addresses.controls; let i=index" class="panel panel-default">
+                                <!--<div class="panel-heading">-->
+                                    <!--<span>Address {{i + 1}}</span>-->
                                     <!--<span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>-->
-                                    <!--<div class="form-group col-xs-6">-->
-                                        <!--<label>street</label>-->
-                                        <!--<input type="text" class="form-control" formControlName="street">-->
-                                        <!--<small [hidden]="addDeviceForm.controls.addresses.controls[i].controls.street.valid" class="text-danger">-->
-                                            <!--Street is required-->
-                                        <!--</small>-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group col-xs-6">-->
-                                        <!--<label>postcode</label>-->
-                                        <!--<input type="text" class="form-control" formControlName="postcode">-->
-                                    <!--</div>-->
                                 <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                                <div class="panel-body" [formGroupName]="i">
+                                    <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
+                                    <div class="form-group col-xs-6">
+                                        <label>street</label>
+                                        <input type="text" class="form-control" formControlName="street">
+                                        <small [hidden]="addDeviceForm.controls.addresses.controls[i].controls.street.valid" class="text-danger">
+                                            Street is required
+                                        </small>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label>postcode</label>
+                                        <input type="text" class="form-control" formControlName="postcode">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <!--<div class="margin-20">-->
-                            <!--<a (click)="addAddress()" style="cursor: pointer">-->
-                                <!--Add another address +-->
-                            <!--</a>-->
-                        <!--</div>-->
+                        <div class="margin-20">
+                            <a (click)="addAddress()" style="cursor: pointer">
+                                Add another address +
+                            </a>
+                        </div>
 
 
-                        <!--<div formArrayName="orders">-->
-                            <!--<div *ngFor="let order of addDeviceForm.controls.orders.controls; let j=index" class="panel panel-default">-->
-                                <!--&lt;!&ndash;<div class="panel-heading">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<span>Address {{i + 1}}</span>&ndash;&gt;-->
-                                <!--&lt;!&ndash;<span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>&ndash;&gt;-->
-                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                <!--<div class="panel-body" [formGroupName]="j">-->
-                                    <!--<span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.orders.controls.length > 1" (click)="removeOrder(j)"></span>-->
-                                    <!--<div class="form-group col-xs-12">-->
-                                        <!--<label>order</label>-->
-                                        <!--<input type="text" class="form-control" formControlName="order">-->
-                                        <!--<small [hidden]="addDeviceForm.controls.orders.controls[j].controls.order.valid" class="text-danger">-->
-                                            <!--order is required-->
-                                        <!--</small>-->
-                                    <!--</div>-->
-
+                        <div formArrayName="orders">
+                            <div *ngFor="let order of addDeviceForm.controls.orders.controls; let j=index" class="panel panel-default">
+                                <!--<div class="panel-heading">-->
+                                <!--<span>Address {{i + 1}}</span>-->
+                                <!--<span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>-->
                                 <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                                <div class="panel-body" [formGroupName]="j">
+                                    <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.orders.controls.length > 1" (click)="removeOrder(j)"></span>
+                                    <div class="form-group col-xs-12">
+                                        <label>order</label>
+                                        <input type="text" class="form-control" formControlName="order">
+                                        <small [hidden]="addDeviceForm.controls.orders.controls[j].controls.order.valid" class="text-danger">
+                                            order is required
+                                        </small>
+                                    </div>
 
-                        <!--<div class="margin-20">-->
-                            <!--<a (click)="addOrder()" style="cursor: pointer">-->
-                                <!--Add another order +-->
-                            <!--</a>-->
-                        <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="margin-20">
+                            <a (click)="addOrder()" style="cursor: pointer">
+                                Add another order +
+                            </a>
+                        </div>
 
 
-                        <!--<div class="margin-20">-->
-                            <!--<button type="submit" class="btn btn-primary pull-right" [disabled]="!addDeviceForm.valid">Submit</button>-->
-                        <!--</div>-->
-                        <!--<div class="clearfix"></div>-->
+                        <div class="margin-20">
+                            <button type="submit" class="btn btn-primary pull-right" [disabled]="!addDeviceForm.valid">Submit</button>
+                        </div>
+                        <div class="clearfix"></div>
 
-                        <!--<div class="margin-20">-->
-                            <!--<div>addDeviceForm details:-</div>-->
-                            <!--<pre>Is addDeviceForm valid?: <br>{{addDeviceForm.valid | json}}</pre>-->
-                            <!--<pre>form value: <br>{{addDeviceForm.value | json}}</pre>-->
-                        <!--</div>-->
-                    <!--</form>-->
-                <!--</div>-->
-            <!--</div>-->
+                        <div class="margin-20">
+                            <div>addDeviceForm details:-</div>
+                            <pre>Is addDeviceForm valid?: <br>{{addDeviceForm.valid | json}}</pre>
+                            <pre>form value: <br>{{addDeviceForm.value | json}}</pre>
+                        </div>
+                    </form>
+                </div>
+            </div>
     </div>
 </div>

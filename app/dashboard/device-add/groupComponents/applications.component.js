@@ -8,27 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by skylele on 19.3.17.
  */
-var core_1 = require('@angular/core');
-var forms_1 = require('@angular/forms');
+var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var AddressComponent = (function () {
     function AddressComponent() {
     }
-    __decorate([
-        core_1.Input('group'), 
-        __metadata('design:type', forms_1.FormGroup)
-    ], AddressComponent.prototype, "adressForm", void 0);
-    AddressComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'address',
-            templateUrl: 'address.component.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AddressComponent);
     return AddressComponent;
 }());
+__decorate([
+    core_1.Input('group'),
+    __metadata("design:type", forms_1.FormGroup)
+], AddressComponent.prototype, "adressForm", void 0);
+AddressComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'address',
+        templateUrl: 'address.component.html'
+    })
+], AddressComponent);
 exports.AddressComponent = AddressComponent;
 //# sourceMappingURL=applications.component.js.map

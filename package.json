@@ -12,9 +12,9 @@
     "node": "5.9.1"
   },
   "license": "MIT",
-  "repository" :
-  { "type" : "git",
-    "url" : "https://github.com/kubeIot/wish.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kubeIot/wish.git"
   },
   "dependencies": {
     "@angular/common": "~2.4.9",
@@ -28,16 +28,18 @@
     "@angular/upgrade": "~2.4.9",
     "@types/core-js": "0.9.35",
     "angular-in-memory-web-api": "0.3.1",
-    "ng-chartist": "1.1.0",
     "angular2-google-maps": "~0.17.0",
+    "angular2-jwt": "^0.2.0",
     "chartist": "~0.9.8",
     "core-js": "~2.4.1",
+    "css-modal": "^1.5.0",
     "jquery": "~3.1.1",
+    "ng-chartist": "1.1.0",
+    "ng2-bs3-modal": "^0.10.4",
     "reflect-metadata": "~0.1.8",
     "rxjs": "5.0.1",
     "systemjs": "~0.19.41",
-    "zone.js": "^0.7.2",
-    "angular2-jwt": "^0.2.0"
+    "zone.js": "^0.7.2"
   },
   "devDependencies": {
     "@types/chartist": "~0.9.33",
@@ -46,6 +48,7 @@
     "@types/node": "~6.0.45",
     "concurrently": "~3.0.0",
     "lite-server": "~2.2.2",
-    "typescript": "~2.0.3"
+    "tslint": "^5.1.0",
+    "typescript": "^2.0.10"
   }
 }

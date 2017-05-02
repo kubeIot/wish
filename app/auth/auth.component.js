@@ -8,29 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by skylele on 27.3.17.
  */
 /**
  * Created by skylele on 5.3.17.
  */
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var auth_service_1 = require("./auth.service");
 var authComponent = (function () {
     function authComponent(auth) {
         this.auth = auth;
     }
-    authComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'auth',
-            templateUrl: 'auth.component.html',
-            providers: [auth_service_1.Auth],
-            styleUrls: ['../../assets/css/app.css'],
-        }), 
-        __metadata('design:paramtypes', [auth_service_1.Auth])
-    ], authComponent);
     return authComponent;
 }());
+authComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'auth',
+        templateUrl: 'auth.component.html',
+        providers: [auth_service_1.Auth],
+        styleUrls: ['../../assets/css/app.css'],
+    }),
+    __metadata("design:paramtypes", [auth_service_1.Auth])
+], authComponent);
 exports.authComponent = authComponent;
 //# sourceMappingURL=auth.component.js.map

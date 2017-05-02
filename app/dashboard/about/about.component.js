@@ -8,11 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by skylele on 5.3.17.
  */
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
+var core_1 = require("@angular/core");
+var common_1 = require("@angular/common");
 var AboutComponent = (function () {
     function AboutComponent(location) {
         this.location = location;
@@ -20,36 +21,36 @@ var AboutComponent = (function () {
     AboutComponent.prototype.goBack = function () {
         this.location.back();
     };
-    AboutComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'about',
-            templateUrl: 'about.component.html',
-            styleUrls: ['../../../assets/css/app.css'],
-            animations: [
-                core_1.trigger('about', [
-                    core_1.transition('void => *', [
-                        core_1.style({ opacity: 0,
-                            '-ms-transform': 'translate3D(0px, 150px, 0px)',
-                            '-webkit-transform': 'translate3D(0px, 150px, 0px)',
-                            '-moz-transform': 'translate3D(0px, 150px, 0px)',
-                            '-o-transform': 'translate3D(0px, 150px, 0px)',
-                            transform: 'translate3D(0px, 150px, 0px)',
-                        }),
-                        core_1.animate('0.3s 0s ease-out', core_1.style({ opacity: 1,
-                            '-ms-transform': 'translate3D(0px, 0px, 0px)',
-                            '-webkit-transform': 'translate3D(0px, px, 0px)',
-                            '-moz-transform': 'translate3D(0px, 0px, 0px)',
-                            '-o-transform': 'translate3D(0px, 0px, 0px)',
-                            transform: 'translate3D(0px, 0px, 0px)',
-                        }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [common_1.Location])
-    ], AboutComponent);
     return AboutComponent;
 }());
+AboutComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'about',
+        templateUrl: 'about.component.html',
+        styleUrls: ['../../../assets/css/app.css'],
+        animations: [
+            core_1.trigger('about', [
+                core_1.transition('void => *', [
+                    core_1.style({ opacity: 0,
+                        '-ms-transform': 'translate3D(0px, 150px, 0px)',
+                        '-webkit-transform': 'translate3D(0px, 150px, 0px)',
+                        '-moz-transform': 'translate3D(0px, 150px, 0px)',
+                        '-o-transform': 'translate3D(0px, 150px, 0px)',
+                        transform: 'translate3D(0px, 150px, 0px)',
+                    }),
+                    core_1.animate('0.3s 0s ease-out', core_1.style({ opacity: 1,
+                        '-ms-transform': 'translate3D(0px, 0px, 0px)',
+                        '-webkit-transform': 'translate3D(0px, px, 0px)',
+                        '-moz-transform': 'translate3D(0px, 0px, 0px)',
+                        '-o-transform': 'translate3D(0px, 0px, 0px)',
+                        transform: 'translate3D(0px, 0px, 0px)',
+                    }))
+                ])
+            ])
+        ]
+    }),
+    __metadata("design:paramtypes", [common_1.Location])
+], AboutComponent);
 exports.AboutComponent = AboutComponent;
 //# sourceMappingURL=about.component.js.map

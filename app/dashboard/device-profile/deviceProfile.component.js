@@ -8,21 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by skylele on 5.3.17.
  */
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var common_1 = require('@angular/common');
-var deviceThumb_service_1 = require('../device-thumbnail/deviceThumb.service');
-require('rxjs/add/operator/switchMap');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
+var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
+require("rxjs/add/operator/switchMap");
 var forms_1 = require("@angular/forms");
 var applications_service_1 = require("../Applications/applications.service");
+var profileSubPages;
 (function (profileSubPages) {
     profileSubPages[profileSubPages["logging"] = 1] = "logging";
     profileSubPages[profileSubPages["loadedApplications"] = 2] = "loadedApplications";
-})(exports.profileSubPages || (exports.profileSubPages = {}));
-var profileSubPages = exports.profileSubPages;
+})(profileSubPages = exports.profileSubPages || (exports.profileSubPages = {}));
 var DeviceProfileComponent = (function () {
     function DeviceProfileComponent(deviceThumbService, applicationService, route, location) {
         this.deviceThumbService = deviceThumbService;
@@ -58,28 +59,32 @@ var DeviceProfileComponent = (function () {
     DeviceProfileComponent.prototype.goBack = function () {
         this.location.back();
     };
-    DeviceProfileComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'device-profile',
-            templateUrl: 'deviceProfile.component.html',
-            providers: [deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService],
-            styleUrls: ['../../../assets/css/device.css', '../../../assets/css/app.css'],
-            animations: [
-                core_1.trigger('profile', [
-                    core_1.state('*', core_1.style({
-                        opacity: 1 })),
-                    core_1.transition('void => *', [
-                        core_1.style({ opacity: 0,
-                        }),
-                        core_1.animate('1s 0s ease-out')
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService, router_1.ActivatedRoute, common_1.Location])
-    ], DeviceProfileComponent);
     return DeviceProfileComponent;
 }());
+DeviceProfileComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'device-profile',
+        templateUrl: 'deviceProfile.component.html',
+        providers: [deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService],
+        styleUrls: ['../../../assets/css/device.css', '../../../assets/css/app.css'],
+        animations: [
+            core_1.trigger('profile', [
+                core_1.state('*', core_1.style({
+                    opacity: 1
+                })),
+                core_1.transition('void => *', [
+                    core_1.style({ opacity: 0,
+                    }),
+                    core_1.animate('1s 0s ease-out')
+                ])
+            ])
+        ]
+    }),
+    __metadata("design:paramtypes", [deviceThumb_service_1.DeviceThumbService,
+        applications_service_1.ApplicationService,
+        router_1.ActivatedRoute,
+        common_1.Location])
+], DeviceProfileComponent);
 exports.DeviceProfileComponent = DeviceProfileComponent;
 //# sourceMappingURL=deviceProfile.component.js.map

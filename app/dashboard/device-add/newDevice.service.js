@@ -11,9 +11,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-require('rxjs/add/operator/map');
+require("rxjs/add/operator/map");
 var NewDeviceService = (function () {
     function NewDeviceService(_http) {
         this._http = _http;
@@ -29,11 +30,11 @@ var NewDeviceService = (function () {
         })
             .map(function (res) { return res.json(); });
     };
-    NewDeviceService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], NewDeviceService);
     return NewDeviceService;
 }());
+NewDeviceService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], NewDeviceService);
 exports.NewDeviceService = NewDeviceService;
 //# sourceMappingURL=newDevice.service.js.map

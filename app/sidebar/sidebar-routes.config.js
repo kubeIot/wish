@@ -1,10 +1,11 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var MenuType;
 (function (MenuType) {
     MenuType[MenuType["BRAND"] = 0] = "BRAND";
     MenuType[MenuType["LEFT"] = 1] = "LEFT";
     MenuType[MenuType["RIGHT"] = 2] = "RIGHT";
-})(exports.MenuType || (exports.MenuType = {}));
-var MenuType = exports.MenuType;
+})(MenuType = exports.MenuType || (exports.MenuType = {}));
 exports.ROUTES = [
     { path: 'dashboard', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'pe-7s-graph' },
     { path: 'devices', title: 'Devices', menuType: MenuType.LEFT, icon: 'pe-7s-config' },

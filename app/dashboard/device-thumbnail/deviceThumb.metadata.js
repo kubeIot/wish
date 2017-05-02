@@ -2,6 +2,7 @@
  * Created by skylele on 3.3.17.
  */
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // export interface RootObject {
 //     applications: number[];
 //     device_vendor: string;

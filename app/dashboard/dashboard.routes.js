@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var deviceThumb_component_1 = require("./device-thumbnail/deviceThumb.component");
 var dashboard_component_1 = require("./dashboard/dashboard.component");
 var devices_component_1 = require("./devices/devices.component");

@@ -12,8 +12,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var angular2_jwt_1 = require('angular2-jwt');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
 var Auth = (function () {
     function Auth() {
         // Configure Auth0
@@ -27,20 +27,20 @@ var Auth = (function () {
         // Call the show method to display the widget.
         this.lock.show();
     };
-    Auth.prototype.authenticated = function () {
-        // Check if there's an unexpired JWT
-        // This searches for an item in localStorage with key == 'id_token'
-        return angular2_jwt_1.tokenNotExpired();
-    };
+    // public authenticated() {
+    //     // Check if there's an unexpired JWT
+    //     // This searches for an item in localStorage with key == 'id_token'
+    //     return tokenNotExpired();
+    // }
     Auth.prototype.logout = function () {
         // Remove token from localStorage
         localStorage.removeItem('id_token');
     };
-    Auth = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], Auth);
     return Auth;
 }());
+Auth = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [])
+], Auth);
 exports.Auth = Auth;
 //# sourceMappingURL=auth.service.js.map

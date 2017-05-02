@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms'
 import {testService} from "./test.service";
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import {Device} from '../device-thumbnail/deviceThumb.metadata'
+import {Router} from "@angular/router";
 export interface Customer {
     name: string; // required field with minimum 5 characters
     orders: string[];
@@ -32,14 +33,17 @@ export class testComponent implements OnInit {
 
 
 
+    constructor(private router: Router, private _httpService: testService, private _fb: FormBuilder) {
+    }
+
+
     device : Device;
     public addDeviceForm: FormGroup;
     getData: any;
     postData: string;
 
 
-    constructor(private _httpService: testService, private _fb: FormBuilder) {
-    }
+
 
 
 
@@ -140,4 +144,9 @@ export class testComponent implements OnInit {
                 () => console.log("post request is completed")
             )
     }
+}
+
+export class Person {
+    firstName: string;
+    lastName: string;
 }

@@ -8,13 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by skylele on 3.3.17.
  */
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-require('rxjs/add/operator/toPromise');
-require('rxjs/add/operator/map');
+require("rxjs/add/operator/toPromise");
+require("rxjs/add/operator/map");
 var rxjs_1 = require("rxjs");
 var configuration_1 = require("../../configuration");
 var DeviceThumbService = (function () {
@@ -41,11 +42,11 @@ var DeviceThumbService = (function () {
         return this.http.get(url)
             .map(function (response) { return response.json(); });
     };
-    DeviceThumbService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], DeviceThumbService);
     return DeviceThumbService;
 }());
+DeviceThumbService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], DeviceThumbService);
 exports.DeviceThumbService = DeviceThumbService;
 //# sourceMappingURL=deviceThumb.service.js.map

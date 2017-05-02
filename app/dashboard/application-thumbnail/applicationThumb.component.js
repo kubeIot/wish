@@ -8,29 +8,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by skylele on 3.4.17.
  */
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var applications_service_1 = require("../Applications/applications.service");
 var ApplicationThumbComponent = (function () {
     function ApplicationThumbComponent() {
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ApplicationThumbComponent.prototype, "application", void 0);
-    ApplicationThumbComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'application-thumb',
-            templateUrl: 'applicationThumb.component.html',
-            providers: [applications_service_1.ApplicationService],
-            styleUrls: ['../../../assets/css/device.css']
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ApplicationThumbComponent);
     return ApplicationThumbComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], ApplicationThumbComponent.prototype, "application", void 0);
+ApplicationThumbComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'application-thumb',
+        templateUrl: 'applicationThumb.component.html',
+        providers: [applications_service_1.ApplicationService],
+        styleUrls: ['../../../assets/css/device.css']
+    })
+], ApplicationThumbComponent);
 exports.ApplicationThumbComponent = ApplicationThumbComponent;
 //# sourceMappingURL=applicationThumb.component.js.map

@@ -8,29 +8,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by skylele on 3.3.17.
  */
-var core_1 = require('@angular/core');
-var deviceThumb_service_1 = require('./deviceThumb.service');
+var core_1 = require("@angular/core");
+var deviceThumb_service_1 = require("./deviceThumb.service");
 var DeviceThumbComponent = (function () {
     function DeviceThumbComponent() {
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DeviceThumbComponent.prototype, "device", void 0);
-    DeviceThumbComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'device-thumb',
-            templateUrl: 'deviceThumb.component.html',
-            providers: [deviceThumb_service_1.DeviceThumbService],
-            styleUrls: ['../../../assets/css/device.css']
-        }), 
-        __metadata('design:paramtypes', [])
-    ], DeviceThumbComponent);
     return DeviceThumbComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DeviceThumbComponent.prototype, "device", void 0);
+DeviceThumbComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'device-thumb',
+        templateUrl: 'deviceThumb.component.html',
+        providers: [deviceThumb_service_1.DeviceThumbService],
+        styleUrls: ['../../../assets/css/device.css']
+    })
+], DeviceThumbComponent);
 exports.DeviceThumbComponent = DeviceThumbComponent;
 //# sourceMappingURL=deviceThumb.component.js.map

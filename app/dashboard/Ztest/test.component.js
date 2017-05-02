@@ -11,11 +11,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
 var test_service_1 = require("./test.service");
-var forms_1 = require('@angular/forms');
+var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
 var testComponent = (function () {
-    function testComponent(_httpService, _fb) {
+    function testComponent(router, _httpService, _fb) {
+        this.router = router;
         this._httpService = _httpService;
         this._fb = _fb;
     }
@@ -83,17 +86,23 @@ var testComponent = (function () {
         this._httpService.postJSON()
             .subscribe(function (data) { return _this.postData = JSON.stringify(data); }, function (error) { return alert(error); }, function () { return console.log("post request is completed"); });
     };
-    testComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'test',
-            templateUrl: 'test.component.html',
-            styleUrls: ['../../../assets/css/app.css'],
-            providers: [test_service_1.testService],
-        }), 
-        __metadata('design:paramtypes', [test_service_1.testService, forms_1.FormBuilder])
-    ], testComponent);
     return testComponent;
 }());
+testComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'test',
+        templateUrl: 'test.component.html',
+        styleUrls: ['../../../assets/css/app.css'],
+        providers: [test_service_1.testService],
+    }),
+    __metadata("design:paramtypes", [router_1.Router, test_service_1.testService, forms_1.FormBuilder])
+], testComponent);
 exports.testComponent = testComponent;
+var Person = (function () {
+    function Person() {
+    }
+    return Person;
+}());
+exports.Person = Person;
 //# sourceMappingURL=test.component.js.map

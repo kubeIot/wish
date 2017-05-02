@@ -1,0 +1,136 @@
+<div class="main-content" [@applications]>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <a routerLink="/application-add">
+                            <button style="float: right; " class="btn btn-primary">Add Application</button>
+                        </a>
+                        <button style="float: right;" class="btn btn-primary" (click)="changeLayout()">Change Layout</button>
+
+                        <!--<div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">-->
+                            <!--<div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>-->
+                        <!--</div>-->
+                        <h4 class="title">Applications</h4>
+                        <p class="category">You can find all of your applications here!</p>
+
+                    </div>
+                    <div class="content">
+                        <div class="row">
+
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="pointer" (click)="changeSort('name')"><b>Name of the Application</b>
+                                        <img *ngIf="sortItem != 'name'" class="sorted" src="../../../assets/img/both.png">
+                                        <img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">
+                                        <img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                                    </label>
+                                    <input class="form-control" placeholder="Name" type="text" [formControl]="searchNameInput">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="pointer" (click)="changeSort('base_image')"><b>Base Image</b>
+                                        <img *ngIf="sortItem != 'base_image'" class="sorted" src="../../../assets/img/both.png">
+                                        <img *ngIf="sortItem == 'base_image' && revert" class="sorted" src="../../../assets/img/down.gif">
+                                        <img *ngIf="sortItem == 'base_image' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                                    </label>
+                                    <input class="form-control" placeholder="Base Image"  type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="form-group">
+                                    <label class="pointer" (click)="changeSort('status')"><b>Show only</b>
+                                        <img *ngIf="sortItem != 'status'" class="sorted" src="../../../assets/img/both.png">
+                                        <img *ngIf="sortItem == 'status' && revert" class="sorted" src="../../../assets/img/down.gif">
+                                        <img *ngIf="sortItem == 'status' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                                    </label>
+                                    <select class="form-control" value="Present">
+                                        <option selected> All </option>
+                                        <option> OK </option>
+                                        <option> Error </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card" *ngIf="!tableView">
+                    <div>
+                        <div class="row">
+                            <application-thumb *ngFor="let app of applications | async | sortBy : sortItem : revert" [application]="app"></application-thumb>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card " *ngIf="tableView">
+                    <div class="content">
+                        <div class="content table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th><b>Name</b></th>
+                                    <th><b>Base Image</b></th>
+                                    <th><b>Service IP</b></th>
+                                    <th><b>Status Message</b></th>
+                                    <th><b>Edit</b></th>
+                                    <th><b>Delete</b></th>
+                                    <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
+                                </tr>
+                                </thead>
+                                <tbody *ngFor="let app of applications | async | sortBy : sortItem : revert"  >
+
+                                <tr class="activity-ok">
+                                    <td >   {{app?.name}} </td>
+                                    <td >   {{app?.base_image}} </td>
+                                    <td >   {{app?.service_ip}} </td>
+                                    <td class=" maxwidth">   {{app?.status_message}} </td>
+                                    <td> <a [routerLink]="['/application-add', app?.id]"> Edit </a> </td>
+                                  <!--modal is at the bottom of the code-->
+                                  <td (click)="deleteConfirm(app?.name, app?.id)"> <span class="pointer"> Delete <i class="pe-7s-close"></i> </span> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="row product-tabs">-->
+                    <!--<ul class="nav nav-tabs">-->
+                        <!--<li class=""> ttt</li>-->
+                        <!--&lt;!&ndash;<button class="btn-primary"> devices</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button class="btn-navbar"> applications</button>&ndash;&gt;-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="card">-->
+                    <!--<div class="row">-->
+
+                        <!--<device-thumb *ngFor="let dev of devices" [device]="dev"></device-thumb>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop"
+       [cssClass]="cssClass" #modal  >
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Delete application</h4>
+  </modal-header>
+  <modal-body>
+    <p>
+      Do you really want to remove {{nameInModal}}? This action may not be undone!
+    </p>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.dismiss()">Go back!</button>
+    <button type="button" class="btn btn-danger" autofocus (click)="deleteApplication()">Delete</button>
+  </modal-footer>
+</modal>

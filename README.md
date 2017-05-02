@@ -10,7 +10,7 @@ Node.js a npm jsou nezbytné pro spuštění tohoto projektu.
 
 Pokud nemáte nainstalovaný node.js, nainstalujte ho dle návodu na www.nodejs.org nebo https://docs.npmjs.com/getting-started/installing-node
 
-**Ověřte, že máte verzi node alespoň 'v4.x.x' a npm '3.x.x'**
+**Ověřte, že máte verzi node alespoň 'v6.9.x' a npm '4.x.x'**
 spuštěním příkazů 'node -v' a 'npm -v' v terminálu. Starší verze mohou způsobovat chyby.
 
 ## Instalace npm balíčků
@@ -29,10 +29,10 @@ Server zastavíte manualně klávesovou zkratkou 'Ctrl-C'
 
 ### npm skripty
 
-Nejdůležitejší příkazy obsažené v 'package.json'.
+Nejdůležitejší příkazy
 
-* 'npm start' - zkompiluje aplikaci a zároveň spustí server. Veškeré změny souborů jsou ihned zaznamenány ('watch-mode').
-* 'npm run tsc' - spustí kompilátor TypeScriptu.
-* 'npm run tsc:w' - spustí kompilátor TypeScriptu ve 'watch-mode'.
-* 'npm run lite' - spustí server
+* 'start' - zkompiluje aplikaci a zároveň spustí server. Veškeré změny souborů jsou ihned zaznamenány ('watch-mode').
+* 'ng serve' - viz start, port lze specifikovat pomocí parametru --port.
+* 'ng build' - proběhne build aplikace, pro produkční prostředí je potřeba zvolit přepínač --prod. Změny v kódu nejsou zaznamenány.
+
 

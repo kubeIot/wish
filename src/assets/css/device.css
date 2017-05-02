@@ -1,0 +1,105 @@
+
+
+
+.menu-item {
+    border-radius: 5px;
+    margin: 11px 10px 5px 10px;
+    padding-top: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1);
+    -webkit-transition: all 0.4s ease; /* Safari and Chrome */
+    -moz-transition: all 0.4s ease; /* Firefox */
+    -ms-transition: all 0.4s ease; /* IE 9 */
+    -o-transition: all 0.4s ease; /* Opera */
+    transition: all 0.4s ease;
+}
+
+.menu-item:hover {
+    background-color: #e9e9e9;
+    cursor: pointer;
+    -webkit-transform:scale(1.05); /* Safari and Chrome */
+    -moz-transform:scale(1.05); /* Firefox */
+    -ms-transform:scale(1.05); /* IE 9 */
+    -o-transform:scale(1.05); /* Opera */
+    transform:scale(1.05);
+}
+
+
+
+.img-circle {
+
+    /*width: 80px;*/
+    /*height: 80px;*/
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+
+}
+
+
+
+
+/*.right-button {*/
+    /*!*position: absolute;*!*/
+    /*float: right;*/
+    /*right: 20px;*/
+    /*top: 9px;*/
+/*}*/
+
+
+.profile-status .title {
+    margin-top: 0;
+}
+
+.card.contact-info {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.contact-info ul {
+    list-style: none;
+    padding-left: 0;
+}
+.contact-info ul li {
+    padding: 10px 0;
+    padding-left: 0;
+}
+.contact-info ul li span {
+    line-height:25px;
+    height: 15px;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 10px;
+}
+.contact-info .pe-icon {
+    font-size: 25px;
+}
+
+.status-indicator.on {
+    background-color: #47e310;
+}
+
+.status-indicator.off {
+    background-color: #FF4A55;
+}
+
+.status-indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+/*a {*/
+    /*color: black;*/
+/*}*/
+
+.profile-description {
+    font-size: 13px;
+    color: #6e6e6f;
+    padding-top: 10px;
+}
+
+nav.my-pager {
+    text-align: center;
+}

@@ -1,0 +1,57 @@
+<div class="main-content" [@login] style="background-color: white;">
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6 col-md-offset-2 card">
+
+                    <!--<alert></alert>-->
+                        <!--<form>-->
+                  <div class="col-md-12" *ngIf="register">
+
+                    <div class="form-group">
+                          <label><b>Register</b></label>
+                          <input type="text" class="form-control" placeholder="Login" required>
+                      </div>
+                      <div class="form-group">
+                          <label><b>Password</b></label>
+                          <input type="Password" class="form-control" placeholder="Password" required>
+                      </div>
+                    <div class="form-group">
+                      <label><b>Confirm Password</b></label>
+                      <input type="Password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                      <label><b>E-Mail</b></label>
+                      <input type="text" class="form-control" placeholder="E-Mail" required>
+                    </div>
+                      <div style="text-align:center">
+                          <a routerLink="/device">
+                              <button (click)="NewRegistration()" type="submit" class="btn btn-danger btn-fill">Create my account!</button>
+                          </a>
+                      </div>
+                  </div>
+
+                  <div class="col-md-12" *ngIf="!register">
+
+                    <div class="form-group">
+                      <label><b>Login</b></label>
+                      <input type="text" class="form-control" placeholder="Login" required>
+                    </div>
+                    <div class="form-group">
+                      <label><b>Password</b></label>
+                      <input type="text" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div style="text-align:center">
+                      <a routerLink="/device">
+                        <button (click)="login()" type="submit" class="btn btn-danger btn-fill">Let me in</button>
+                      </a>
+                    </div>
+                  </div>
+                        <!--</form>-->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

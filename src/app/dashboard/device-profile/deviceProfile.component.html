@@ -56,10 +56,6 @@
                                 </li>
                                 <hr/>
                                 <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Applications:</span>
-                                </li>
-                                <br/><hr/>
-                                <li>
                                     <i class="pe-icon pe-7s-door-lock"></i><span>Installed capabilities:</span>
                                   <ul *ngFor="let capability of installedCapabilities">
                                     <li> <i class="pe-7s-info" title="Peripheral device: {{capability.peripherial_device}}&#013;Protocol: {{capability.protocol}}"></i>
@@ -234,12 +230,12 @@
                                     <tbody *ngFor="let app of (apps) "  >
                                     <tr [ngClass]="{'activity-ok': getClass(app.status)}">
                                         <!--activity-warning activity-ok-->
-                                        <td>{{app.name}}</td>
-                                        <td>{{app.base_image}}</td>
-                                        <td>{{app.service_ip}}</td>
-                                        <td *ngIf="app.ports.length < 1">None</td>
-                                        <td *ngFor="let port of app.ports"> {{port}} <br/> </td>
-                                        <td class="maxwidth">app.status message</td>
+                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.name}}</td>
+                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.base_image}}</td>
+                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.service_ip}}</td>
+                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngIf="app.ports.length < 1">None</td>
+                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngFor="let port of app.ports"> {{port}} <br/> </td>
+                                        <td [routerLink]="['/application-profile', app?.id]"  class="maxwidth pointer">app.status message</td>
                                     </tr>
                                     </tbody>
                                 </table>

@@ -56,7 +56,7 @@
               <ul>
                 <li>
                   <i class="pe-7s-info" title="Base Image: {{image?.base_image}}&#013;Description: {{image?.description}}"></i>
-                  <span>
+                  <span class="info-with-icon">
                     {{ image?.name }}
                   </span>
                 </li>
@@ -69,7 +69,7 @@
               <ul>
                 <li>
                   <i class="pe-7s-info" title="Device Address: {{device?.address}}&#013;Device Vendor: {{device?.device_vendor}}&#013;Device Version: {{device?.device_version}}"></i>
-                  <span class="info-with-icon">{{ application.device_id}}</span>
+                  <span style="cursor: pointer" [routerLink]="['/device-profile', application.device_id]" class="info-with-icon">{{ application.device_id}}</span>
                 </li>
               </ul>
             </li><hr/>

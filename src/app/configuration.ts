@@ -8,3 +8,7 @@ export let applicationsUrl = 'http://127.0.0.1:8080/application/';  // URL to we
 export let imagesUrl = 'http://127.0.0.1:8080/image/';  // URL to web api
 
 export let userUrl = 'http://127.0.0.1:8080/user/';
+
+export let capabilitiesUrl = 'http://127.0.0.1:8080/capability/';
+
+

@@ -21,7 +21,7 @@ public logged: boolean = false;
         this.loggedIn = localStorage.getItem('isLoggedIn');
     }
     ngOnInit(){
-        $.getScript('../assets/js/light-bootstrap-dashboard.js');
+        // $.getScript('../assets/js/light-bootstrap-dashboard.js');
     }
     public isMaps(path){
         if(path == window.location.pathname){

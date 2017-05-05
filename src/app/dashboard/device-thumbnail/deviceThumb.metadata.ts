@@ -1,6 +1,10 @@
 /**
  * Created by skylele on 3.3.17.
  */
+export interface Ids {
+  application_id: number;  // required field
+  capability_id: number;
+}
 
 export interface Device {
     adress: string;
@@ -14,7 +18,7 @@ export interface Device {
     os_distribution: string;
     owner: number;
     system_info: string;
-    used_capabilities: string[];
+    used_capabilities: Ids[];
 }
 // export interface RootObject {
 //     applications: number[];

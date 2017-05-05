@@ -86,10 +86,10 @@
                                 <tbody *ngFor="let app of pagedItems | sortBy : sortItem : revert"  >
 
                                 <tr class="activity-ok">
-                                    <td >   {{app?.name}} </td>
-                                    <td >   {{app?.base_image}} </td>
-                                    <td >   {{app?.service_ip}} </td>
-                                    <td class=" maxwidth">   {{app?.status_message}} </td>
+                                  <td > <a [routerLink]="['/application-profile', app?.id]">  {{app?.name}} </a> </td>
+                                    <td >  <a [routerLink]="['/application-profile', app?.id]"> {{app?.base_image}} </a> </td>
+                                    <td >  <a [routerLink]="['/application-profile', app?.id]"> {{app?.service_ip}} </a> </td>
+                                    <td class=" maxwidth"> <a [routerLink]="['/application-profile', app?.id]">  {{app?.status_message}}  </a> </td>
                                     <td> <a [routerLink]="['/application-add', app?.id]"> Edit </a> </td>
                                   <!--modal is at the bottom of the code-->
                                   <td (click)="deleteConfirm(app?.name, app?.id)"> <span class="pointer"> Delete <i class="pe-7s-close"></i> </span> </td>

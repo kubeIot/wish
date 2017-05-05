@@ -15,6 +15,7 @@ import {authComponent} from "../auth/auth.component";
 import {sortPipe} from "./sorting.pipe";
 import {ApplicationThumbComponent} from "./application-thumbnail/applicationThumb.component";
 import {NewApplicationComponent} from "./application-add/newApplication.component";
+import {ApplicationProfileComponent} from "./application-profile/applicationProfile.component";
 export const MODULE_COMPONENTS = [
     AboutComponent,
     EventsLogComponent,
@@ -26,6 +27,7 @@ export const MODULE_COMPONENTS = [
     DashboadrComponent,
     DevicesComponent,
     DeviceProfileComponent,
+    ApplicationProfileComponent,
     // LoginComponent,
     ApplicationsComponent,
     testComponent,
@@ -44,7 +46,9 @@ export const MODULE_ROUTES: Route[] =[
     { path: 'application-add', component: NewApplicationComponent},
     { path: 'application-add/:id', component: NewApplicationComponent},
     { path: 'device-profile/:id', component: DeviceProfileComponent },
-    { path: 'profile', component: ProfileComponent },
+  { path: 'application-profile/:id', component: ApplicationProfileComponent },
+
+  { path: 'profile', component: ProfileComponent },
     { path: 'dashboard', component: DashboadrComponent },
     // { path: 'authentication', component: LoginComponent },
     { path: 'applications', component: ApplicationsComponent },

@@ -20,9 +20,27 @@
 
                     </div>
                 </div>
+
+
+              <div class="row">
                 <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12" id="information">
-                    <img class="profile-pic" src="../../../assets/img/250x250.png" alt="..."/>
-                    <div class="card contact-info">
+                  <img class="profile-pic" src="../../../assets/img/250x250.png" alt="..."/>
+                </div>
+
+                <div class="profile-status">
+                  <h3 *ngIf="device.name" class="title">{{device?.name}}</h3>
+                  <h3 *ngIf="device.device_vendor" class="title">{{device?.device_vendor}}</h3>
+                  <p class="category">IP Address: {{device?.address}}</p>
+                  <p class="category">Device Vendor: {{device?.device_vendor}} {{device?.device_version}}</p>
+                  <p class="category">Distribution: {{device?.os_distribution}}</p>
+                  <p class="profile-description">Sensor gives information about heat in the kitchen every once and then.</p>
+                  <hr>
+                </div>
+              </div>
+
+
+
+                <div class="card contact-info col-lg-3 col-md-5 col-sm-6 col-xs-12">
                         <div class="header">
                             <h4 class="title">Device info</h4>
                         </div>
@@ -32,34 +50,37 @@
                                 <!--<i class="pe-icon pe-7s-power"></i><span>Status: <span class="status-indicator on"></span></span>-->
                                 <!--</li>-->
                                 <li>
-                                    <i class="pe-icon pe-7s-ticket"></i><span>ID: {{ device.id }}</span>
-
+                                  <i class="pe-icon pe-7s-door-lock"></i>
+                                  <span *ngIf="deviceStatus(device?.system_info)">Status: <span class="status-indicator on"></span></span>
+                                  <span *ngIf="!deviceStatus(device?.system_info)">Status: <span class="status-indicator off"></span></span>
                                 </li>
                                 <hr/>
-                                <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Address: <br/>{{ device.address }}</span>
-                                </li>
-                                <br/><hr/>
                                 <li>
                                     <i class="pe-icon pe-7s-door-lock"></i><span>Applications:</span>
                                 </li>
                                 <br/><hr/>
                                 <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Vendor: <br/> {{ device.device_vendor}}</span>
-                                </li>
-                                <br/><hr/>
-                                <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Vendor: <br/> {{ device.device_version}}</span>
-                                </li>
-                                <br/><hr/>
-                                <li>
                                     <i class="pe-icon pe-7s-door-lock"></i><span>Installed capabilities:</span>
+                                  <ul *ngFor="let capability of installedCapabilities">
+                                    <li> <i class="pe-7s-info" title="Peripheral device: {{capability.peripherial_device}}&#013;Protocol: {{capability.protocol}}"></i>
+                                      <span class="info-with-icon">{{capability.name}}</span>
+                                    </li>
+
+                                  </ul>
                                 </li>
-                                <br/><hr/>
+                                <hr/>
                                 <li>
                                     <i class="pe-icon pe-7s-door-lock"></i><span>Used capabilities:</span>
+                                  <ul *ngFor="let usedCapability of usedCapabilities">
+                                    <!-- checking for existence of used capability application/ capability because interface may load asynchronously -->
+                                    <li> <i class="pe-7s-info" title="Application: {{usedCapability?.application?.name}}"></i>
+                                      <span class="info-with-icon">{{usedCapability?.capability?.name}}</span>
+                                    </li>
+
+                                  </ul>
+
                                 </li>
-                                <br/><hr/>
+                                <hr/>
                                 <li>
                                     <i class="pe-icon pe-7s-door-lock"></i><span>Kernel Version: <br/> {{ device.kernel_version}}</span>
                                 </li>
@@ -68,26 +89,11 @@
                                     <i class="pe-icon pe-7s-door-lock"></i><span>Applications count: {{ device.number_of_applications}}</span>
                                 </li>
                                 <hr/>
-                                <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Distribution: <br/> {{ device.os_distribution}}</span>
-                                </li>
-                                <br/><hr/>
-                                <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>owner: <br/> {{ device.owner}}</span>
-                                </li>
-                                <br/><hr/>
                             </ul>
                         </div>
-                    </div>
                 </div>
 
                 <div class="col-lg-9 col-md-7 col-sm-6 col-xs-12" id="device-profile-header">
-                    <div class="profile-status">
-                        <h3 class="title">{{device?.device_vendor}}</h3>
-                        <p class="category">{{device?.address}}</p>
-                        <p class="profile-description">Sensor gives information about heat in the kitchen every once and then.</p>
-                        <hr>
-                    </div>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -198,7 +204,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="subPage == 2" class="card" id="device-profile-applications">
+                    <div *ngIf="subPage == 2" class="card col-sm-12" id="device-profile-applications">
 
                         <div class="header">
                             <h4 class="title">Applications</h4>
@@ -241,23 +247,23 @@
 
 
                               <!-- pager -->
-                              <ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination"> <!-- todo posunout pager -->
-                                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                                  <a (click)="setPage(1)">First</a>
-                                </li>
-                                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-                                </li>
-                                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                                  <a (click)="setPage(page)">{{page}}</a>
-                                </li>
-                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
-                                </li>
-                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                                  <a (click)="setPage(pager.totalPages)">Last</a>
-                                </li>
-                              </ul>
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination"> <!-- todo posunout pager -->
+                                  <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                    <a (click)="setPage(1)">First</a>
+                                  </li>
+                                  <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                  </li>
+                                  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                    <a (click)="setPage(page)">{{page}}</a>
+                                  </li>
+                                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                  </li>
+                                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a (click)="setPage(pager.totalPages)">Last</a>
+                                  </li>
+                                </ul>
                             </div>
                         </div>
                     </div>

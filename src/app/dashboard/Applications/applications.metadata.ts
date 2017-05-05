@@ -12,3 +12,13 @@ export interface Application {
     status: number;
     status_message: string;
 }
+
+
+export interface Image {
+  base_image: string;
+  description: string;
+  exposed_ports: string[];
+  id: number;
+  name: string;
+  required_capabilities: number[];
+}

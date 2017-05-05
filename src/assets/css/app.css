@@ -52,12 +52,14 @@ ul hr {
 }
 
 .profile-pic {
+
     width: 100%;
     border-radius: 20%;
     max-height: 250px;
     max-width: 250px;
     display: block;
     margin: 0 auto;
+  margin-bottom: 15px;
     object-fit: cover;
     padding-bottom: 5px;
 }
@@ -172,4 +174,12 @@ span.icon-back span {
   list-style:none;
   position:relative;
   left:37%;
+}
+
+.info-with-icon {
+  padding-left: 15px !important;
+}
+
+.info-without-icon {
+  padding-left: 30px !important;
 }

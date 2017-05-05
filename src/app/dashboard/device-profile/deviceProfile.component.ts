@@ -21,6 +21,15 @@ import {Device} from "../device-thumbnail/deviceThumb.metadata";
 import {FormControl} from "@angular/forms";
 import {ApplicationService} from "../Applications/applications.service";
 import {PagerService} from "../../helper-services/pager.service";
+import {CapabilitiesService} from "../Capabilities/capabilities.service";
+import {Capability} from "../Capabilities/capabilities.metadata";
+
+//Used capabilities comes with two Ids
+export interface usedCapability {
+  application: Application;  // required field
+  capability: Capability;
+}
+
 
 export enum profileSubPages {
     logging = 1,
@@ -30,7 +39,7 @@ export enum profileSubPages {
     moduleId: module.id,
     selector: 'device-profile',
     templateUrl: 'deviceProfile.component.html',
-    providers: [DeviceThumbService, ApplicationService, PagerService],
+    providers: [DeviceThumbService, ApplicationService, PagerService, CapabilitiesService],
     styleUrls: ['../../../assets/css/device.css' , '../../../assets/css/app.css'],
     animations: [
         trigger('profile', [
@@ -49,12 +58,9 @@ export class DeviceProfileComponent implements OnInit {
   // modal variables
   @ViewChild('modal')
   modal: ModalComponent;
-  items: string[] = ['item1', 'item2', 'item3'];
   selected: string;
-
   index: number = 0;
   backdropOptions = [true, false, 'static'];
-
   animation: boolean = true;
   keyboard: boolean = true;
   backdrop: string | boolean = true;
@@ -70,26 +76,23 @@ export class DeviceProfileComponent implements OnInit {
   //end of pager variables
 
 
-  deleteDevice() {
-    console.log("device deleted");
-    this.modal.close();
-  }
-  open() {
-    this.modal.open();
-  }
     device: Device;
     subPage: profileSubPages = profileSubPages.logging;
     apps = [];
+    installedCapabilities: Capability[] = [];
+    usedCapabilities: usedCapability[] = [];
     searchInput = new FormControl();
 
 
     constructor(
         private deviceThumbService: DeviceThumbService,
         private applicationService: ApplicationService,
+        private capabilitiesService: CapabilitiesService,
         private pagerService: PagerService,
         private route: ActivatedRoute,
         private location: Location
-    ) {}
+    ) {
+    }
 
     changeSubPage(change: profileSubPages): void {
         this.subPage = change;
@@ -122,6 +125,26 @@ export class DeviceProfileComponent implements OnInit {
                     () => console.log("finished"));
         });
 
+      this.device.installed_capabilities.forEach((capabilityId, index) => {
+
+        this.capabilitiesService.getCapability(capabilityId)
+          .subscribe((capability) => {this.installedCapabilities[index] = capability;
+            });
+      });
+
+      this.device.used_capabilities.forEach((Ids , index) => {
+       //initiazing the used capability
+        this.usedCapabilities[index] = {application: null, capability: null};
+
+        this.capabilitiesService.getCapability(Ids.capability_id)
+          .subscribe((capability) => { this.usedCapabilities[index].capability = capability;
+            });
+
+        this.applicationService.getApplication(Ids.application_id)
+          .subscribe((application) => {this.usedCapabilities[index].application = application;
+        });
+      });
+
         console.log(this.apps);
 
     }
@@ -145,6 +168,20 @@ export class DeviceProfileComponent implements OnInit {
   }
 
 
+  deviceStatus(status: string) {
+    if(status == null)
+      return false;
+    return status.toLowerCase( ) == "running";
+  }
+
+
+  deleteDevice() {
+    console.log("device deleted");
+    this.modal.close();
+  }
+  open() {
+    this.modal.open();
+  }
 
     goBack(): void {
         this.location.back();

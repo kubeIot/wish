@@ -26,19 +26,16 @@
                                     </small>
                                 </div>
                             </div>
-                            <!--select Base image-->
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label><b>Base Image</b></label>
-                                    <input list="base-image" name="base-image" class="form-control" formControlName="base_image" >
-                                  <datalist id="base-image" >
-                                    <option  *ngFor="let image of listOfImages | async" value="{{image.name}}">
-                                  </datalist>
-                                  <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
-                                        Base Image is required.
-                                    </small>
-                                </div>
+                          <!--Select service IP-->
+                          <div class=" col-sm-6 col-xs-12">
+                            <div class="form-group">
+                              <label><b>Service IP</b></label>
+                              <input type="text" class="form-control" formControlName="service_ip" >
+                              <small *ngIf="!addApplicationForm.controls.service_ip.valid" class="text-danger">
+                                Service IP is required.
+                              </small>
                             </div>
+                          </div>
 
 
                             <div class=" col-sm-6 col-xs-12">
@@ -54,15 +51,20 @@
                                 </div>
                             </div>
 
-                            <div class=" col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label><b>Service IP</b></label>
-                                    <input type="text" class="form-control" formControlName="service_ip" >
-                                    <small *ngIf="!addApplicationForm.controls.service_ip.valid" class="text-danger">
-                                        Service IP is required.
-                                    </small>
-                                </div>
+                          <!--select Base image-->
+                          <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                              <label><b>Base Image</b></label>
+                              <input list="base-image" name="base-image" class="form-control" formControlName="base_image" >
+                              <datalist id="base-image" >
+                                <option  *ngFor="let image of listOfImages | async" value="{{image.name}}">
+                              </datalist>
+                              <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
+                                Base Image is required.
+                              </small>
                             </div>
+                          </div>
+
 
 
                             <!--<div class="col-md-12">-->

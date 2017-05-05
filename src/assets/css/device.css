@@ -50,10 +50,10 @@
     margin-top: 0;
 }
 
-.card.contact-info {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
+/*.card.contact-info {*/
+    /*margin-top: 0px;*/
+    /*margin-bottom: 0px;*/
+/*}*/
 .contact-info ul {
     list-style: none;
     padding-left: 0;

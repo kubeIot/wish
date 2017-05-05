@@ -7,7 +7,7 @@
 import { Injectable } from '@angular/core';
 import { Http,Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
-import { Application } from "./applications.metadata";
+import {Application, Image} from "./applications.metadata";
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
 import {applicationsUrl, imagesUrl} from "../../configuration"
@@ -27,11 +27,9 @@ export class ApplicationService {
         .publishReplay(1)
         .refCount();
 
-  private imagesList: Observable < any[] > = this.http.get(this.imagesUrl)
+  private imagesList: Observable < Image[] > = this.http.get(this.imagesUrl)
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
-    // .do(console.log(Response))
-    // .do(console.log("yea"))
     .publishReplay(1)
     .refCount();
     constructor(private http: Http) { }
@@ -54,7 +52,15 @@ export class ApplicationService {
 
     }
 
-  getImages(): Observable<any[]> {//Todo create image structure
+  getImage(imageId: number | string) {
+
+    const url = `${this.imagesUrl}${imageId}`;
+    return this.http.get(url)
+      .map((response:Response) => response.json());
+
+  }
+
+  getImages(): Observable<Image[]> {
     // console.log("devices - search: ", text);
     return this.imagesList
       .map(images => images);

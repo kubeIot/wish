@@ -13,8 +13,15 @@ import {Observable} from "rxjs";
 import {applicationsUrl, imagesUrl} from "../../configuration"
 
 
+
 @Injectable()
 export class ApplicationService {
+
+  nameFilter = "";
+  baseImageFilter = "";
+  statusFilter = "";
+  images: Image[];
+  applications: Observable<Application[]>;
 
     private applicationsUrl = applicationsUrl;  // URL to web api
   private imagesUrl = imagesUrl;  // URL to web api
@@ -23,26 +30,59 @@ export class ApplicationService {
   private applicationsList: Observable < Application[] > = this.http.get(this.applicationsUrl)
         .map((res: Response) => res.json())
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
-
         .publishReplay(1)
         .refCount();
 
   private imagesList: Observable < Image[] > = this.http.get(this.imagesUrl)
-    .map((res: Response) => res.json())
-    .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
-    .publishReplay(1)
-    .refCount();
-    constructor(private http: Http) { }
+        .map((res: Response) => res.json())
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+        .publishReplay(1)
+        .refCount();
+  constructor(private http: Http) { }
 
     getList(): Observable<Application[]> {
         return this.applicationsList;
     }
 
-    getApplications(text: string): Observable<Application[]> {
-        const lowerCaseText = text.toLowerCase();
-        return this.getList()
-            .map(applications => applications.filter(item => item.name.toLowerCase().indexOf(lowerCaseText) !== -1));
+    getApplications(applicationFilter: any): Observable<Application[]> {
+
+      if(applicationFilter != "") { //no filter causes error in "toLowerCase" + optimalization
+        this.nameFilter = applicationFilter.name.toLowerCase();
+        this.baseImageFilter = applicationFilter.base_image.toLowerCase();
+        this.statusFilter = applicationFilter.status_message.toLowerCase();
+        this.applications = this.getList();
+
+
+        //filter device vendor
+        if(this.nameFilter !== "") //if filter does not exist, dont lose time worrying about it
+          this.applications = this.applications
+            .map(applications => applications.filter(item =>
+            item.name != null && //if item is null, toLowerCase() would cause error
+            item.name.toLowerCase().indexOf(this.nameFilter) !== -1));
+
+        // filter base_image
+        // if(this.baseImageFilter !== "") //if filter does not exist, dont lose time worrying about it
+        //
+        //   this.applications = this.applications
+        //     .map(applications => applications.filter(item =>
+        //       item.status_message != null &&
+        //
+        //     ));
+
+        //filter system info
+        if(this.statusFilter !== "" && this.statusFilter !== "all") //if filter does not exist, dont lose time worrying about it
+          this.applications = this.applications
+            .map(applications => applications.filter(item =>
+            item.status_message != null && //if item is null, toLowerCase() would cause error
+            item.status_message.toLowerCase().indexOf(this.statusFilter) !== -1));
+
+
+        return this.applications;
+      }
+      return this.getList();
     }
+
+
 
     getApplication(applicationsId: number | string) {
 

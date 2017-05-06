@@ -2,7 +2,7 @@
  * Created by skylele on 14.3.17.
  */
 import {Component, trigger, transition, style, animate, group, state, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import { Application } from "./applications.metadata";
 import {ApplicationService} from "./applications.service";
@@ -38,7 +38,7 @@ import {PagerService} from "../../helper-services/pager.service";
 })
 
 export class ApplicationsComponent  implements OnInit{
-    searchNameInput = new FormControl();
+    searchNameInput: FormGroup;
     applications: Observable<Application[]>;
     sortItem = "device_vendor";
     revert = false;
@@ -56,19 +56,15 @@ export class ApplicationsComponent  implements OnInit{
   @ViewChild('modal')
   modal: ModalComponent;
   selected: string;
-
   index: number = 0;
-  backdropOptions = [true, false, 'static'];
-
-   animation: boolean = true;
-   keyboard: boolean = true;
-   backdrop: string | boolean = true;
 
   nameInModal: string;
   idInModal: number | string;
   //modal variables
 
-  constructor (private applicationService: ApplicationService, private pagerService: PagerService) {
+  constructor (private applicationService: ApplicationService,
+               private _fb: FormBuilder,
+               private pagerService: PagerService) {
 
   }
   deleteApplication() {
@@ -84,11 +80,20 @@ export class ApplicationsComponent  implements OnInit{
 
 
     ngOnInit(): void {
-        this.applications = this.searchNameInput.valueChanges
+
+      this.searchNameInput = this._fb.group({
+        name: [''],
+        base_image: [''],
+        status_message: [''],
+      });
+
+
+      this.applications = this.searchNameInput.valueChanges
             .startWith('')
             .debounce(() => Observable.interval(200))
             .distinctUntilChanged()
             .flatMap(term => this.applicationService.getApplications(term));
+
       this.applications.subscribe(result => {this.pagedItems = result;
         this.setPage(1);});
     }
@@ -107,6 +112,8 @@ export class ApplicationsComponent  implements OnInit{
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
+
+
 
     // get pager object from service
     this.pager = this.pagerService.getPager(this.pagedItems.length, page, 20);

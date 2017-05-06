@@ -17,7 +17,7 @@
 
                     </div>
                     <div class="content">
-                        <div class="row">
+                        <div class="row" [formGroup]="searchNameInput">
 
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div   class="form-group">
@@ -26,7 +26,7 @@
                                         <img *ngIf="sortItem == 'device_vendor' && revert" class="sorted" src="../../../assets/img/down.gif">
                                         <img *ngIf="sortItem == 'device_vendor' && !revert" class="sorted" src="../../../assets/img/up.gif">
                                     </label>
-                                    <input class="form-control" placeholder="A321" type="text" [formControl]="searchNameInput">
+                                    <input class="form-control" placeholder="A321" type="text"  formControlName="device_vendor">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -36,13 +36,13 @@
                                         <img *ngIf="sortItem == 'address' && revert" class="sorted" src="../../../assets/img/down.gif">
                                         <img *ngIf="sortItem == 'address' && !revert" class="sorted" src="../../../assets/img/up.gif">
                                     </label>
-                                    <input class="form-control" placeholder="RPi 3.0"  type="text">
+                                    <input class="form-control" placeholder="RPi 3.0"  type="text" formControlName="address">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12 ">
                                 <div class="form-group">
                                     <label><b>Show only</b></label>
-                                    <select class="form-control" value="Present">
+                                    <select class="form-control"   formControlName="system_info">
                                         <option selected> All </option>
                                         <option> Running </option>
                                         <option> Not running </option>

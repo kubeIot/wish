@@ -18,7 +18,7 @@
 
                     </div>
                     <div class="content">
-                        <div class="row">
+                        <div class="row" [formGroup]="searchNameInput">
 
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
@@ -27,7 +27,7 @@
                                         <img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">
                                         <img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">
                                     </label>
-                                    <input class="form-control" placeholder="Name" type="text" [formControl]="searchNameInput">
+                                    <input class="form-control" placeholder="Name" type="text" formControlName="name">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -37,7 +37,7 @@
                                         <img *ngIf="sortItem == 'base_image' && revert" class="sorted" src="../../../assets/img/down.gif">
                                         <img *ngIf="sortItem == 'base_image' && !revert" class="sorted" src="../../../assets/img/up.gif">
                                     </label>
-                                    <input class="form-control" placeholder="Base Image"  type="text">
+                                    <input class="form-control" placeholder="Base Image"  type="text" formControlName="base_image">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12 ">
@@ -47,7 +47,7 @@
                                         <img *ngIf="sortItem == 'status' && revert" class="sorted" src="../../../assets/img/down.gif">
                                         <img *ngIf="sortItem == 'status' && !revert" class="sorted" src="../../../assets/img/up.gif">
                                     </label>
-                                    <select class="form-control" value="Present">
+                                    <select class="form-control" value="Present" formControlName="status_message">
                                         <option selected> All </option>
                                         <option> OK </option>
                                         <option> Error </option>
@@ -137,7 +137,7 @@
 </div>
 
 
-<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" #modal  >
+<modal [animation]="true" [keyboard]="true" [backdrop]="true" #modal  >
   <modal-header [show-close]="true">
     <h4 class="modal-title">Delete application</h4>
   </modal-header>

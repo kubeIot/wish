@@ -1,7 +1,7 @@
 import { Component, trigger,transition,style,animate,group,state, OnInit } from '@angular/core';
 import { Device } from "../device-thumbnail/deviceThumb.metadata"
 import { DeviceThumbService } from "../device-thumbnail/deviceThumb.service";
-import {FormControl} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {PagerService} from "../../helper-services/pager.service";
 
@@ -39,7 +39,7 @@ import {UserService} from "../profile/profile.service";
 })
 
 export class DevicesComponent implements OnInit {
-    searchNameInput = new FormControl();
+    public searchNameInput: FormGroup;
     devices: Observable<Device[]>;
     sortItem = "device_vendor";
     revert = false;
@@ -60,7 +60,8 @@ export class DevicesComponent implements OnInit {
 
     constructor (private deviceThumbService: DeviceThumbService,
                  private pagerService: PagerService,
-                  private userService: UserService) {
+                  private userService: UserService,
+                 private _fb: FormBuilder,) {
 
     }
 
@@ -80,6 +81,14 @@ export class DevicesComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+      this.searchNameInput = this._fb.group({
+        device_vendor: [''],
+        address: [''],
+        system_info: [''],
+      });
+
+
       this.userService.getUser(1).subscribe(user => {this.loggedInUser = user;
       console.log(this.loggedInUser);});
 
@@ -89,12 +98,18 @@ export class DevicesComponent implements OnInit {
             .distinctUntilChanged()
             .flatMap(term => this.deviceThumbService.getDevices(term));
       this.devices.subscribe(result => {this.devs = result;
+
         this.setPage(1);});
     }
 
 
   setPage(page: number) {
     if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+
+    if(this.devs.length <= 0) { //Checks, that there is some device to be displayed, otherwise pager fails
+      this.pagedItems = [];
       return;
     }
 

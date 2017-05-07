@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit, DoCheck {
 
     ngDoCheck() {
         this.loggedIn = localStorage.getItem('isLoggedIn');
-         // this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
+          // this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
 
     }
     constructor(location:Location) {

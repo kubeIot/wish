@@ -10,13 +10,14 @@
         <div class="col-md-12 col-sm-12 col-xs-12" [@newapplication]>
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Add Device</h4>
+                    <h4 class="title">Add Application</h4>
                 </div>
                 <div class="content">
                     <form [formGroup]="addApplicationForm" novalidate (ngSubmit)="addAppPost(addApplicationForm)">
 
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                         <!--select Name-->
+                          <div class="row">
                             <div class=" col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Name of the Application</b></label>
@@ -27,17 +28,18 @@
                                 </div>
                             </div>
                           <!--Select service IP-->
-                          <div class=" col-sm-6 col-xs-12">
-                            <div class="form-group">
-                              <label><b>Service IP</b></label>
-                              <input type="text" class="form-control" formControlName="service_ip" >
-                              <small *ngIf="!addApplicationForm.controls.service_ip.valid" class="text-danger">
-                                Service IP is required.
-                              </small>
-                            </div>
+                            <div class=" col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                <label><b>Service IP</b></label>
+                                <input type="text" class="form-control" formControlName="service_ip" pattern="{{ipPattern}}" >
+                                <small *ngIf="!addApplicationForm.controls.service_ip.valid" class="text-danger">
+                                  Valid Form of the Service IP is Required! (ie. 127.0.0.1 or 0:0:0:0:0:0:0:1 or localhost)
+                                </small>
+                              </div>
+                           </div>
                           </div>
 
-
+                          <div class="row">
                             <div class=" col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Device </b></label>
@@ -52,16 +54,17 @@
                             </div>
 
                           <!--select Base image-->
-                          <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                              <label><b>Base Image</b></label>
-                              <input list="base-image" name="base-image" class="form-control" formControlName="base_image" >
-                              <datalist id="base-image" >
-                                <option  *ngFor="let image of listOfImages | async" value="{{image.name}}">
-                              </datalist>
-                              <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
-                                Base Image is required.
-                              </small>
+                            <div class="col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                <label><b>Base Image</b></label>
+                                <input list="base-image" name="base-image" class="form-control" formControlName="base_image" >
+                                <datalist id="base-image" >
+                                  <option  *ngFor="let image of listOfImages | async" value="{{image.name}}">
+                                </datalist>
+                                <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
+                                  Base Image is required.
+                                </small>
+                              </div>
                             </div>
                           </div>
 
@@ -112,10 +115,10 @@
                                                 <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addApplicationForm.controls.ports.controls.length > 1" (click)="removePort(i)"></span>
                                                 <div class="form-group col-xs-12">
                                                     <label>Port {{i + 1}}</label>
-                                                    <input type="text" class="form-control" formControlName="port">
+                                                    <input type="text" pattern="[0-9]+:[0-9]+" class="form-control" formControlName="port" placeholder="80:8080">
 
                                                     <small [hidden]="addApplicationForm.controls.ports.controls[i].controls.port.valid" class="text-danger">
-                                                        Port is required
+                                                        Valid Form of the Port is Required! (ie. 80:8000)
                                                     </small>
                                                 </div>
 

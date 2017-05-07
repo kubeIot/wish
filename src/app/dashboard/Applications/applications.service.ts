@@ -20,7 +20,7 @@ export class ApplicationService {
   nameFilter = "";
   baseImageFilter = "";
   statusFilter = "";
-  images: Image[];
+
   applications: Observable<Application[]>;
 
     private applicationsUrl = applicationsUrl;  // URL to web api
@@ -38,7 +38,12 @@ export class ApplicationService {
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
         .publishReplay(1)
         .refCount();
-  constructor(private http: Http) { }
+  images: Image[];
+
+
+  constructor(private http: Http) {
+  this.imagesList.subscribe(imgs => this.images = imgs)
+  }
 
     getList(): Observable<Application[]> {
         return this.applicationsList;
@@ -60,14 +65,14 @@ export class ApplicationService {
             item.name != null && //if item is null, toLowerCase() would cause error
             item.name.toLowerCase().indexOf(this.nameFilter) !== -1));
 
+
         // filter base_image
-        // if(this.baseImageFilter !== "") //if filter does not exist, dont lose time worrying about it
-        //
-        //   this.applications = this.applications
-        //     .map(applications => applications.filter(item =>
-        //       item.status_message != null &&
-        //
-        //     ));
+        if(this.baseImageFilter !== "") //if filter does not exist, dont lose time worrying about it
+          this.applications = this.applications
+            .map(applications => applications.filter(item =>
+              item.base_image != null &&
+              this.getBaseImageName(item.base_image).toLowerCase().indexOf(this.baseImageFilter) !== -1
+            ));
 
         //filter system info
         if(this.statusFilter !== "" && this.statusFilter !== "all") //if filter does not exist, dont lose time worrying about it
@@ -104,6 +109,18 @@ export class ApplicationService {
     // console.log("devices - search: ", text);
     return this.imagesList
       .map(images => images);
+  }
+
+  getFilteredImages(filter: any[]): Observable<Image[]> {
+    // console.log("devices - search: ", text);
+    return this.imagesList
+      .map(images => images);
+  }
+
+  getBaseImageName(imageId: string | number) {
+    return this.images.filter(
+      image => image.id == imageId
+    )[0].name;
   }
 
 

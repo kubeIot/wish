@@ -16,18 +16,24 @@ import {sortPipe} from "./sorting.pipe";
 import {ApplicationThumbComponent} from "./application-thumbnail/applicationThumb.component";
 import {NewApplicationComponent} from "./application-add/newApplication.component";
 import {ApplicationProfileComponent} from "./application-profile/applicationProfile.component";
+import {CapabilitiesComponent} from "./Capabilities/capabilities.component";
+import {NewCapabilityComponent} from "./capability-add/newCapability.component";
+import {ImagesComponent} from "./images/images.component";
 export const MODULE_COMPONENTS = [
     AboutComponent,
     EventsLogComponent,
     NewDeviceComponent,
     NewApplicationComponent,
+    NewCapabilityComponent,
     ProfileComponent,
     DeviceThumbComponent,
     ApplicationThumbComponent,
+    ImagesComponent,
     DashboadrComponent,
     DevicesComponent,
     DeviceProfileComponent,
     ApplicationProfileComponent,
+    CapabilitiesComponent,
     // LoginComponent,
     ApplicationsComponent,
     testComponent,
@@ -40,15 +46,22 @@ export const MODULE_ROUTES: Route[] =[
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'about', component: AboutComponent },
     { path: 'events-log', component: EventsLogComponent },
+    { path: 'capabilities', component: CapabilitiesComponent },
     { path: 'devices', component: DevicesComponent},
-    { path: 'device-add', component: NewDeviceComponent},
+  { path: 'images', component: ImagesComponent},
+
+
+  { path: 'capability-add', component: NewCapabilityComponent},
+  { path: 'capability-add/:id', component: NewCapabilityComponent},
+
+  { path: 'device-add', component: NewDeviceComponent},
     { path: 'device-add/:id', component: NewDeviceComponent},
     { path: 'application-add', component: NewApplicationComponent},
     { path: 'application-add/:id', component: NewApplicationComponent},
     { path: 'device-profile/:id', component: DeviceProfileComponent },
-  { path: 'application-profile/:id', component: ApplicationProfileComponent },
+    { path: 'application-profile/:id', component: ApplicationProfileComponent },
 
-  { path: 'profile', component: ProfileComponent },
+    { path: 'profile', component: ProfileComponent },
     { path: 'dashboard', component: DashboadrComponent },
     // { path: 'authentication', component: LoginComponent },
     { path: 'applications', component: ApplicationsComponent },

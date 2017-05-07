@@ -1,10 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="main-content" [@images] id="images">
+  <div class="container-fluid">
+    <div class="row">
 
-</body>
-</html>
+      <div class="col-md-12">
+        <div class="card" id="images-filter">
+          <div class="header">
+            <a routerLink="/image-add">
+              <button style="float: right; " class="btn btn-primary">Add Image</button>
+            </a>
+
+            <!--<div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">-->
+            <!--<div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>-->
+            <!--</div>-->
+            <h4 class="title">Images</h4>
+            <p class="category">You can find list of all your Images here!</p>
+
+          </div>
+          <div class="content">
+            <div class="row">
+
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label class="pointer" (click)="changeSort('name')"><b>Name of the Image</b>
+                    <img *ngIf="sortItem != 'name'" class="sorted" src="../../../assets/img/both.png">
+                    <img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">
+                    <img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                  </label>
+                  <input class="form-control" placeholder="Name of the Image" type="text" [formControl]="searchNameInput">
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label class="pointer" (click)="changeSort('base_image')"><b>Base Image</b>
+                    <img *ngIf="sortItem != 'base_image'" class="sorted" src="../../../assets/img/both.png">
+                    <img *ngIf="sortItem == 'base_image' && revert" class="sorted" src="../../../assets/img/down.gif">
+                    <img *ngIf="sortItem == 'base_image' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                  </label>
+                  <input class="form-control" placeholder="Base Image"  type="text">
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12 ">
+                <div class="form-group">
+                  <label class="pointer" (click)="changeSort('description')"><b>Description</b>
+                    <img *ngIf="sortItem != 'description'" class="sorted" src="../../../assets/img/both.png">
+                    <img *ngIf="sortItem == 'description' && revert" class="sorted" src="../../../assets/img/down.gif">
+                    <img *ngIf="sortItem == 'description' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                  </label>
+                  <input class="form-control" placeholder="Description"  type="text">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="card" id="images-table">
+          <div class="content">
+            <div class="content table-responsive">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th><b>Name</b></th>
+                  <th><b>Base Image</b></th>
+                  <th><b>Exposed Ports</b></th>
+                  <th><b>Required Capabilities</b></th>
+                  <th><b>Description</b></th>
+                  <th><b>Edit</b></th>
+                  <th><b>Delete</b></th>
+
+                  <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
+                </tr>
+                </thead>
+                <tbody *ngFor="let image of pagedItems | sortBy : sortItem : revert"  >
+
+                <tr class="activity-ok">
+                  <td > {{image?.name}}  </td>
+                  <td > {{image?.base_image}}  </td>
+                  <td> <span *ngFor="let port of image?.exposed_ports"> {{port}} <br> </span> </td>
+                  <td> <span *ngFor="let capability of getRequiredCapabilitiesName(image?.required_capabilities)"> {{capability}} <br> </span> </td>
+
+
+                  <td > {{image?.description}}  </td>
+                  <td> <a [routerLink]="['/image-add', image?.id]"> Edit </a> </td>
+                  <!--modal is at the bottom of the code-->
+                  <td (click)="deleteConfirm(image?.name, image?.id)"> <span class="pointer"> Delete <i class="pe-7s-close"></i> </span> </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!--<ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination">-->
+        <!--<li [ngClass]="{disabled:pager.currentPage === 1}">-->
+        <!--<a (click)="setPage(1)">First</a>-->
+        <!--</li>-->
+        <!--<li [ngClass]="{disabled:pager.currentPage === 1}">-->
+        <!--<a (click)="setPage(pager.currentPage - 1)">Previous</a>-->
+        <!--</li>-->
+        <!--<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">-->
+        <!--<a (click)="setPage(page)">{{page}}</a>-->
+        <!--</li>-->
+        <!--<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">-->
+        <!--<a (click)="setPage(pager.currentPage + 1)">Next</a>-->
+        <!--</li>-->
+        <!--<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">-->
+        <!--<a (click)="setPage(pager.totalPages)">Last</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+
+        <!--<div class="row product-tabs">-->
+        <!--<ul class="nav nav-tabs">-->
+        <!--<li class=""> ttt</li>-->
+        <!--&lt;!&ndash;<button class="btn-primary"> devices</button>&ndash;&gt;-->
+        <!--&lt;!&ndash;<button class="btn-navbar"> applications</button>&ndash;&gt;-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="card">-->
+        <!--<div class="row">-->
+
+        <!--<device-thumb *ngFor="let dev of devices" [device]="dev"></device-thumb>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<modal [animation]="true" [keyboard]="true" [backdrop]="true" #modal  >
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Delete Capability</h4>
+  </modal-header>
+  <modal-body>
+    <p>
+      Do you really want to remove {{nameInModal}}? This action may not be undone!
+    </p>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.dismiss()">Go back!</button>
+    <button type="button" class="btn btn-danger" autofocus (click)="deleteCapability()">Delete</button>
+  </modal-footer>
+</modal>

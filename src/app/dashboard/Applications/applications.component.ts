@@ -4,7 +4,7 @@
 import {Component, trigger, transition, style, animate, group, state, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
-import { Application } from "./applications.metadata";
+import {Application, Image} from "./applications.metadata";
 import {ApplicationService} from "./applications.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {PagerService} from "../../helper-services/pager.service";
@@ -40,6 +40,7 @@ import {PagerService} from "../../helper-services/pager.service";
 export class ApplicationsComponent  implements OnInit{
     searchNameInput: FormGroup;
     applications: Observable<Application[]>;
+    images: Image[];
     sortItem = "device_vendor";
     revert = false;
     tableView = true;
@@ -87,6 +88,8 @@ export class ApplicationsComponent  implements OnInit{
         status_message: [''],
       });
 
+      this.applicationService.getImages().subscribe(images => this.images = images);
+
 
       this.applications = this.searchNameInput.valueChanges
             .startWith('')
@@ -97,6 +100,12 @@ export class ApplicationsComponent  implements OnInit{
       this.applications.subscribe(result => {this.pagedItems = result;
         this.setPage(1);});
     }
+
+  getBaseImage(imageId: string | number) {
+    return this.images.filter(
+      image => image.id == imageId
+    )[0].name;
+  }
 
     changeLayout(): void {
         this.tableView = !this.tableView;

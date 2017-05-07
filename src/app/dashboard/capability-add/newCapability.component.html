@@ -1,0 +1,68 @@
+<div class="main-content" id="newApplication">
+  <div class="container-fluid">
+
+    <div class="col-md-3" >
+      <a class="pointer"  (click)="goBack()">
+        <span class="icon-back"><span><i class="pe-icon pe-7s-angle-left pe-icon-back"></i>Go Back</span></span>
+      </a>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12" [@newapplication]>
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Add Capability</h4>
+        </div>
+        <div class="content">
+          <form [formGroup]="addCapabilityForm" novalidate (ngSubmit)="addCapabilityPost(addCapabilityForm)">
+
+            <div class="col-md-12">
+              <!--select Name-->
+              <div class=" col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label><b>Name of the Capability</b></label>
+                  <input type="text" class="form-control" formControlName="name">
+                  <small *ngIf="!addCapabilityForm.controls.name.valid" class="text-danger">
+                    Name of the Capability is required.
+                  </small>
+                </div>
+              </div>
+              <!--Select service IP-->
+              <div class=" col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label><b>Peripherial Device</b></label>
+                  <input type="text" class="form-control" formControlName="peripherial_device" >
+                  <small *ngIf="!addCapabilityForm.controls.peripherial_device.valid" class="text-danger">
+                    Peripherial Device is required.
+                  </small>
+                </div>
+              </div>
+
+
+              <div class=" col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label><b>Protocol </b></label>
+                  <input type="text" class="form-control" formControlName="protocol" >
+                  <small *ngIf="!addCapabilityForm.controls.protocol.valid" class="text-danger">
+                    Protocol is required.
+                  </small>
+                </div>
+              </div>
+
+              <!--odsazeni buttonu-->
+              <div class="col-sm-6 col-xs-12"></div>
+
+
+            </div>
+            <a *ngIf="!capability" routerLink="/capabilities">
+              <button type="submit" class="btn btn-info btn-fill pull-right" [disabled]="!addCapabilityForm.valid">Add Capability</button>
+            </a>
+            <a *ngIf="capability" routerLink="/capabilities">
+              <button type="submit" class="btn btn-info btn-fill pull-right" [disabled]="!addCapabilityForm.valid">Edit Capability</button>
+            </a>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

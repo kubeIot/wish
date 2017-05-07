@@ -16,10 +16,23 @@ export class CapabilitiesService {
 
   private capabilitiesUrl = capabilitiesUrl;  // URL to web api
 
+  private capabilitiesList: Observable < Capability[] > = this.http.get(this.capabilitiesUrl)
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+    // .do(console.log(Response))
+    // .do(console.log("yea"))
+    .publishReplay(1)
+    .refCount();
+
 
   constructor(private http: Http) { }
 
 
+
+  getCapabilities(filter: any[]) {
+    return this.getList();
+
+  }
 
   getCapability(capabilityId: number | string) {
 
@@ -29,4 +42,8 @@ export class CapabilitiesService {
 
   }
 
+  getList() : Observable<Capability[]>{
+    return this.capabilitiesList;
+
+  }
 }

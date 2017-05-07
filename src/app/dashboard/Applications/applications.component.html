@@ -87,7 +87,7 @@
 
                                 <tr class="activity-ok">
                                   <td > <a [routerLink]="['/application-profile', app?.id]">  {{app?.name}} </a> </td>
-                                    <td >  <a [routerLink]="['/application-profile', app?.id]"> {{app?.base_image}} </a> </td>
+                                    <td >  <a [routerLink]="['/application-profile', app?.id]"> {{getBaseImage(app?.base_image)}} </a> </td>
                                     <td >  <a [routerLink]="['/application-profile', app?.id]"> {{app?.service_ip}} </a> </td>
                                     <td class=" maxwidth"> <a [routerLink]="['/application-profile', app?.id]">  {{app?.status_message}}  </a> </td>
                                     <td> <a [routerLink]="['/application-add', app?.id]"> Edit </a> </td>

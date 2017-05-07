@@ -54,7 +54,7 @@ export class NewApplicationComponent implements OnInit {
   listOfImages: Observable<any[]>;
     application: Application;
     public addApplicationForm: FormGroup;
-
+    ipPattern = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$";
     constructor(private _httpService: NewApplicationService,
                 private _fb: FormBuilder,
                 private location: Location,
@@ -126,27 +126,27 @@ export class NewApplicationComponent implements OnInit {
 
     // accepts strings as well as numbers
     initCapability(value:number | string = "") {
-        // initialize our order
+        // initialize our capability
         return this._fb.group({
-            capability: [value, Validators.required]
+            capability: [value]
         });
     }
     addCapability(value:any = "") {
-        // add order to the list
+        // add capability to the list
         const control = <FormArray>this.addApplicationForm.controls['capabilities'];
         control.push(this.initCapability(value));
     }
 
     removeCapability(i: number) {
 
-        // remove address from the list
+        // remove capability from the list
         const control = <FormArray>this.addApplicationForm.controls['capabilities'];
         control.removeAt(i);
     }
     //accepts strings as well as numbers
 
     initPort(value: number | string  = "") {
-        // initialize our order
+        // initialize our port
         return this._fb.group({
             port: [value, Validators.required]
         });
@@ -154,13 +154,13 @@ export class NewApplicationComponent implements OnInit {
     addPort(value: any = "") {
 
 
-        // add order to the list
+        // add port to the list
         const control = <FormArray>this.addApplicationForm.controls['ports'];
         control.push(this.initPort(value));
     }
 
     removePort(i: number) {
-        // remove address from the list
+        // remove port from the list
         const control = <FormArray>this.addApplicationForm.controls['ports'];
         control.removeAt(i);
     }
@@ -169,7 +169,7 @@ export class NewApplicationComponent implements OnInit {
 
 
     addAppPost(model:any) {
-        // call API to save customer
+        // call API to save application
 
         console.log(JSON.stringify(model._value));
     }

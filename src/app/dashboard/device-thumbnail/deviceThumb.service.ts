@@ -17,6 +17,8 @@ export class DeviceThumbService {
 
   devices: Observable<Device[]>;
      private devicesUrl = devicesUrl;  // URL to web api
+
+
     private devicesList: Observable < Device[] > = this.http.get(this.devicesUrl)
         .map((res: Response) => res.json())
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'))

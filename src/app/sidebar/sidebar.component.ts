@@ -12,7 +12,7 @@ import {Location} from '@angular/common';
 
 export class SidebarComponent implements OnInit, DoCheck {
 
-    name = 'Angular';
+    name = 'What Is Happening';
     today = new Date();
 
     public menuItems: any[];
@@ -35,12 +35,12 @@ export class SidebarComponent implements OnInit, DoCheck {
         timer.subscribe(t=>this.today = new Date());
         this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
     }
-    // public get menuIcon(): string {
-    //     return this.isCollapsed ? '☰' : '✖';
-    // }
-    // public getMenuItemClasses(menuItem: any) {
-    //     return {
-    //         'pull-xs-right': this.isCollapsed && menuItem.menuType === MenuType.RIGHT
-    //     };
-    // }
+    public get menuIcon(): string {
+        return this.isCollapsed ? '☰' : '✖';
+    }
+    public getMenuItemClasses(menuItem: any) {
+        return {
+            'pull-xs-right': this.isCollapsed && menuItem.menuType === MenuType.RIGHT
+        };
+    }
 }

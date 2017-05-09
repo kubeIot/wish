@@ -6,6 +6,14 @@ export interface Ids {
   capability_id: number;
 }
 
+export interface DeviceEvent {
+  event_message: string;
+  event_timestamp: string;
+  event_type: string;
+  id: number;
+  parent_id: number;
+}
+
 export interface Device {
     adress: string;
     applications: string[];

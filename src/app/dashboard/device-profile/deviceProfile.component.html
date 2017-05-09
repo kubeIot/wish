@@ -109,37 +109,72 @@
 
                     <div *ngIf="subPage == 1" class="card" id="device-profile-actions">
                         <div class="header">
-                            <h4 class="title">Actions</h4>
+                            <h4 class="title">Events</h4>
                         </div>
                         <div class="content">
-                            <div class="row">
-                                <div class="col-md-4 ">
-                                    <div class="form-group">
-                                        <label><b>Time - From</b></label>
-                                        <input class="form-control datepicker" placeholder="Click to choose" type="text">
-                                    </div>
+                            <div class="row" [formGroup]="eventsFilter">
 
+                              <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                  <label><b> Time - From</b></label>
+                                  <!--<label class="pointer" (click)="changeSort('name')"><b>Name of the Application</b>-->
+                                    <!--<img *ngIf="sortItem != 'name'" class="sorted" src="../../../assets/img/both.png">-->
+                                    <!--<img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">-->
+                                    <!--<img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">-->
+                                  <!--</label>-->
+                                  <my-date-picker name="time_from" [options]="myDatePickerOptions"
+                                                  formControlName="time_from" placeholder="ie. 2017-05-04"></my-date-picker>
                                 </div>
-                                <div class="col-md-4 ">
-                                    <div class="form-group">
-                                        <label><b>Time - To</b></label>
-                                        <input class="form-control datepicker" placeholder="Click to choose" type="text">
-                                    </div>
+                              </div>
 
-                                </div>
-                                <div class="col-md-4 ">
-                                    <div class="form-group">
-                                        <label><b>Actions</b></label>
-                                        <select class="form-control" value="Present">
-                                            <option selected> All </option>
-                                            <option> Error </option>
-                                            <option> Warning </option>
-                                            <option> Error and Warning </option>
-                                            <option> OK </option>
-                                        </select>
-                                    </div>
 
+                              <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                  <label><b> Time - To</b></label>
+                                  <my-date-picker name="time_to" [options]="myDatePickerOptions"
+                                                  formControlName="time_to" placeholder="ie. 2017-05-04"></my-date-picker>
+                                  <!--<label class="pointer" (click)="changeSort('name')"><b>Name of the Application</b>-->
+                                  <!--<img *ngIf="sortItem != 'name'" class="sorted" src="../../../assets/img/both.png">-->
+                                  <!--<img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">-->
+                                  <!--<img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">-->
+                                  <!--</label>-->
                                 </div>
+                              </div>
+
+
+
+                              <div class="col-sm-6 col-xs-12 ">
+                                <div class="form-group">
+                                  <!--<label class="pointer" (click)="changeSort('status')"><b>Show only</b>-->
+                                    <!--<img *ngIf="sortItem != 'status'" class="sorted" src="../../../assets/img/both.png">-->
+                                    <!--<img *ngIf="sortItem == 'status' && revert" class="sorted" src="../../../assets/img/down.gif">-->
+                                    <!--<img *ngIf="sortItem == 'status' && !revert" class="sorted" src="../../../assets/img/up.gif">-->
+                                  <!--</label>-->
+                                <label><b>Type of Event</b></label>
+                                  <select class="form-control" value="Present" formControlName="event_type">
+                                    <option selected>All</option>
+                                    <option>System</option>
+                                    <option>User</option>
+                                    <option>Other</option>
+
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                  <label><b>Event Message</b></label>
+                                  <!--<label class="pointer" (click)="changeSort('base_image')"><b>Base Image</b>-->
+                                    <!--<img *ngIf="sortItem != 'base_image'" class="sorted" src="../../../assets/img/both.png">-->
+                                    <!--<img *ngIf="sortItem == 'base_image' && revert" class="sorted" src="../../../assets/img/down.gif">-->
+                                    <!--<img *ngIf="sortItem == 'base_image' && !revert" class="sorted" src="../../../assets/img/up.gif">-->
+                                  <!--</label>-->
+                                  <input class="form-control" placeholder="Event Message"  type="text" formControlName="event_message">
+                                </div>
+                              </div>
+
+
+
                             </div>
 
                             <div class="table-responsive">
@@ -147,25 +182,26 @@
                                     <thead>
                                     <tr><th>ID</th>
                                         <th>Time</th>
-                                        <th>Type</th>
+                                        <th>Type of Event</th>
+                                      <th>Event Message</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr class="activity-error">
-                                        <td>391</td>
-                                        <td>16:20:21</td>
-                                        <td>ERROR</td>
-                                    </tr>
-                                    <tr class="activity-warning">
-                                        <td>390</td>
-                                        <td>16:15:21</td>
-                                        <td>WARNING</td>
-                                    </tr>
-                                    <tr class="activity-ok">
-                                        <td>389</td>
-                                        <td>16:10:21</td>
-                                        <td>OK</td>
-                                    </tr>
+                                  <tbody>
+
+                                  <tbody *ngFor="let event of deviceEvents | sortBy : logSortItem : logRevert">
+                                    <tr *ngIf="systemEvent(event)" class="activity-warning">
+                                    <td>{{event?.id}}</td>
+                                      <td>{{getTime(event?.id) | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+                                      <td>{{event?.event_type}}</td>
+                                      <td class="maxwidth">{{event?.event_message}}</td>
+                                    </tr >
+                                    <tr *ngIf="!systemEvent(event)" class="activity-ok">
+                                      <td>{{event?.id}}</td>
+                                      <td>{{event?.event_timestamp}}</td>
+                                      <td>{{event?.event_type}}</td>
+                                      <td class="maxwidth">{{event?.event_message}}</td>
+                                    </tr >
+
                                     </tbody>
                                 </table>
 
@@ -230,8 +266,8 @@
                                         <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.base_image}}</td>
                                         <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.service_ip}}</td>
                                         <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngIf="app.ports.length < 1">None</td>
-                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngFor="let port of app.ports"> {{port}} <br/> </td>
-                                        <td [routerLink]="['/application-profile', app?.id]"  class="maxwidth pointer">app.status message</td>
+                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngFor="let port of app?.ports"> {{port}} <br/> </td>
+                                        <td [routerLink]="['/application-profile', app?.id]"  class="maxwidth pointer">{{app?.status_message}}</td>
                                     </tr>
                                     </tbody>
                                 </table>

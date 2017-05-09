@@ -1,4 +1,4 @@
-import {Component, OnInit,trigger,state,style,transition,animate,keyframes, group} from '@angular/core';
+import {Component, OnInit, trigger, state, style, transition, animate, keyframes, group, DoCheck} from '@angular/core';
 // import initDemo = require('../../../assets/js/charts.js');
 // import initNotify = require('../../../assets/js/notify.js');
 
@@ -35,6 +35,7 @@ declare var $:any;
 })
 
 export class DashboadrComponent implements OnInit{
+
     ngOnInit() {
         // $.getScript('../../../assets/js/bootstrap-checkbox-radio-switch.js');
         // $.getScript('../../../assets/js/light-bootstrap-dashboard.js');
@@ -45,7 +46,10 @@ export class DashboadrComponent implements OnInit{
             var $checkbox = $(this);
             $checkbox.checkbox();
         });
+
+
         // initDemo();
         // initNotify();
     }
+
 }

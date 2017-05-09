@@ -3,12 +3,24 @@
         <div class="row">
 
         <div class="col-lg-12">
+          <div class="row">
+            <!--<form #myForm="ngForm" novalidate>-->
+            <form [formGroup]="myForm" novalidate>
+              <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                              formControlName="myDate"></my-date-picker>
+              <!-- other controls are here... -->
+            </form>
+            <!--</form>-->
+
+
+          </div>
           <!--<iframe src="http://localhost:5601/app/kibana#/dashboard?embed=true&_g=()&_a=(filters:!(),options:(darkTheme:!f),panels:!((col:1,id:cfc781e0-2f2a-11e7-ac5c-d30f8136720c,panelIndex:1,row:1,size_x:6,size_y:3,type:visualization),(col:7,id:'6e3c1520-2f2b-11e7-8bf2-691b3f9e24bf',panelIndex:2,row:1,size_x:6,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:'New+Dashboard',uiState:())"-->
                   <!--frameborder="0" [style.height.px]="0.66 * height" style="width: 100%; position:absolute; "></iframe>-->
           <!--<iframe frameborder="0" [style.height.px]="0.66 * height" style="width: 100%; position:absolute; " src="https://petrvocelka.cz/">-->
             <!--wtf-->
           <!--</iframe>-->
         </div>
+          <br><br><br><br><br><br><br><br><br>
         <!--</div> &lt;!&ndash; zakomentovat kdyz se bude zbytek odkomentovavat &ndash;&gt;-->
           <p>
             <button type="button" class="btn btn-default" (click)="modal.open()">Open me!</button>

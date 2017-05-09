@@ -1,7 +1,6 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
-import {Auth} from "./auth/auth.service";
 import * as $ from 'jquery';
 
 @Component({
@@ -21,7 +20,7 @@ public logged: boolean = false;
         this.loggedIn = localStorage.getItem('isLoggedIn');
     }
     ngOnInit(){
-        // $.getScript('../assets/js/light-bootstrap-dashboard.js');
+         // $.getScript('../assets/js/light-bootstrap-dashboard.js'); //already gotten in index.html
     }
     public isMaps(path){
         if(path == window.location.pathname){

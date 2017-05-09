@@ -3,7 +3,7 @@
  */
 
 import {Component, trigger, transition, style, animate, group, state, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {PagerService} from "../../helper-services/pager.service";
@@ -41,7 +41,8 @@ import {Capability} from "./capabilities.metadata";
 })
 
 export class CapabilitiesComponent  implements OnInit{
-  searchNameInput = new FormControl();
+  filterGroup: FormGroup;
+
   capabilities: Observable<Capability[]>;
   sortItem = "name";
   revert = false;
@@ -66,6 +67,7 @@ export class CapabilitiesComponent  implements OnInit{
 
   constructor (private deviceThumbService: DeviceThumbService,
                private pagerService: PagerService,
+               private _fb: FormBuilder,
                private capabilitiesService: CapabilitiesService) {
 
   }
@@ -82,7 +84,15 @@ export class CapabilitiesComponent  implements OnInit{
 
 
   ngOnInit(): void {
-    this.capabilities = this.searchNameInput.valueChanges
+
+    this.filterGroup = this._fb.group({
+      name: [''],
+      protocol: [''],
+      peripherial_device: [''],
+    });
+
+
+    this.capabilities = this.filterGroup.valueChanges
       .startWith('')
       .debounce(() => Observable.interval(200))
       .distinctUntilChanged()

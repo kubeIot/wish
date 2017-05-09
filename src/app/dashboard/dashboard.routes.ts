@@ -11,7 +11,6 @@ import {ProfileComponent} from "./profile/profile.component";
 import {testComponent} from "./Ztest/test.component";
 import {LoginComponent} from "../authentication/login/login.component";
 import {ApplicationsComponent} from "./Applications/applications.component";
-import {authComponent} from "../auth/auth.component";
 import {sortPipe} from "./sorting.pipe";
 import {ApplicationThumbComponent} from "./application-thumbnail/applicationThumb.component";
 import {NewApplicationComponent} from "./application-add/newApplication.component";
@@ -19,6 +18,8 @@ import {ApplicationProfileComponent} from "./application-profile/applicationProf
 import {CapabilitiesComponent} from "./Capabilities/capabilities.component";
 import {NewCapabilityComponent} from "./capability-add/newCapability.component";
 import {ImagesComponent} from "./images/images.component";
+import { SwitchComponent } from 'angular2-bootstrap-switch/components';
+
 export const MODULE_COMPONENTS = [
     AboutComponent,
     EventsLogComponent,
@@ -37,8 +38,8 @@ export const MODULE_COMPONENTS = [
     // LoginComponent,
     ApplicationsComponent,
     testComponent,
-    authComponent,
-    sortPipe
+    sortPipe,
+  SwitchComponent
 
 ]
 
@@ -69,7 +70,6 @@ export const MODULE_ROUTES: Route[] =[
     { path: 'test/test1', component: testComponent },
     { path: 'test/test2', component: testComponent },
     { path: 'test/test3', component: testComponent },
-    { path: 'auth', component: authComponent },
 
     { path: '**', redirectTo: '/dashboard' }
 

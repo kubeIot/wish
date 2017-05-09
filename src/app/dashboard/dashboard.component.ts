@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, DoCheck} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -7,12 +7,18 @@ import {Router} from '@angular/router';
     templateUrl: 'dashboard.component.html'
 })
 
-export class DashboardComponent{
+export class DashboardComponent implements DoCheck{
     loggedIn: any;
 
     constructor(private router: Router) {
         this.loggedIn = localStorage.getItem('isLoggedIn')
 
     }
+
+    ngDoCheck() {
+      this.loggedIn = localStorage.getItem('isLoggedIn');
+    }
+
+
 
 }

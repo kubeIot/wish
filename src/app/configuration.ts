@@ -11,4 +11,4 @@ export let userUrl = 'http://127.0.0.1:8080/user/';
 
 export let capabilitiesUrl = 'http://127.0.0.1:8080/capability/';
 
-
+export let logUrl = 'TBD';

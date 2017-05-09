@@ -17,7 +17,7 @@
 
           </div>
           <div class="content">
-            <div class="row">
+            <div class="row" [formGroup]="filterGroup">
 
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="form-group">
@@ -26,7 +26,7 @@
                     <img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">
                     <img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">
                   </label>
-                  <input class="form-control" placeholder="Name" type="text" [formControl]="searchNameInput">
+                  <input class="form-control" placeholder="Name" type="text" formControlName="name">
                 </div>
               </div>
               <div class="col-md-4 col-sm-6 col-xs-12">
@@ -36,7 +36,7 @@
                     <img *ngIf="sortItem == 'protocol' && revert" class="sorted" src="../../../assets/img/down.gif">
                     <img *ngIf="sortItem == 'protocol' && !revert" class="sorted" src="../../../assets/img/up.gif">
                   </label>
-                  <input class="form-control" placeholder="Base Image"  type="text">
+                  <input class="form-control" placeholder="Protocol"  type="text" formControlName="protocol">
                 </div>
               </div>
               <div class="col-md-4 col-sm-6 col-xs-12 ">
@@ -46,7 +46,7 @@
                     <img *ngIf="sortItem == 'peripherial_device' && revert" class="sorted" src="../../../assets/img/down.gif">
                     <img *ngIf="sortItem == 'peripherial_device' && !revert" class="sorted" src="../../../assets/img/up.gif">
                   </label>
-                  <input class="form-control" placeholder="Peripheral Device"  type="text">
+                  <input class="form-control" placeholder="Peripherial Device"  type="text" formControlName="peripherial_device">
                 </div>
               </div>
 

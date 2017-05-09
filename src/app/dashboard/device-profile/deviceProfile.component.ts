@@ -17,8 +17,8 @@ import {Observable} from "rxjs";
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 
-import {Device} from "../device-thumbnail/deviceThumb.metadata";
-import {FormControl} from "@angular/forms";
+import {Device, DeviceEvent} from "../device-thumbnail/deviceThumb.metadata";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ApplicationService} from "../Applications/applications.service";
 import {PagerService} from "../../helper-services/pager.service";
 import {CapabilitiesService} from "../Capabilities/capabilities.service";
@@ -56,6 +56,10 @@ export enum profileSubPages {
 
 export class DeviceProfileComponent implements OnInit {
   // modal variables
+  eventsFilter: FormGroup;
+  logSortItem = "event_timestamp";
+  logRevert = false;
+
   @ViewChild('modal')
   modal: ModalComponent;
   selected: string;
@@ -64,6 +68,7 @@ export class DeviceProfileComponent implements OnInit {
   animation: boolean = true;
   keyboard: boolean = true;
   backdrop: string | boolean = true;
+
 
   //pager variables
   // array of all items to be paged
@@ -79,6 +84,8 @@ export class DeviceProfileComponent implements OnInit {
     device: Device;
     subPage: profileSubPages = profileSubPages.logging;
     apps = [];
+    deviceEvents: DeviceEvent[] = [];
+    shownDeviceEvents: DeviceEvent[] = [];
     installedCapabilities: Capability[] = [];
     usedCapabilities: usedCapability[] = [];
     searchInput = new FormControl();
@@ -90,7 +97,8 @@ export class DeviceProfileComponent implements OnInit {
         private capabilitiesService: CapabilitiesService,
         private pagerService: PagerService,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
+        private _fb: FormBuilder,
     ) {
     }
 
@@ -101,6 +109,14 @@ export class DeviceProfileComponent implements OnInit {
 
 
     ngOnInit(): void {
+      this.eventsFilter = this._fb.group({
+        time_to: [''],
+        time_from: [''],
+        event_message: [''],
+        event_type: ['']
+      });
+
+
 
       this.route.params
             .switchMap((params: Params) => this.deviceThumbService.getDevice(+params['id']))
@@ -108,6 +124,12 @@ export class DeviceProfileComponent implements OnInit {
             .subscribe(device => this.setVariables(device),
                 () => console.log("finished"));
 
+
+      // this.shownDeviceEvents = this.eventsFilter.valueChanges
+      //   .startWith('')
+      //   .debounce(() => Observable.interval(200))
+      //   .distinctUntilChanged()
+      //   .flatMap(term => this.deviceThumbService.getFilteredDeviceEvents(term));
 
     }
 
@@ -117,6 +139,23 @@ export class DeviceProfileComponent implements OnInit {
 
     setVariables(device: Device){
         this.device = device;
+
+
+      this.eventsFilter.valueChanges
+        .startWith('')
+        .debounce(() => Observable.interval(200))
+        .distinctUntilChanged()
+        .flatMap(term =>
+          this.route.params
+            .switchMap((params: Params) => this.deviceThumbService.getDeviceEvents(+params['id'], term))
+        )
+        .subscribe(events => this.deviceEvents = events.filter(event => event != null));
+
+      // this.route.params
+      //   .switchMap((params: Params) => this.deviceThumbService.getDeviceEvents(+params['id']))
+      //   // .subscribe(device => this.doMagic(device),
+      //   .subscribe(events => this.deviceEventsList = events.filter(event => event != null));
+
         this.device.applications.forEach((appId, index) => {
 
           this.applicationService.getApplication(appId)
@@ -174,6 +213,14 @@ export class DeviceProfileComponent implements OnInit {
     return status.toLowerCase( ) == "running";
   }
 
+  systemEvent(event: DeviceEvent) {
+
+      if(event.event_type.toLowerCase() == "system") {
+        return true;
+      }
+      return false;
+  }
+
 
   deleteDevice() {
     console.log("device deleted");
@@ -181,6 +228,15 @@ export class DeviceProfileComponent implements OnInit {
   }
   open() {
     this.modal.open();
+  }
+
+  getTime( id: string | number) {
+      // + 000 - conversion to miliseconds
+      var epochTime = Number(this.deviceEvents.filter(item => item.id == id)[0].event_timestamp + "000");
+      console.log(epochTime);
+      return new Date(epochTime).toLocaleString();
+      // return epochTime;
+
   }
 
     goBack(): void {

@@ -29,8 +29,43 @@ export class CapabilitiesService {
 
 
 
-  getCapabilities(filter: any[]) {
-    return this.getList();
+  getCapabilities(Capabilityfilter: any) {
+    var capabilities = this.getList();
+
+
+    if(Capabilityfilter != "") { //no filter causes error in "toLowerCase" + optimalization
+      var nameFilter: string = Capabilityfilter.name.toLowerCase();
+      var protocolFilter: string = Capabilityfilter.protocol.toLowerCase();
+      var peripherialFilter: string = Capabilityfilter.peripherial_device.toLowerCase();
+
+      //filter name
+      if(nameFilter !== "") //if filter does not exist, dont lose time worrying about it
+        capabilities = capabilities
+          .map(capabilities => capabilities.filter(item =>
+          item != null &&
+          item.name != null && //if item is null, toLowerCase() would cause error
+          item.name.toLowerCase().indexOf(nameFilter) !== -1));
+
+
+      //filter protocol
+      if(protocolFilter !== "") //if filter does not exist, dont lose time worrying about it
+        capabilities = capabilities
+          .map(capabilities => capabilities.filter(item =>
+          item != null &&
+          item.protocol != null && //if item is null, toLowerCase() would cause error
+          item.protocol.toLowerCase().indexOf(protocolFilter) !== -1));
+
+      //filter protocol
+      if(peripherialFilter !== "") //if filter does not exist, dont lose time worrying about it
+        capabilities = capabilities
+          .map(capabilities => capabilities.filter(item =>
+          item != null &&
+          item.peripherial_device != null && //if item is null, toLowerCase() would cause error
+          item.peripherial_device.toLowerCase().indexOf(peripherialFilter) !== -1));
+
+
+    }
+    return capabilities;
 
   }
 

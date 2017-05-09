@@ -52,37 +52,40 @@ export class ApplicationService {
     getApplications(applicationFilter: any): Observable<Application[]> {
 
       if(applicationFilter != "") { //no filter causes error in "toLowerCase" + optimalization
-        this.nameFilter = applicationFilter.name.toLowerCase();
-        this.baseImageFilter = applicationFilter.base_image.toLowerCase();
-        this.statusFilter = applicationFilter.status_message.toLowerCase();
-        this.applications = this.getList();
+        var nameFilter: string = applicationFilter.name.toLowerCase();
+        var baseImageFilter:string = applicationFilter.base_image.toLowerCase();
+        var statusFilter:string = applicationFilter.status_message.toLowerCase();
+        var applications = this.getList();
 
 
         //filter device vendor
-        if(this.nameFilter !== "") //if filter does not exist, dont lose time worrying about it
-          this.applications = this.applications
+        if(nameFilter !== "") //if filter does not exist, dont lose time worrying about it
+          applications = applications
             .map(applications => applications.filter(item =>
+            item != null &&
             item.name != null && //if item is null, toLowerCase() would cause error
-            item.name.toLowerCase().indexOf(this.nameFilter) !== -1));
+            item.name.toLowerCase().indexOf(nameFilter) !== -1));
 
 
         // filter base_image
-        if(this.baseImageFilter !== "") //if filter does not exist, dont lose time worrying about it
-          this.applications = this.applications
+        if(baseImageFilter !== "") //if filter does not exist, dont lose time worrying about it
+          applications = applications
             .map(applications => applications.filter(item =>
+              item != null &&
               item.base_image != null &&
-              this.getBaseImageName(item.base_image).toLowerCase().indexOf(this.baseImageFilter) !== -1
+              this.getBaseImageName(item.base_image).toLowerCase().indexOf(baseImageFilter) !== -1
             ));
 
         //filter system info
-        if(this.statusFilter !== "" && this.statusFilter !== "all") //if filter does not exist, dont lose time worrying about it
-          this.applications = this.applications
+        if(statusFilter !== "" && statusFilter !== "all") //if filter does not exist, dont lose time worrying about it
+          applications = applications
             .map(applications => applications.filter(item =>
+            item != null &&
             item.status_message != null && //if item is null, toLowerCase() would cause error
-            item.status_message.toLowerCase().indexOf(this.statusFilter) !== -1));
+            item.status_message.toLowerCase().indexOf(statusFilter) !== -1));
 
 
-        return this.applications;
+        return applications;
       }
       return this.getList();
     }

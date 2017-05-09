@@ -11,6 +11,7 @@ import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import {Device} from '../device-thumbnail/deviceThumb.metadata'
 import {Router} from "@angular/router";
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import {IMyOptions} from 'mydatepicker';
 
 export interface Customer {
     name: string; // required field with minimum 5 characters
@@ -43,7 +44,7 @@ export class testComponent implements OnInit {
   items: string[] = ['item1', 'item2', 'item3'];
   selected: string;
   output: string;
-  model: Person = new Person();
+  //model: Person = new Person();
 
   index: number = 0;
   backdropOptions = [true, false, 'static'];
@@ -61,9 +62,33 @@ export class testComponent implements OnInit {
 
   }
 
+  private myDatePickerOptions: IMyOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+  };
+
+  private myForm: FormGroup;
+
+  setDate(): void {
+    // Set today date using the setValue function
+    let date = new Date();
+    this.myForm.setValue({myDate: {
+      date: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()}
+    }});
+  }
+
+  clearDate(): void {
+    // Clear the date using the setValue function
+    this.myForm.setValue({myDate: null});
+  }
 
 
-    constructor(private router: Router, private _httpService: testService, private _fb: FormBuilder) {
+    constructor(private router: Router,
+                private _httpService: testService, private _fb:
+                  FormBuilder, private formBuilder: FormBuilder) {
     }
 
 
@@ -80,6 +105,15 @@ export class testComponent implements OnInit {
 
 
     ngOnInit() {
+
+      this.myForm = this.formBuilder.group({
+        // Empty string or null means no initial value. Can be also specific date for
+        // example: {date: {year: 2018, month: 10, day: 9}} which sets this date to initial
+        // value.
+
+        myDate: [null, Validators.required]
+        // other controls are here...
+      });
 
         // we will initialize our form here
         this.addDeviceForm = this._fb.group({

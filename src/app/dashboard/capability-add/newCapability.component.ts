@@ -69,7 +69,7 @@ export class NewCapabilityComponent implements OnInit {
       name: ['', [Validators.required]],
       peripherial_device: ['', [Validators.required]],
       protocol: ['', [Validators.required]],
-      id: ['', [Validators.required]],
+      // id: ['', [Validators.required]],
     });
 
     this.route.params
@@ -86,7 +86,7 @@ export class NewCapabilityComponent implements OnInit {
     this.addCapabilityForm.patchValue({name: capability.name,
       peripherial_device: capability.peripherial_device,
       protocol: capability.protocol,
-      id: capability.id,
+      // id: capability.id,
       // system_info: application.system_info,
     });
 

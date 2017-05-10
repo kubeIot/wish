@@ -5,13 +5,6 @@
       <div class="col-md-12">
         <div class="card" id="images-filter">
           <div class="header">
-            <a routerLink="/image-add">
-              <button style="float: right; " class="btn btn-primary">Add Image</button>
-            </a>
-
-            <!--<div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">-->
-            <!--<div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>-->
-            <!--</div>-->
             <h4 class="title">Images</h4>
             <p class="category">You can find list of all your Images here!</p>
 
@@ -68,7 +61,7 @@
                   <th><b>Exposed Ports</b></th>
                   <th><b>Required Capabilities</b></th>
                   <th><b>Description</b></th>
-                  <th><b>Edit</b></th>
+                  <!--<th><b>Edit</b></th>-->
                   <!--<th><b>Delete</b></th>-->
 
                   <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
@@ -84,7 +77,7 @@
 
 
                   <td > {{image?.description}}  </td>
-                  <td> <a [routerLink]="['/image-add', image?.id]"> Edit </a> </td>
+                  <!--<td> <a [routerLink]="['/image-add', image?.id]"> Edit </a> </td>-->
                   <!--modal is at the bottom of the code-->
                   <!--<td (click)="deleteConfirm(image?.name, image?.id)"> <span class="pointer"> Delete <i class="pe-7s-close"></i> </span> </td>-->
                 </tr>

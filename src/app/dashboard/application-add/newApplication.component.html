@@ -78,31 +78,6 @@
                                 </div>
                             </div>
 
-                            <div class=" col-sm-6 col-xs-12">
-                                <label><b>Capabilities</b></label>
-                                <div formArrayName="capabilities" class="panel panel-default">
-                                    <div class="panel-body" >
-                                        <div *ngFor="let capability of addApplicationForm.controls.capabilities.controls; let i=index">
-                                            <div [formGroupName]="i">
-                                                <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addApplicationForm.controls.capabilities.controls.length > 1" (click)="removeCapability(i)"></span>
-                                                <div class="form-group col-xs-12">
-                                                    <label>Capability {{i + 1}}</label>
-                                                    <input type="text" class="form-control" formControlName="capability">
-                                                    <small [hidden]="addApplicationForm.controls.capabilities.controls[i].controls.capability.valid" class="text-danger">
-                                                        Capability is required
-                                                    </small>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-20">
-                                    <a (click)="addCapability()" style="cursor: pointer">
-                                        Add another Capability +
-                                    </a>
-                                </div>
-                            </div>
 
 
 
@@ -118,7 +93,7 @@
                                                     <input type="text" pattern="[0-9]+:[0-9]+" class="form-control" formControlName="port" placeholder="80:8080">
 
                                                     <small [hidden]="addApplicationForm.controls.ports.controls[i].controls.port.valid" class="text-danger">
-                                                        Valid Form of the Port is Required! (ie. 80:8000)
+                                                        Valid Form of the Port is Required! (source:destination, ie. 80:8000)
                                                     </small>
                                                 </div>
 

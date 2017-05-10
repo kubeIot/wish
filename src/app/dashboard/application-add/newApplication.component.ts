@@ -79,10 +79,7 @@ export class NewApplicationComponent implements OnInit {
             service_ip: ['', [Validators.required]],
 
             system_info: [''],
-            capabilities: this._fb.array([
-                this.initCapability(),
 
-            ]),
             ports: this._fb.array([
                 this.initPort(),
 
@@ -117,32 +114,9 @@ export class NewApplicationComponent implements OnInit {
                 this.removePort(index);
         });
 
-        application.capabilities.forEach((item, index) => {
-            this.addCapability(item);
-            if(index == 0)
-                this.removeCapability(index);
-        });
     }
 
-    // accepts strings as well as numbers
-    initCapability(value:number | string = "") {
-        // initialize our capability
-        return this._fb.group({
-            capability: [value]
-        });
-    }
-    addCapability(value:any = "") {
-        // add capability to the list
-        const control = <FormArray>this.addApplicationForm.controls['capabilities'];
-        control.push(this.initCapability(value));
-    }
 
-    removeCapability(i: number) {
-
-        // remove capability from the list
-        const control = <FormArray>this.addApplicationForm.controls['capabilities'];
-        control.removeAt(i);
-    }
     //accepts strings as well as numbers
 
     initPort(value: number | string  = "") {

@@ -69,12 +69,15 @@ export class NewCapabilityComponent implements OnInit {
       name: ['', [Validators.required]],
       peripherial_device: ['', [Validators.required]],
       protocol: ['', [Validators.required]],
+      id: ['', [Validators.required]],
     });
 
     this.route.params
       .switchMap((params: Params) => this.capabilitiesService.getCapability(+params['id']))
       .subscribe(capability => this.setVariables(capability),
-        () => console.log("finished"));
+        (err) => this.addCapabilityForm.patchValue({id: 0}),
+
+    () => console.log("finished"));
 
   }
   //Any parameter - can be number or string
@@ -83,6 +86,7 @@ export class NewCapabilityComponent implements OnInit {
     this.addCapabilityForm.patchValue({name: capability.name,
       peripherial_device: capability.peripherial_device,
       protocol: capability.protocol,
+      id: capability.id,
       // system_info: application.system_info,
     });
 
@@ -93,8 +97,12 @@ export class NewCapabilityComponent implements OnInit {
   addCapabilityPost(capability:any) {
     // call API to save capabiity
 
-    console.log(JSON.stringify(capability._value));
-    this.newCapabilityService.postCapability(capability)
+    //console.log(JSON.stringify(capability._value));
+    this.newCapabilityService.postCapability(capability.value).subscribe(
+      data => console.log(data),
+      error => alert(error),
+      () => console.log("post request is completed")
+    );
   }
 
 

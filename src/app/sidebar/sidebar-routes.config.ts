@@ -24,7 +24,6 @@ export const ROUTES: RouteInfo[] = [
   { path: 'device-add', title: 'New Device', menuType: MenuType.LEFT, icon:'pe-7s-plus' },
   { path: 'application-add', title: 'New Application', menuType: MenuType.LEFT, icon:'pe-7s-plus' },
   { path: 'capability-add', title: 'New Capability', menuType: MenuType.LEFT, icon:'pe-7s-plus' },
-  { path: 'image-add', title: 'New Image', menuType: MenuType.LEFT, icon:'pe-7s-plus' },
   { path: 'about', title: 'About', menuType: MenuType.LEFT, icon:'pe-7s-info' },
     { path: 'test', title: 'Test', menuType: MenuType.LEFT, icon:'pe-7s-attention' },
     { path: 'profile', title: 'Profile', menuType: MenuType.BRAND, icon:'' },

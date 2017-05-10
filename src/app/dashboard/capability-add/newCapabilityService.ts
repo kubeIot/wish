@@ -15,12 +15,18 @@ export class NewCapabilityService {
 
 
   postCapability(data:string) {
+    //console.log(data);
     var json = JSON.stringify(data)
-    var params='json=' + json;
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.post('http://validate.jsontest.com', params, {
+    var params=json;
+    var headers = new Headers();
+    // headers.append('Access-Control-Allow-Origin', '*');
+    // headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer + token');
+
+    console.log(params);
+    return this._http.post('http://localhost:8080/capability', params, {
       headers: headers
     })
       .map(res => res.json());

@@ -27,7 +27,6 @@ export class SidebarComponent implements OnInit, DoCheck {
         (menuItem.menuType !== MenuType.BRAND) &&
         !(localStorage.getItem("showDevice") === "false" && menuItem.title == 'New Device') &&
         !(localStorage.getItem("showApplication") === "false" && menuItem.title == 'New Application') &&
-        !(localStorage.getItem("showImage") === "false" && menuItem.title == 'New Image') &&
         !(localStorage.getItem("showCapability") === "false" && menuItem.title == 'New Capability')
 
       );
@@ -40,8 +39,6 @@ export class SidebarComponent implements OnInit, DoCheck {
     ngOnInit() {
         let timer = Observable.timer(1000,1000);
         timer.subscribe(t=>this.today = new Date());
-        if (localStorage.getItem("showDevice") === null)
-          localStorage.setItem("showDevice", "true");
 
         this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
     }

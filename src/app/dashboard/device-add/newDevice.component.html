@@ -20,11 +20,21 @@
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Address</b></label>
-                                    <input value={{device?.address}} type="text" class="form-control" formControlName="address" pattern="ipPattern" placeholder="127.0.0.1">
+                                    <input value={{device?.address}} type="text" class="form-control" formControlName="address" pattern="{{ipPattern}}" placeholder="127.0.0.1">
                                     <small *ngIf="!addDeviceForm.controls.address.valid" class="text-danger">
-                                      Valid Form of the Service IP is Required! <br/> (ie. 127.0.0.1 or 0:0:0:0:0:0:0:1 or localhost)
+                                      Valid Form of the IP address is Required! <br/> (ie. 127.0.0.1 or 0:0:0:0:0:0:0:1)
                                     </small>
                                 </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                <label><b>Name of the Device</b></label>
+                                <input type="text" class="form-control" formControlName="name">
+                                <small *ngIf="!addDeviceForm.controls.name.valid" class="text-danger">
+                                  Name of the device is required.
+                                </small>
+                              </div>
                             </div>
 
                             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -37,6 +47,8 @@
                                 </div>
                             </div>
 
+                          </div>
+                          <div class="row">
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Device Version</b></label>
@@ -46,18 +58,9 @@
                                     </small>
                                 </div>
                             </div>
-                          </div>
-                          <div class="row">
 
-                          <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label><b>ID</b></label>
-                                    <input type="text" class="form-control" formControlName="id">
-                                    <small *ngIf="!addDeviceForm.controls.id.valid" class="text-danger">
-                                        ID is required.
-                                    </small>
-                                </div>
-                            </div>
+
+
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Kernel Version</b></label>
@@ -90,32 +93,66 @@
                             </div>
 
 
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <label><b>Installed Capabilities</b></label>
-                                <div formArrayName="installed_capabilities" class="panel panel-default">
-                                    <div class="panel-body" >
-                                        <div *ngFor="let installed_capability of addDeviceForm.controls.installed_capabilities.controls; let i=index">
-                                            <div [formGroupName]="i">
-                                                <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.installed_capabilities.controls.length > 1" (click)="removeInstalledCapability(i)"></span>
-                                                <div class="form-group col-xs-12">
-                                                    <label>Installed Capability {{i + 1}}</label>
-                                                    <input type="text" class="form-control" formControlName="installed_capability">
-                                                    <small [hidden]="addDeviceForm.controls.installed_capabilities.controls[i].controls.installed_capability.valid" class="text-danger">
-                                                        Installed capability is required
-                                                    </small>
+
+                          <!--<div class="panel-body" [formGroupName]="i">-->
+                            <!--<span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>-->
+                            <!--<div class="form-group col-xs-6">-->
+                              <!--<label>street</label>-->
+                              <!--<input type="text" class="form-control" formControlName="street">-->
+                              <!--<small [hidden]="addDeviceForm.controls.addresses.controls[i].controls.street.valid" class="text-danger">-->
+                                <!--Street is required-->
+                              <!--</small>-->
+                            <!--</div>-->
+                            <!--<div class="form-group col-xs-6">-->
+                              <!--<label>postcode</label>-->
+                              <!--<input type="text" class="form-control" formControlName="postcode">-->
+                            <!--</div>-->
+                          <!--</div>-->
+
+
+                            <div class="row">
+                              <div class="col-xs-12">
+                                  <label><b>Device Capabilities</b></label>
+                                  <div formArrayName="device_capabilities" class="panel panel-default">
+                                      <div class="panel-body" >
+                                          <div *ngFor="let device_capability of addDeviceForm.controls.device_capabilities.controls; let i=index">
+                                              <div [formGroupName]="i">
+                                                  <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addDeviceForm.controls.device_capabilities.controls.length > 1" (click)="removeDeviceCapability(i)"></span>
+                                                  <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                                      <label>Device Capability {{i + 1}}</label>
+                                                      <input type="text" class="form-control" formControlName="device_capability">
+                                                      <small [hidden]="addDeviceForm.controls.device_capabilities.controls[i].controls.device_capability.valid" class="text-danger">
+                                                          Device capability is required
+                                                      </small>
+                                                  </div>
+
+                                                <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                                  <label>Name of the Capability {{i + 1}}</label>
+                                                  <input type="text" class="form-control" formControlName="capability_name">
+                                                  <small [hidden]="addDeviceForm.controls.device_capabilities.controls[i].controls.capability_name.valid" class="text-danger">
+                                                    Name of the Capability is Required
+                                                  </small>
                                                 </div>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-20">
-                                    <a (click)="addInstalledCapability()" style="cursor: pointer">
-                                        Add another installed capability +
-                                    </a>
-                                </div>
-                            </div>
+                                                <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                                  <label> Bus Connection {{i + 1}}</label>
+                                                  <input type="text" class="form-control" formControlName="bus_connection">
+                                                  <small [hidden]="addDeviceForm.controls.device_capabilities.controls[i].controls.bus_connection.valid" class="text-danger">
+                                                    Bus Connection is Required
+                                                  </small>
+                                                </div>
 
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="margin-20">
+                                      <a (click)="addDeviceCapability()" style="cursor: pointer">
+                                          Add another device capability +
+                                      </a>
+                                  </div>
+                              </div>
+                            </div>
 
                             <!--odsazeni buttonu-->
                             <div class="col-xs-12"></div>

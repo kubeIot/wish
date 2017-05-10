@@ -14,6 +14,15 @@ export interface DeviceEvent {
   parent_id: number;
 }
 
+export interface DeviceCapability {
+  app_id: number;
+  bus_connection: string;
+  cap_id: number;
+  id: number;
+  used: Boolean;
+}
+
+
 export interface Device {
     adress: string;
     applications: string[];

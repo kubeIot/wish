@@ -4,29 +4,27 @@
 import { Injectable } from '@angular/core';
 import { Http,Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
-import {Device, DeviceEvent} from "./deviceThumb.metadata";
+import {Device, DeviceEvent, DeviceCapability} from "./deviceThumb.metadata";
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
 import {devicesUrl} from "../../configuration"
 
 @Injectable()
 export class DeviceThumbService {
-  notSearched: Boolean = true; //Optimalization in deviceEventsList searches
-  deviceEventsList: Observable<DeviceEvent[]>;
-  // deviceEvents: Observable<DeviceEvent[]>;
 
-
-  devices: Observable<Device[]>;
-     private devicesUrl = devicesUrl;  // URL to web api
-
-
+    private devicesUrl = devicesUrl;  // URL to web api
+    eventsNotSearched: Boolean = true; //Optimalization in deviceEventsList searches
+    capabilitiesNotSearched: Boolean = true; //Optimalization in deviceCapabilitiesList searches
+    deviceEventsList: Observable<DeviceEvent[]>;
+    deviceCapabilitiesList: Observable<DeviceCapability[]>;
+    devices: Observable<Device[]>;
     private devicesList: Observable < Device[] > = this.http.get(this.devicesUrl)
-        .map((res: Response) => res.json())
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
-        // .do(console.log(Response))
-        // .do(console.log("yea"))
-        .publishReplay(1)
-        .refCount();
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+      // .do(console.log(Response))
+      // .do(console.log("yea"))
+      .publishReplay(1)
+      .refCount();
 
 
     constructor(private http: Http) { }
@@ -85,16 +83,28 @@ export class DeviceThumbService {
 
 
 
+  getDeviceCapabilities(id: number | string, filter: any = "") {
+
+    if(this.capabilitiesNotSearched) {
+      this.capabilitiesNotSearched = false;
+      const url = `${this.devicesUrl}/${id}/capabilities`;
+      return this.deviceCapabilitiesList = this.http.get(url)
+        .map((response:Response) => response.json()).filter(item => item != null);
+    }
+
+
+
+  }
 
     getDeviceEventsList() {
       return this.deviceEventsList.filter(item => item != null);
     }
 
 
-  getDeviceEvents(id: number| string, filter: any) {
+  getDeviceEvents(id: number| string, filter: any = "") {
 
-    if(this.notSearched) {
-      this.notSearched = false;
+    if(this.eventsNotSearched) {
+      this.eventsNotSearched = false;
       const url = `${this.devicesUrl}/${id}/events`;
       return this.deviceEventsList = this.http.get(url)
         .map((response:Response) => response.json()).filter(item => item != null);
@@ -123,14 +133,6 @@ export class DeviceThumbService {
     return this.getDeviceEventsList();
 
   }
-
-
-
-
-
-
-
-
 
 
 

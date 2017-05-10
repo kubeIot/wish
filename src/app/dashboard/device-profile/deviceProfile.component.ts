@@ -184,7 +184,7 @@ export class DeviceProfileComponent implements OnInit {
         });
       });
 
-        console.log(this.apps);
+        // console.log(this.apps);
 
     }
 
@@ -233,7 +233,7 @@ export class DeviceProfileComponent implements OnInit {
   getTime( id: string | number) {
       // + 000 - conversion to miliseconds
       var epochTime = Number(this.deviceEvents.filter(item => item.id == id)[0].event_timestamp + "000");
-      console.log(epochTime);
+      // console.log(epochTime);
       return new Date(epochTime).toLocaleString();
       // return epochTime;
 

@@ -8,9 +8,15 @@ import { NewDeviceService } from "./newDevice.service"
 import { Location } from '@angular/common';
 import {ActivatedRoute, Params} from "@angular/router";
 import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
-import {Device} from "../device-thumbnail/deviceThumb.metadata";
+import {Device, DeviceCapability} from "../device-thumbnail/deviceThumb.metadata";
 
-//todo <row> do html, aby to fungovalo i pri zmenseni + podivat se jestli tam neni takova chyyba s sidebarem
+// only for Post purposes, not full interface!
+export interface deviceCapabilityPost {
+  device_capability: string;
+  capability_name: string;
+  bus_connection: string;
+}
+
 
 @Component({
     moduleId: module.id,
@@ -44,7 +50,7 @@ import {Device} from "../device-thumbnail/deviceThumb.metadata";
 export class NewDeviceComponent implements OnInit {
 
     public addDeviceForm: FormGroup;
-    ipPattern = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$";
+    ipPattern = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$";
 
     public device: Device;
     constructor(private _httpService: NewDeviceService,
@@ -61,12 +67,12 @@ export class NewDeviceComponent implements OnInit {
             address: ['', [Validators.required]],
             device_vendor: ['', [Validators.required]],
             device_version: [''],
-            id: ['', [Validators.required]],
+            name: ['', [Validators.required]],
             kernel_version: [''],
             os_distribution: ['', [Validators.required]],
             system_info: [''],
-            installed_capabilities: this._fb.array([
-                this.initInstalledCapability(),
+            device_capabilities: this._fb.array([
+                this.initDeviceCapability(),
 
             ]),
 
@@ -90,30 +96,42 @@ export class NewDeviceComponent implements OnInit {
 
     });
 
-      device.installed_capabilities.forEach((item, index) => {
-        this.addInstalledCapability(item);
-        if(index == 0)
-          this.removeInstalledCapability(index);
-      });
 
+      this.route.params
+        .switchMap((params: Params) => this.deviceThumbService.getDeviceCapabilities(+params['id']))
+        // .subscribe(device => this.doMagic(device),
+        .subscribe(devs => {this.setCapabilities(devs)},
+          () => console.log("finished"));
+    }
+
+    setCapabilities(capabilities: DeviceCapability[]) {
+      capabilities.forEach((item, index) => {
+        this.addDeviceCapability(String(item.cap_id), String(item.id), item.bus_connection);
+        if(index == 0)
+          this.removeDeviceCapability(index);
+      });
     }
 
 
-    initInstalledCapability(capability: string = "") {
+    initDeviceCapability(capability: string = "", name: string = "", bus: string = "") {
         // initialize our order
+
+
         return this._fb.group({
-            installed_capability: [capability, Validators.required]
+            device_capability: [capability , Validators.required],
+            capability_name: [name, Validators.required],
+            bus_connection: [bus, Validators.required],
         });
     }
-    addInstalledCapability(capability: string = "") {
+    addDeviceCapability(capability: string = "", name: string = "", bus: string = "") {
         // add order to the list
-        const control = <FormArray>this.addDeviceForm.controls['installed_capabilities'];
-        control.push(this.initInstalledCapability(capability));
+        const control = <FormArray>this.addDeviceForm.controls['device_capabilities'];
+        control.push(this.initDeviceCapability(capability, name, bus));
     }
 
-    removeInstalledCapability(i: number) {
+    removeDeviceCapability(i: number) {
         // remove address from the list
-        const control = <FormArray>this.addDeviceForm.controls['installed_capabilities'];
+        const control = <FormArray>this.addDeviceForm.controls['device_capabilities'];
         control.removeAt(i);
     }
 

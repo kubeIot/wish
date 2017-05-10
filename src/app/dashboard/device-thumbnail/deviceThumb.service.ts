@@ -2,7 +2,7 @@
  * Created by skylele on 3.3.17.
  */
 import { Injectable } from '@angular/core';
-import { Http,Response} from "@angular/http";
+import { Http,Response, Headers} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {Device, DeviceEvent, DeviceCapability} from "./deviceThumb.metadata";
 import 'rxjs/add/operator/map';
@@ -134,6 +134,20 @@ export class DeviceThumbService {
 
   }
 
+
+
+
+  deleteDevice(deviceId: number|string) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer + token');
+
+    const url = `${this.devicesUrl}${deviceId}`;
+    return this.http.delete(url, {
+      headers: headers
+    })
+      .map(res => res.json());
+  }
 
 
 }

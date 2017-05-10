@@ -71,8 +71,11 @@ export class CapabilitiesComponent  implements OnInit{
                private capabilitiesService: CapabilitiesService) {
 
   }
-  deleteCapability() {
-    console.log("capability deleted");
+  deleteCapability(id: number | string) {
+    this.capabilitiesService.deleteCapability(id).subscribe(
+      data => console.log(data),
+      error => alert(error),
+    )
     this.modal.close();
   }
 

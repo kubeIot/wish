@@ -94,7 +94,7 @@ export class NewCapabilityComponent implements OnInit {
 
 
 
-  addCapabilityPost(capability:any) {
+  addCapability(capability:any) {
     // call API to save capabiity
 
     //console.log(JSON.stringify(capability._value));
@@ -105,6 +105,13 @@ export class NewCapabilityComponent implements OnInit {
     );
   }
 
+  editCapability(capability: any)  {
+    this.newCapabilityService.putCapability(capability.value).subscribe(
+      data => console.log(data),
+      error => alert(error),
+      () => console.log("post request is completed")
+    );
+  }
 
   goBack(): void {
     this.location.back();

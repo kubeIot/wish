@@ -69,7 +69,7 @@
                   <th><b>Required Capabilities</b></th>
                   <th><b>Description</b></th>
                   <th><b>Edit</b></th>
-                  <th><b>Delete</b></th>
+                  <!--<th><b>Delete</b></th>-->
 
                   <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
                 </tr>
@@ -86,7 +86,7 @@
                   <td > {{image?.description}}  </td>
                   <td> <a [routerLink]="['/image-add', image?.id]"> Edit </a> </td>
                   <!--modal is at the bottom of the code-->
-                  <td (click)="deleteConfirm(image?.name, image?.id)"> <span class="pointer"> Delete <i class="pe-7s-close"></i> </span> </td>
+                  <!--<td (click)="deleteConfirm(image?.name, image?.id)"> <span class="pointer"> Delete <i class="pe-7s-close"></i> </span> </td>-->
                 </tr>
                 </tbody>
               </table>

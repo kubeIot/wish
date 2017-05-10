@@ -5,7 +5,7 @@
  * Created by skylele on 3.3.17.
  */
 import { Injectable } from '@angular/core';
-import { Http,Response} from "@angular/http";
+import { Http,Response, Headers} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {Application, Image} from "./applications.metadata";
 import 'rxjs/add/operator/map';
@@ -125,7 +125,26 @@ export class ApplicationService {
 
 
 
-    // getApplication(id: number) {
+
+
+
+
+  deleteApplication(applicationId: number|string) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer + token');
+
+    const url = `${this.applicationsUrl}${applicationId}`;
+    return this.http.delete(url,  {
+      headers: headers
+    })
+      .map(res => res.json());
+  }
+
+
+
+
+  // getApplication(id: number) {
     //     const url = `${this.applicationsUrl}/${id}`;
     //     return this.http.get(url)
     //         .map((response:Response) => response.json());

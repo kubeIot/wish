@@ -3,7 +3,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http,Response} from "@angular/http";
+import { Http,Response, Headers} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import { Capability } from "./capabilities.metadata";
 import 'rxjs/add/operator/map';
@@ -70,15 +70,27 @@ export class CapabilitiesService {
   }
 
   getCapability(capabilityId: number | string) {
-
     const url = `${this.capabilitiesUrl}${capabilityId}`;
     return this.http.get(url)
       .map((response:Response) => response.json());
-
   }
 
   getList() : Observable<Capability[]>{
     return this.capabilitiesList;
 
+  }
+
+
+
+  deleteCapability(capabilityId: number|string) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer + token');
+
+    const url = `${this.capabilitiesUrl}${capabilityId}`;
+    return this.http.delete(url, {
+      headers: headers
+    })
+      .map(res => res.json());
   }
 }

@@ -16,19 +16,29 @@ export class NewCapabilityService {
 
   postCapability(data:string) {
     //console.log(data);
-    var json = JSON.stringify(data)
-
-    var params=json;
+    var params=JSON.stringify(data);
     var headers = new Headers();
-    // headers.append('Access-Control-Allow-Origin', '*');
-    // headers.append('Access-Control-Allow-Headers', 'Content-Type');
+
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer + token');
 
-    console.log(params);
+    // console.log(params);
     return this._http.post('http://localhost:8080/capability', params, {
       headers: headers
     })
       .map(res => res.json());
   }
-}
+
+  putCapability(data:string) {
+    var params= JSON.stringify(data);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer + token');
+    // console.log(params);
+    return this._http.put('http://localhost:8080/capability', params, {
+      headers: headers
+    })
+      .map(res => res.json());
+
+  }
+  }

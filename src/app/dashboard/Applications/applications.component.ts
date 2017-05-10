@@ -68,10 +68,7 @@ export class ApplicationsComponent  implements OnInit{
                private pagerService: PagerService) {
 
   }
-  deleteApplication() {
-    console.log("application deleted");
-    this.modal.close();
-  }
+
 
   deleteConfirm(name:string = "this application", id:number | string) {
     this.nameInModal = name;
@@ -131,6 +128,16 @@ export class ApplicationsComponent  implements OnInit{
     this.pagedItems = this.pagedItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
+
+
+
+  deleteApplication(id: string| number) {
+    this.applicationService.deleteApplication(id).subscribe(
+      data => console.log(data),
+      error => alert(error),
+    )
+    this.modal.close();
+  }
 
 
 }

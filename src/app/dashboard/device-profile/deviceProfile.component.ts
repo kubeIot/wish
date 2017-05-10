@@ -222,10 +222,22 @@ export class DeviceProfileComponent implements OnInit {
   }
 
 
-  deleteDevice() {
-    console.log("device deleted");
+
+
+
+  deleteDevice(id: string| number) {
+    this.deviceThumbService.deleteDevice(id).subscribe(
+      data => console.log(data),
+      error => alert(error),
+    )
     this.modal.close();
   }
+
+
+
+
+
+
   open() {
     this.modal.open();
   }

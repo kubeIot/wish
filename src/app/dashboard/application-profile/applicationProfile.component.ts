@@ -139,15 +139,23 @@ export class ApplicationProfileComponent implements OnInit {
     // this.pagedItems = this.apps.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
+
+  deleteApplication(id: string| number) {
+    this.applicationService.deleteApplication(id).subscribe(
+      data => console.log(data),
+      error => alert(error),
+    )
+    this.modal.close();
+  }
+
+
   applicationStatus(status:string) {
     if(status == null)
       return false;
     return status.toLowerCase( ) == "ok";
   }
-  deleteApplication() {
-    console.log("application deleted");
-    this.modal.close();
-  }
+  
+
   open() {
     this.modal.open();
   }

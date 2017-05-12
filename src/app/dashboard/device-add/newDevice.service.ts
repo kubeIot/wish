@@ -5,25 +5,44 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from "@angular/http";
 import 'rxjs/add/operator/map';
+import {devicesUrl} from "../../configuration"
 
 @Injectable()
 export class NewDeviceService {
 
-    private _url: string = "http://date.jsontest.com";
+  private devicesUrl = devicesUrl;  // URL to web api
     constructor (private _http: Http) {
     }
 
 
 
-    postDevice(data:string) {
-        var json = JSON.stringify(data)
-        var params='json=' + json;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  postDevice(data:string) {
 
-        return this._http.post('http://validate.jsontest.com', params, {
-            headers: headers
-        })
-            .map(res => res.json());
-    }
+    var params=JSON.stringify(data);
+    var headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer + token');
+
+    // console.log(params);
+    return this._http.post(this.devicesUrl, params, {
+      headers: headers
+    })
+      .map(res => res.json());
+  }
+
+  putDevice(data:string, id: string | number) {
+    var params= JSON.stringify(data);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer + token');
+    // console.log(params);
+    return this._http.put(this.devicesUrl, params, {
+      headers: headers
+    })
+      .map(res => res.json());
+
+  }
+
+
 }

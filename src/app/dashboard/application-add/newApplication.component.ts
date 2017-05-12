@@ -58,7 +58,8 @@ export class NewApplicationComponent implements OnInit {
                 private location: Location,
                 private deviceThumbService: DeviceThumbService,
                 private applicationService: ApplicationService,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private newApplicationService: NewApplicationService) {
 
     }
 
@@ -140,11 +141,29 @@ export class NewApplicationComponent implements OnInit {
 
 
 
-    addAppPost(model:any) {
+
+
+
+    addApplication(application:any) {
         // call API to save application
 
-        console.log(JSON.stringify(model._value));
+
+      this.newApplicationService.postApplication(application.value).subscribe(
+        data => console.log(data),
+        error => alert(error),
+        () => console.log("post request is completed")
+      );
     }
+
+  editApplication(application:any, id: number | string) {
+    this.newApplicationService.putApplication(application.value, id).subscribe(
+      data => console.log(data),
+      error => alert(error),
+      () => console.log("post request is completed")
+    );
+  }
+
+
 
 
     goBack(): void {

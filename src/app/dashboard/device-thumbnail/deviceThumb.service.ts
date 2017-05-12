@@ -33,7 +33,7 @@ export class DeviceThumbService {
         return this.devicesList;
     }
 
-    getDevices(filter: any): Observable<Device[]> {
+    getDevices(filter: any = ""): Observable<Device[]> {
       // console.log(filter);
       // console.log(filter.device_vendor);
       // console.log(filter.address);

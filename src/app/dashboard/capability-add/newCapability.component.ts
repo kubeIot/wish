@@ -1,12 +1,8 @@
 /**
  * Created by skytzi on 6.5.17.
  */
-/**
- * Created by skylele on 13.4.17.
- */
-/**
- * Created by skylele on 5.3.17.
- */
+
+
 import {Component, OnInit,AfterViewInit,trigger,state,style,transition,animate,keyframes} from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -105,8 +101,8 @@ export class NewCapabilityComponent implements OnInit {
     );
   }
 
-  editCapability(capability: any)  {
-    this.newCapabilityService.putCapability(capability.value).subscribe(
+  editCapability(capability: any, id: number | string)  {
+    this.newCapabilityService.putCapability(capability.value, id).subscribe(
       data => console.log(data),
       error => alert(error),
       () => console.log("post request is completed")

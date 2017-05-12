@@ -246,7 +246,10 @@ export class DeviceProfileComponent implements OnInit {
       // + 000 - conversion to miliseconds
       var epochTime = Number(this.deviceEvents.filter(item => item.id == id)[0].event_timestamp + "000");
       // console.log(epochTime);
-      return new Date(epochTime).toLocaleString();
+    var time = new Date(epochTime).toLocaleString();
+    if(time == 'Invalid Date')
+        time = new Date(1).toLocaleString();
+      return time;
       // return epochTime;
 
   }

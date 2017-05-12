@@ -57,7 +57,8 @@ export class NewDeviceComponent implements OnInit {
                 private _fb: FormBuilder,
                 private location: Location,
                 private route: ActivatedRoute,
-                private deviceThumbService: DeviceThumbService) {
+                private deviceThumbService: DeviceThumbService,
+                private newDeviceService: NewDeviceService) {
 
     }
 
@@ -137,12 +138,25 @@ export class NewDeviceComponent implements OnInit {
 
 
 
+  addDevice(device:any) {
+    // call API to save capabiity
 
-    addDevice(model:any) {
-        // call API to save customer
+    //console.log(JSON.stringify(capability._value));
+    this.newDeviceService.postDevice(device.value).subscribe(
+      data => console.log(data),
+      error => alert(error),
+      () => console.log("post request is completed")
+    );
+  }
 
-        console.log(JSON.stringify(model._value));
-    }
+  editDevice(device: any, id: number | string)  {
+    this.newDeviceService.putDevice(device.value, id).subscribe(
+      data => console.log(data),
+      error => alert(error),
+      () => console.log("post request is completed")
+    );
+  }
+
 
     goBack(): void {
         this.location.back();

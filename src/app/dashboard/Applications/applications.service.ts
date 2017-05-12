@@ -47,7 +47,7 @@ export class ApplicationService {
 
 
 
-    getApplications(applicationFilter: any): Observable<Application[]> {
+    getApplications(applicationFilter: any = ""): Observable<Application[]> {
     return this.applyApplicationsFilter(applicationFilter)
     }
 

@@ -64,7 +64,7 @@ export class testComponent implements OnInit {
 
   private myDatePickerOptions: IMyOptions = {
     // other options...
-    dateFormat: 'dd.mm.yyyy',
+    dateFormat: 'dd/mm/yyyy',
   };
 
   private myForm: FormGroup;
@@ -193,7 +193,7 @@ export class testComponent implements OnInit {
                 () => console.log("get request is completed")
             );
 
-        console.log(this.getData);;
+        console.log(this.getData);
         console.log("get request is completed");
     }
 

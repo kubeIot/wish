@@ -86,6 +86,7 @@ export class DashboadrComponent implements OnInit{
 
   ngOnInit() {
 
+
     this.deviceThumbService.getDevices().subscribe(
       devices => {this.getDeviceInformation(devices)}
     );

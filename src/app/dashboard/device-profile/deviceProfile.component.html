@@ -1,309 +1,259 @@
+
+
 <!--<div id="map" [@maps]></div>-->
 <div class="main-content" [@profile] id="device-profile">
-    <div class="container-fluid" *ngIf="device">
-                <div class="row">
-                        <div class="col-xs-3">
-                            <a class="pointer"  (click)="goBack()" id="goback">
-                                <span class="icon-back"><span><i class="pe-icon pe-7s-angle-left pe-icon-back"></i>Go Back</span></span>
-                            </a>
-                        </div>
-                      <a>
-                        <!--Modal is at the bottom of this code-->
-                        <button class="btn right-button btn-danger" (click)="modal.open()">Remove Device</button>
-                      </a>
-                      <a [routerLink]="['/device-add', device?.id]">
-                          <button class="btn right-button btn-primary" data-toggle="modal">Edit Device</button>
-                        </a>
-
-                </div>
-
-
-              <div class="row">
-                <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12" id="information">
-                  <img class="profile-pic" src="../../../assets/img/250x250.png" alt="..."/>
-                </div>
-
-                <div class="profile-status">
-                  <h3 *ngIf="device.name" class="title">{{device?.name}}</h3>
-                  <h3 *ngIf="device.device_vendor" class="title">{{device?.device_vendor}}</h3>
-                  <p class="category">IP Address: {{device?.address}}</p>
-                  <p class="category">Device Vendor: {{device?.device_vendor}} {{device?.device_version}}</p>
-                  <p class="category">Distribution: {{device?.os_distribution}}</p>
-                  <p class="profile-description">Sensor gives information about heat in the kitchen every once and then.</p>
-                  <hr>
-                </div>
-              </div>
-
-
-
-                <div class="card contact-info col-lg-3 col-md-5 col-sm-6 col-xs-12">
-                        <div class="header">
-                            <h4 class="title">Device info</h4>
-                        </div>
-                        <div class="content">
-                            <ul>
-                                <!--<li>-->
-                                <!--<i class="pe-icon pe-7s-power"></i><span>Status: <span class="status-indicator on"></span></span>-->
-                                <!--</li>-->
-                                <li>
-                                  <i class="pe-icon pe-7s-door-lock"></i>
-                                  <span *ngIf="deviceStatus(device?.system_info)">Status: <span class="status-indicator on"></span></span>
-                                  <span *ngIf="!deviceStatus(device?.system_info)">Status: <span class="status-indicator off"></span></span>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Installed capabilities:</span>
-                                  <ul *ngFor="let capability of installedCapabilities">
-                                    <li> <i class="pe-7s-info" title="Peripheral device: {{capability.peripherial_device}}&#013;Protocol: {{capability.protocol}}"></i>
-                                      <span class="info-with-icon">{{capability.name}}</span>
-                                    </li>
-
-                                  </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Used capabilities:</span>
-                                  <ul *ngFor="let usedCapability of usedCapabilities">
-                                    <!-- checking for existence of used capability application/ capability because interface may load asynchronously -->
-                                    <li> <i class="pe-7s-info" title="Application: {{usedCapability?.application?.name}}"></i>
-                                      <span class="info-with-icon">{{usedCapability?.capability?.name}}</span>
-                                    </li>
-
-                                  </ul>
-
-                                </li>
-                                <hr/>
-                                <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Kernel Version: <br/> {{ device.kernel_version}}</span>
-                                </li>
-                                <br/><hr/>
-                                <li>
-                                    <i class="pe-icon pe-7s-door-lock"></i><span>Applications count: {{ device.number_of_applications}}</span>
-                                </li>
-                                <hr/>
-                            </ul>
-                        </div>
-                </div>
-
-                <div class="col-lg-9 col-md-7 col-sm-6 col-xs-12" id="device-profile-header">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="product-tabs">
-                                <ul class="nav nav-tabs">
-                                    <li  class="nav-option pointer" (click)="changeSubPage(1)"
-                                         [ngClass]="{'active-link': subPage == 1}">
-                                        <a>Log</a>
-                                    </li>
-                                    <!-- class // active active-link-->
-                                    <li  class="nav-option pointer" (click)="changeSubPage(2)"
-                                         [ngClass]="{'active-link': subPage == 2}">
-                                        <a >Applications</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div *ngIf="subPage == 1" class="card" id="device-profile-actions">
-                        <div class="header">
-                            <h4 class="title">Events</h4>
-                        </div>
-                        <div class="content">
-                            <div class="row" [formGroup]="eventsFilter">
-
-                              <div class="col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                  <label><b> Time - From</b></label>
-                                  <!--<label class="pointer" (click)="changeSort('name')"><b>Name of the Application</b>-->
-                                    <!--<img *ngIf="sortItem != 'name'" class="sorted" src="../../../assets/img/both.png">-->
-                                    <!--<img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">-->
-                                    <!--<img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">-->
-                                  <!--</label>-->
-                                  <my-date-picker name="time_from" [options]="myDatePickerOptions"
-                                                  formControlName="time_from" placeholder="ie. 2017-05-04"></my-date-picker>
-                                </div>
-                              </div>
-
-
-                              <div class="col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                  <label><b> Time - To</b></label>
-                                  <my-date-picker name="time_to" [options]="myDatePickerOptions"
-                                                  formControlName="time_to" placeholder="ie. 2017-05-04"></my-date-picker>
-                                  <!--<label class="pointer" (click)="changeSort('name')"><b>Name of the Application</b>-->
-                                  <!--<img *ngIf="sortItem != 'name'" class="sorted" src="../../../assets/img/both.png">-->
-                                  <!--<img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">-->
-                                  <!--<img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">-->
-                                  <!--</label>-->
-                                </div>
-                              </div>
-
-
-
-                              <div class="col-sm-6 col-xs-12 ">
-                                <div class="form-group">
-                                  <!--<label class="pointer" (click)="changeSort('status')"><b>Show only</b>-->
-                                    <!--<img *ngIf="sortItem != 'status'" class="sorted" src="../../../assets/img/both.png">-->
-                                    <!--<img *ngIf="sortItem == 'status' && revert" class="sorted" src="../../../assets/img/down.gif">-->
-                                    <!--<img *ngIf="sortItem == 'status' && !revert" class="sorted" src="../../../assets/img/up.gif">-->
-                                  <!--</label>-->
-                                <label><b>Type of Event</b></label>
-                                  <select class="form-control" value="Present" formControlName="event_type">
-                                    <option selected>All</option>
-                                    <option>System</option>
-                                    <option>User</option>
-                                    <option>Other</option>
-
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div class="col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                  <label><b>Event Message</b></label>
-                                  <!--<label class="pointer" (click)="changeSort('base_image')"><b>Base Image</b>-->
-                                    <!--<img *ngIf="sortItem != 'base_image'" class="sorted" src="../../../assets/img/both.png">-->
-                                    <!--<img *ngIf="sortItem == 'base_image' && revert" class="sorted" src="../../../assets/img/down.gif">-->
-                                    <!--<img *ngIf="sortItem == 'base_image' && !revert" class="sorted" src="../../../assets/img/up.gif">-->
-                                  <!--</label>-->
-                                  <input class="form-control" placeholder="Event Message"  type="text" formControlName="event_message">
-                                </div>
-                              </div>
-
-
-
-                            </div>
-
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr><th>ID</th>
-                                        <th>Time</th>
-                                        <th>Type of Event</th>
-                                      <th>Event Message</th>
-                                    </tr>
-                                    </thead>
-                                  <tbody>
-
-                                  <tbody *ngFor="let event of deviceEvents | sortBy : logSortItem : logRevert">
-                                    <tr *ngIf="systemEvent(event)" class="activity-warning">
-                                    <td>{{event?.id}}</td>
-                                      <td>{{getTime(event?.id) | date:'yyyy-MM-dd hh:mm:ss'}}</td>
-                                      <td>{{event?.event_type}}</td>
-                                      <td class="maxwidth">{{event?.event_message}}</td>
-                                    </tr >
-                                    <tr *ngIf="!systemEvent(event)" class="activity-ok">
-                                      <td>{{event?.id}}</td>
-                                      <td>{{event?.event_timestamp}}</td>
-                                      <td>{{event?.event_type}}</td>
-                                      <td class="maxwidth">{{event?.event_message}}</td>
-                                    </tr >
-
-                                    </tbody>
-                                </table>
-
-
-
-                                <nav class="my-pager" aria-label="Page navigation">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link"  aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" >1</a></li>
-                                        <li class="page-item"><a class="page-link" >2</a></li>
-                                        <li class="page-item"><a class="page-link" >3</a></li>
-                                        <li class="page-item"><a class="page-link" >4</a></li>
-                                        <li class="page-item"><a class="page-link" >5</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link"  aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div *ngIf="subPage == 2" class="card col-sm-12" id="device-profile-applications">
-
-                        <div class="header">
-                            <h4 class="title">Applications</h4>
-                        </div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-4 ">
-                                    <div class="form-group">
-                                        <label><b>Search</b></label>
-                                        <input class="form-control" placeholder="Search anything" type="text" [formControl]="searchInput">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Base image</th>
-                                        <th>Service IP</th>
-                                        <th>Capabilities and ports</th>
-                                        <th>Status message</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tbody *ngFor="let app of (apps) "  >
-                                    <tr [ngClass]="{'activity-ok': getClass(app.status)}">
-                                        <!--activity-warning activity-ok-->
-                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.name}}</td>
-                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.base_image}}</td>
-                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.service_ip}}</td>
-                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngIf="app.ports.length < 1">None</td>
-                                        <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngFor="let port of app?.ports"> {{port}} <br/> </td>
-                                        <td [routerLink]="['/application-profile', app?.id]"  class="maxwidth pointer">{{app?.status_message}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-
-
-                              <!-- pager -->
-                                <ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination"> <!-- todo posunout pager -->
-                                  <li [ngClass]="{disabled:pager.currentPage === 1}">
-                                    <a (click)="setPage(1)">First</a>
-                                  </li>
-                                  <li [ngClass]="{disabled:pager.currentPage === 1}">
-                                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-                                  </li>
-                                  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                                    <a (click)="setPage(page)">{{page}}</a>
-                                  </li>
-                                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
-                                  </li>
-                                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                                    <a (click)="setPage(pager.totalPages)">Last</a>
-                                  </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+  <div class="container-fluid" *ngIf="device">
+    <div class="row">
+      <div class="col-xs-3">
+        <a class="pointer"  (click)="goBack()" id="goback">
+          <span class="icon-back"><span><i class="pe-icon pe-7s-angle-left pe-icon-back"></i>Go Back</span></span>
+        </a>
+      </div>
+      <a>
+        <!--Modal is at the bottom of this code-->
+        <button class="btn right-button btn-danger" (click)="modal.open()">Remove Device</button>
+      </a>
+      <a [routerLink]="['/device-add', device?.id]">
+        <button class="btn right-button btn-primary" data-toggle="modal">Edit Device</button>
+      </a>
     </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12" id="information">
+        <img class="profile-pic" src="../../../assets/img/250x250.png" alt="..."/>
+      </div>
+      <div class="profile-status">
+        <h3 *ngIf="device.name" class="title">{{device?.name}}</h3>
+        <h3 *ngIf="device.device_vendor" class="title">{{device?.device_vendor}}</h3>
+        <p class="category">IP Address: {{device?.address}}</p>
+        <p class="category">Device Vendor: {{device?.device_vendor}} {{device?.device_version}}</p>
+        <p class="category">Distribution: {{device?.os_distribution}}</p>
+        <p class="profile-description">Sensor gives information about heat in the kitchen every once and then.</p>
+        <hr>
+      </div>
+    </div>
+    <div class="card contact-info col-lg-3 col-md-5 col-sm-6 col-xs-12">
+      <div class="header">
+        <h4 class="title">Device info</h4>
+      </div>
+      <div class="content">
+        <ul>
+          <!--<li>-->
+          <!--<i class="pe-icon pe-7s-power"></i><span>Status: <span class="status-indicator on"></span></span>-->
+          <!--</li>-->
+          <li>
+            <i class="pe-icon pe-7s-power"></i>
+            <span *ngIf="deviceStatus(device?.system_info)">Status: <span class="status-indicator on"></span></span>
+            <span *ngIf="!deviceStatus(device?.system_info)">Status: <span class="status-indicator off"></span></span>
+          </li>
+          <hr/>
+          <li>
+            <i class="pe-icon pe-7s-usb"></i><span>Installed capabilities:</span>
+            <ul *ngFor="let capability of installedCapabilities">
+              <li> <i class="pe-7s-info" title="Peripheral device: {{capability.peripherial_device}}&#013;Protocol: {{capability.protocol}}"></i>
+                <span class="info-with-icon">{{capability.name}}</span>
+              </li>
+            </ul>
+          </li>
+          <hr/>
+          <li>
+            <i class="pe-icon pe-7s-usb"></i><span>Used capabilities:</span>
+            <ul *ngFor="let usedCapability of usedCapabilities">
+              <!-- checking for existence of used capability application/ capability because interface may load asynchronously -->
+              <li> <i class="pe-icon pe-7s-info" title="Application: {{usedCapability?.application?.name}}"></i>
+                <span class="info-with-icon">{{usedCapability?.capability?.name}}</span>
+              </li>
+            </ul>
+          </li>
+          <hr/>
+          <li>
+            <i class="pe-icon pe-7s-server"></i><span>Kernel Version: <br/> {{ device.kernel_version}}</span>
+          </li>
+          <br/>
+          <hr/>
+          <li>
+            <i class="pe-icon pe-7s-plugin"></i><span>Applications count: {{ device.number_of_applications}}</span>
+          </li>
+          <hr/>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-9 col-md-7 col-sm-6 col-xs-12" id="device-profile-header">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="product-tabs">
+            <ul class="nav nav-tabs">
+              <li  class="nav-option pointer" (click)="changeSubPage(1)"
+                   [ngClass]="{'active-link': subPage == 1}">
+                <a>Log</a>
+              </li>
+              <!-- class // active active-link-->
+              <li  class="nav-option pointer" (click)="changeSubPage(2)"
+                   [ngClass]="{'active-link': subPage == 2}">
+                <a >Applications</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="subPage == 1" class="card" id="device-profile-actions">
+        <div class="header">
+          <h4 class="title">Events</h4>
+        </div>
+        <div class="content">
+          <div class="row" [formGroup]="eventsFilter">
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="pointer" (click)="changeSort('event_timestamp')"><b>Time - From</b>
+                <img *ngIf="logSortItem != 'event_timestamp'" class="sorted" src="../../../assets/img/both.png">
+                <img *ngIf="logSortItem == 'event_timestamp' && logRevert" class="sorted" src="../../../assets/img/down.gif">
+                <img *ngIf="logSortItem == 'event_timestamp' && !logRevert" class="sorted" src="../../../assets/img/up.gif">
+                </label>
+                <my-date-picker name="time_from" [options]="myDatePickerOptions"
+                                formControlName="time_from" placeholder="ie. 2017-05-04"></my-date-picker>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="pointer" (click)="changeSort('event_timestamp')"><b>Time - To</b>
+                  <img *ngIf="logSortItem != 'event_timestamp'" class="sorted" src="../../../assets/img/both.png">
+                  <img *ngIf="logSortItem == 'event_timestamp' && logRevert" class="sorted" src="../../../assets/img/down.gif">
+                  <img *ngIf="logSortItem == 'event_timestamp' && !logRevert" class="sorted" src="../../../assets/img/up.gif">
+                </label>
+                <my-date-picker name="time_to" [options]="myDatePickerOptions"
+                                formControlName="time_to" placeholder="ie. 2017-05-04"></my-date-picker>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12 ">
+              <div class="form-group">
+                <label class="pointer" (click)="changeSort('event_type')"><b>Type of Event</b>
+                <img *ngIf="logSortItem != 'event_type'" class="sorted" src="../../../assets/img/both.png">
+                <img *ngIf="logSortItem == 'event_type' && logRevert" class="sorted" src="../../../assets/img/down.gif">
+                <img *ngIf="logSortItem == 'event_type' && !logRevert" class="sorted" src="../../../assets/img/up.gif">
+                </label>
+                <select class="form-control" value="Present" formControlName="event_type">
+                  <option selected>All</option>
+                  <option>System</option>
+                  <option>User</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="pointer" (click)="changeSort('event_message')"><b>Event Message</b>
+                <img *ngIf="logSortItem != 'event_message'" class="sorted" src="../../../assets/img/both.png">
+                <img *ngIf="logSortItem == 'event_message' && logRevert" class="sorted" src="../../../assets/img/down.gif">
+                <img *ngIf="logSortItem == 'event_message' && !logRevert" class="sorted" src="../../../assets/img/up.gif">
+                </label>
+                <input class="form-control" placeholder="Event Message"  type="text" formControlName="event_message">
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Time</th>
+                <th>Type of Event</th>
+                <th>Event Message</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tbody *ngFor="let event of shownDeviceEvents | sortBy : logSortItem : logRevert">
+              <tr *ngIf="systemEvent(event)" class="activity-warning">
+                <td>{{event?.id}}</td>
+                <td>{{getTime(event?.id) | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+                <td>{{event?.event_type}}</td>
+                <td class="maxwidth">{{event?.event_message}}</td>
+              </tr >
+              <tr *ngIf="!systemEvent(event)" class="activity-ok">
+                <td>{{event?.id}}</td>
+                <td>{{event?.event_timestamp}}</td>
+                <td>{{event?.event_type}}</td>
+                <td class="maxwidth">{{event?.event_message}}</td>
+              </tr >
+              </tbody>
+            </table>
+            <!-- pager -->
+            <ul *ngIf="eventsPager.pages && eventsPager.pages.length" class="pager-align pagination">
+              <li [ngClass]="{disabled:eventsPager.currentPage === 1}">
+                <a (click)="setEventsPage(1)">First</a>
+              </li>
+              <li [ngClass]="{disabled:eventsPager.currentPage === 1}">
+                <a (click)="setEventsPage(eventsPager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of eventsPager.pages" [ngClass]="{active:eventsPager.currentPage === page}">
+                <a (click)="setEventsPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:eventsPager.currentPage === eventsPager.totalPages}">
+                <a (click)="setEventsPage(eventsPager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:eventsPager.currentPage === eventsPager.totalPages}">
+                <a (click)="setEventsPage(eventsPager.totalPages)">Last</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="subPage == 2" class="card col-sm-12" id="device-profile-applications">
+        <div class="header">
+          <h4 class="title">Applications</h4>
+        </div>
+        <div class="content">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Base image</th>
+                <th>Service IP</th>
+                <th>Capabilities and ports</th>
+                <th>Status message</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tbody *ngFor="let app of (apps) "  >
+              <tr [ngClass]="{'activity-ok': getClass(app.status)}">
+                <!--activity-warning activity-ok-->
+                <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.name}}</td>
+                <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.base_image}}</td>
+                <td [routerLink]="['/application-profile', app?.id]" class="pointer">{{app.service_ip}}</td>
+                <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngIf="app.ports.length < 1">None</td>
+                <td [routerLink]="['/application-profile', app?.id]" class="pointer" *ngFor="let port of app?.ports"> {{port}} <br/> </td>
+                <td [routerLink]="['/application-profile', app?.id]"  class="maxwidth pointer">{{app?.status_message}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- pager -->
+            <ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination">
+              <!-- todo posunout pager -->
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setApplicationPage(1)">First</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setApplicationPage(pager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setApplicationPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setApplicationPage(pager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setApplicationPage(pager.totalPages)">Last</a>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop"
-        #modal  >
+<modal animation="true" keyboard="true" backdrop="true"
+       #modal  >
   <modal-header [show-close]="true">
     <h4 class="modal-title">Delete device</h4>
   </modal-header>
@@ -317,3 +267,4 @@
     <button type="button" class="btn btn-danger" autofocus (click)="deleteDevice(device.id)">Delete</button>
   </modal-footer>
 </modal>
+

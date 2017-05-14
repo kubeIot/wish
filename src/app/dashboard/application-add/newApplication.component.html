@@ -1,132 +1,132 @@
 <div class="main-content" id="newApplication">
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-        <div class="col-md-3" >
-            <a class="pointer"  (click)="goBack()">
-                <span class="icon-back"><span><i class="pe-icon pe-7s-angle-left pe-icon-back"></i>Go Back</span></span>
-            </a>
-        </div>
-
-        <div class="col-xs-12" [@newapplication]>
-            <div class="card">
-                <div class="header">
-                    <h4 class="title">Add Application</h4>
-                </div>
-                <div class="content">
-                    <form [formGroup]="addApplicationForm" novalidate (ngSubmit)="addAppPost(addApplicationForm)">
-
-                        <div class="col-xs-12">
-                        <!--select Name-->
-                          <div class="row">
-                            <div class=" col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label><b>Name of the Application</b></label>
-                                    <input type="text" class="form-control" formControlName="name">
-                                    <small *ngIf="!addApplicationForm.controls.name.valid" class="text-danger">
-                                        Name of the Application is required.
-                                    </small>
-                                </div>
-                            </div>
-                          <!--Select service IP-->
-                            <div class=" col-sm-6 col-xs-12">
-                              <div class="form-group">
-                                <label><b>Service IP</b></label>
-                                <input type="text" class="form-control" formControlName="service_ip" pattern="{{ipPattern}}" >
-                                <small *ngIf="!addApplicationForm.controls.service_ip.valid" class="text-danger">
-                                  Valid Form of the Service IP is Required! (ie. 127.0.0.1 or 0:0:0:0:0:0:0:1)
-                                </small>
-                              </div>
-                           </div>
-                          </div>
-
-                          <div class="row">
-                            <div class=" col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label><b>Device </b></label>
-                                    <input list="devices" name="devices" class="form-control" formControlName="device_id" >
-                                    <datalist id="devices" >
-                                        <option  *ngFor="let dev of listOfDevices | async" value="{{dev.device_vendor}} - {{dev.address}}">
-                                    </datalist>
-                                    <small *ngIf="!addApplicationForm.controls.device_id.valid" class="text-danger">
-                                        Device is required.
-                                    </small>
-                                </div>
-                            </div>
-
-                          <!--select Base image-->
-                            <div class="col-sm-6 col-xs-12">
-                              <div class="form-group">
-                                <label><b>Base Image</b></label>
-                                <input list="base-image" name="base-image" class="form-control" formControlName="base_image" >
-                                <datalist id="base-image" >
-                                  <option  *ngFor="let image of listOfImages | async" value="{{image.name}}">
-                                </datalist>
-                                <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
-                                  Base Image is required.
-                                </small>
-                              </div>
-                            </div>
-                          </div>
-
-
-
-                            <!--<div class="col-md-12">-->
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label><b>System Information</b></label>
-                                    <input type="text" class="form-control" formControlName="system_info" >
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="col-xs-12">
-                                <label><b>Ports</b></label>
-                                <div formArrayName="ports" class="panel panel-default">
-                                    <div class="panel-body" >
-                                        <div *ngFor="let port of addApplicationForm.controls.ports.controls; let i=index">
-                                            <div [formGroupName]="i">
-                                                <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addApplicationForm.controls.ports.controls.length > 1" (click)="removePort(i)"></span>
-                                                <div class="form-group col-xs-12">
-                                                    <label>Port {{i + 1}}</label>
-                                                    <input type="text" pattern="[0-9]+:[0-9]+" class="form-control" formControlName="port" placeholder="80:8080">
-
-                                                    <small [hidden]="addApplicationForm.controls.ports.controls[i].controls.port.valid" class="text-danger">
-                                                        Valid Form of the Port is Required! (source:destination, ie. 80:8000)
-                                                    </small>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-20">
-                                    <a (click)="addPort()" style="cursor: pointer">
-                                        Add another Port +
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <!--odsazeni buttonu-->
-                            <div class="col-xs-12"></div>
-
-                          <pre> {{addApplicationForm.value | json}}</pre>
-
-
-
-                        </div>
-                        <a *ngIf="!application" routerLink="/applications">
-                            <button (click)="addApplication(addApplicationForm)" type="submit" class="btn btn-info btn-fill pull-right" [disabled]="!addApplicationForm.valid">Add Application</button>
-                        </a>
-                        <a *ngIf="application" routerLink="/applications">
-                            <button (click)="editApplication(addApplicationForm, application.id)" type="submit" class="btn btn-info btn-fill pull-right" [disabled]="!addApplicationForm.valid">Edit Application</button>
-                        </a>
-                        <div class="clearfix"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-3">
+      <a class="pointer" (click)="goBack()">
+        <span class="icon-back"><span><i class="pe-icon pe-7s-angle-left pe-icon-back"></i>Go Back</span></span>
+      </a>
     </div>
+
+    <div class="col-xs-12" [@newapplication]>
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Add Application</h4>
+        </div>
+        <div class="content">
+          <form [formGroup]="addApplicationForm" novalidate (ngSubmit)="addAppPost(addApplicationForm)">
+
+            <div class="col-xs-12">
+              <!--select Name-->
+              <div class="row">
+                <div class=" col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label><b>Name of the Application</b>
+                    </label>
+                    <input type="text" class="form-control" formControlName="name">
+                    <small *ngIf="!addApplicationForm.controls.name.valid" class="text-danger">
+                      Name of the Application is required.
+                    </small>
+                  </div>
+                </div>
+                <!--Select service IP-->
+                <div class=" col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label><b>Service IP</b>
+                    </label>
+                    <input type="text" class="form-control" formControlName="service_ip" pattern="{{ipPattern}}">
+                    <small *ngIf="!addApplicationForm.controls.service_ip.valid" class="text-danger">
+                      Valid Form of the Service IP is Required! (ie. 127.0.0.1 or 0:0:0:0:0:0:0:1)
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class=" col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label><b>Device </b>
+                    </label>
+                    <input list="devices" name="devices" class="form-control" pattern="[0-9]+ — .+" formControlName="device_id">
+                    <datalist id="devices">
+                      <option *ngFor="let dev of filteredDevices" value="{{dev.id}} — {{dev.device_vendor}}">
+                    </datalist>
+                    <small *ngIf="!addApplicationForm.controls.device_id.valid" class="text-danger">
+                      Valid device is required.
+                    </small>
+                  </div>
+                </div>
+
+                <!--select Base image-->
+                <div class="col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label><b>Base Image</b>
+                    </label>
+                    <input list="base-image" name="base-image" class="form-control" pattern="[0-9]+ — .+" formControlName="base_image">
+                    <datalist id="base-image">
+                      <option *ngFor="let image of filteredImages" value="{{image.id}} — {{image.name}}">
+                    </datalist>
+                    <small *ngIf="!addApplicationForm.controls.base_image.valid" class="text-danger">
+                      Base Image is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <!--<div class="col-md-12">-->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label><b>System Information</b>
+                  </label>
+                  <input type="text" class="form-control" formControlName="system_info">
+                </div>
+              </div>
+
+              <div class="col-xs-12">
+                <label><b>Ports</b>
+                </label>
+                <div formArrayName="ports" class="panel panel-default">
+                  <div class="panel-body">
+                    <div *ngFor="let port of addApplicationForm.controls.ports.controls; let i=index">
+                      <div [formGroupName]="i">
+                        <span class="pe-7s-close  pull-right" style="cursor: pointer" *ngIf="addApplicationForm.controls.ports.controls.length > 1"
+                              (click)="removePort(i)"></span>
+                        <div class="form-group col-xs-12">
+                          <label>Port {{i + 1}}</label>
+                          <input type="text" pattern="[0-9]+:[0-9]+" class="form-control" formControlName="port" placeholder="80:8080">
+
+                          <small [hidden]="addApplicationForm.controls.ports.controls[i].controls.port.valid" class="text-danger">
+                            Valid Form of the Port is Required! (source:destination, ie. 80:8000)
+                          </small>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="margin-20">
+                  <a (click)="addPort()" style="cursor: pointer">
+                    Add another Port +
+                  </a>
+                </div>
+              </div>
+
+              <!--odsazeni buttonu-->
+              <div class="col-xs-12"></div>
+
+              <pre> {{addApplicationForm.value | json}}</pre>
+
+            </div>
+            <a *ngIf="!application" routerLink="/applications">
+              <button (click)="addApplication(addApplicationForm)" type="submit" class="btn btn-info btn-fill pull-right" [disabled]="!addApplicationForm.valid">Add Application</button>
+            </a>
+            <a *ngIf="application" routerLink="/applications">
+              <button (click)="editApplication(addApplicationForm, application.id)" type="submit" class="btn btn-info btn-fill pull-right"
+                      [disabled]="!addApplicationForm.valid">Edit Application</button>
+            </a>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

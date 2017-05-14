@@ -15,7 +15,7 @@ import {User} from "./profile.metadata";
     styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
     providers: [UserService],
     animations: [
-        trigger('photo', [
+        trigger('settings', [
             state('*', style({
                 '-ms-transform': 'translate3D(0px, 0px, 0px)',
                 '-webkit-transform': 'translate3D(0px, 0px, 0px)',
@@ -31,7 +31,7 @@ import {User} from "./profile.metadata";
                     '-o-transform':'translate3D(0px, 150px, 0px)',
                     transform:'translate3D(0px, 150px, 0px)',
                 }),
-                animate('0.3s 0s ease-out')
+                animate('0.3s 0.2s ease-out')
             ])
         ]),
         trigger('description', [
@@ -50,7 +50,7 @@ import {User} from "./profile.metadata";
                     '-o-transform':'translate3D(0px, 150px, 0px)',
                     transform:'translate3D(0px, 150px, 0px)',
                 }),
-                animate('0.3s 0.25s ease-out')
+                animate('0.3s 0s ease-out')
             ])
         ])
     ]

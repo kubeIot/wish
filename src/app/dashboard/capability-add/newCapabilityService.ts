@@ -22,7 +22,7 @@ private capabilitiesUrl = capabilitiesUrl;  // URL to web api
     var headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer + token');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
 
     // console.log(params);
     return this._http.post(this.capabilitiesUrl, params, {
@@ -35,7 +35,7 @@ private capabilitiesUrl = capabilitiesUrl;  // URL to web api
       var params= JSON.stringify(data);
       var headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      headers.append('Authorization', 'Bearer + token');
+      headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
       // console.log(params);
       return this._http.put(this.capabilitiesUrl, params, {
         headers: headers

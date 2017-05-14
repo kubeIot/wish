@@ -1,12 +1,10 @@
 <div class="main-content" id="newApplication">
   <div class="container-fluid">
-
     <div class="col-md-3" >
       <a class="pointer"  (click)="goBack()">
         <span class="icon-back"><span><i class="pe-icon pe-7s-angle-left pe-icon-back"></i>Go Back</span></span>
       </a>
     </div>
-
     <div class="col-md-12 col-sm-12 col-xs-12" [@newapplication]>
       <div class="card">
         <div class="header">
@@ -14,7 +12,6 @@
         </div>
         <div class="content">
           <form [formGroup]="addCapabilityForm" novalidate (ngSubmit)="addCapabilityPost(addCapabilityForm)">
-
             <div class="col-xs-12">
               <!--select Name-->
               <div class=" col-sm-6 col-xs-12">
@@ -36,10 +33,7 @@
                   </small>
                 </div>
               </div>
-
               <!--<input type="hidden" value="0" class="form-control" formControlName="id">-->
-
-
               <div class=" col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label><b>Protocol </b></label>
@@ -49,13 +43,9 @@
                   </small>
                 </div>
               </div>
-
               <!--odsazeni buttonu-->
               <div class="col-sm-6 col-xs-12"></div>
-
-
             </div>
-
             <pre> {{addCapabilityForm.value | json}}</pre>
             <a *ngIf="!capability" routerLink="/capabilities">
               <button (click)="addCapability(addCapabilityForm)"  type="submit" class="btn btn-info btn-fill pull-right" [disabled]="!addCapabilityForm.valid">Add Capability</button>
@@ -70,3 +60,4 @@
     </div>
   </div>
 </div>
+

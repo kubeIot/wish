@@ -1,61 +1,58 @@
+
+
 <nav class="navbar navbar-default" id="navbar">
-    <div *ngIf="loggedIn" class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" >
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand">{{getTitle()}}</a>
-        </div>
-        <div class="collapse navbar-collapse">
-
-
-            <ul class="nav navbar-nav navbar-right">
-                <li  class="user">
-                    <a id="profile-navbar" class="no-margin" routerLink="/profile">
-                        <img class="profile-pic-thumb" src="../../../assets/img/profile-marek.jpg" alt="..."/>
-                        <p class="profile-name">Marek Hrvol</p>
-                    </a>
-                </li>
-                <li>
-
-                    <a (click)="logout()" routerLink="/login">
-                        <i class="pe-7s-back-2"> </i>
-                        <p>Log out</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
+  <div *ngIf="loggedIn" class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">{{getTitle()}}</a>
     </div>
-    <div *ngIf="!loggedIn" class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" >
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse">
-
-
-            <ul class="nav navbar-nav navbar-right">
-              <li (click)="setRegister()">
-                <a routerLink="/register">
-                  <i class="pe-7s-upload"> </i>
-                  <p>Register</p>
-                </a>
-              </li>
-              <li (click)="setLogin()">
-                    <a routerLink="/login">
-                        <i class="pe-7s-next-2"> </i>
-                        <p>Login</p>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li  class="user">
+          <a id="profile-navbar" class="no-margin" routerLink="/profile">
+            <img class="profile-pic-thumb" src="../../../assets/img/profile-marek.jpg" alt="..."/>
+            <p class="profile-name">Marek Hrvol</p>
+          </a>
+        </li>
+        <li>
+          <a (click)="logout()" routerLink="/login">
+            <i class="pe-7s-back-2"> </i>
+            <p>Log out</p>
+          </a>
+        </li>
+      </ul>
     </div>
+  </div>
+  <div *ngIf="!loggedIn" class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li (click)="setRegister()">
+          <a routerLink="/register">
+            <i class="pe-7s-upload"> </i>
+            <p>Register</p>
+          </a>
+        </li>
+        <li (click)="setLogin()">
+          <a routerLink="/login">
+            <i class="pe-7s-next-2"> </i>
+            <p>Login</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
+

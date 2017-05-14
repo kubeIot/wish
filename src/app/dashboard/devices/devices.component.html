@@ -1,118 +1,110 @@
+
+
 <div class="main-content" [@devices] id="devices">
-    <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="card" id="devices-filter">
-                    <div class="header">
-                        <a routerLink="/device-add">
-                            <button style="float: right;" class="btn btn-primary">Add Device</button>
-                        </a>
-                        <button style="float: right;" class="btn btn-primary" (click)="changeLayout()">Change Layout</button>
-                        <!--<div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">-->
-                            <!--<div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>-->
-                        <!--</div>-->
-                        <h4 class="title">Devices</h4>
-                        <p class="category">You can find any device here!</p>
-
-                    </div>
-                    <div class="content">
-                        <div class="row" [formGroup]="searchNameInput">
-
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div   class="form-group">
-                                    <label class="pointer" (click)="changeSort('device_vendor')"><b>Device Vendor</b>
-                                        <img *ngIf="sortItem != 'device_vendor'" class="sorted" src="../../../assets/img/both.png">
-                                        <img *ngIf="sortItem == 'device_vendor' && revert" class="sorted" src="../../../assets/img/down.gif">
-                                        <img *ngIf="sortItem == 'device_vendor' && !revert" class="sorted" src="../../../assets/img/up.gif">
-                                    </label>
-                                    <input class="form-control" placeholder="A321" type="text"  formControlName="device_vendor">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label class="pointer" (click)="changeSort('address')"><b>Address of the Device</b>
-                                        <img *ngIf="sortItem != 'address'" class="sorted" src="../../../assets/img/both.png">
-                                        <img *ngIf="sortItem == 'address' && revert" class="sorted" src="../../../assets/img/down.gif">
-                                        <img *ngIf="sortItem == 'address' && !revert" class="sorted" src="../../../assets/img/up.gif">
-                                    </label>
-                                    <input class="form-control" placeholder="RPi 3.0"  type="text" formControlName="address">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-12 ">
-                                <div class="form-group">
-                                    <label><b>Show only</b></label>
-                                    <select class="form-control"   formControlName="system_info">
-                                        <option selected> All </option>
-                                        <option> Running </option>
-                                        <option> Not running </option>
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" id="devices-filter">
+          <div class="header">
+            <a routerLink="/device-add">
+              <button style="float: right;" class="btn btn-primary">Add Device</button>
+            </a>
+            <button style="float: right;" class="btn btn-primary" (click)="changeLayout()">Change Layout</button>
+            <!--<div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">-->
+            <!--<div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>-->
+            <!--</div>-->
+            <h4 class="title">Devices</h4>
+            <p class="category">You can find any device here!</p>
+          </div>
+          <div class="content">
+            <div class="row" [formGroup]="searchNameInput">
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <div   class="form-group">
+                  <label class="pointer" (click)="changeSort('device_vendor')"><b>Device Vendor</b>
+                    <img *ngIf="sortItem != 'device_vendor'" class="sorted" src="../../../assets/img/both.png">
+                    <img *ngIf="sortItem == 'device_vendor' && revert" class="sorted" src="../../../assets/img/down.gif">
+                    <img *ngIf="sortItem == 'device_vendor' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                  </label>
+                  <input class="form-control" placeholder="A321" type="text"  formControlName="device_vendor" name="device_vendor">
                 </div>
-                    <div class="card" *ngIf="!tableView" id="devices-thumbs">
-                        <div>
-                            <div class="row">
-                                <device-thumb *ngFor="let dev of pagedItems | sortBy : sortItem : revert" [device]="dev"></device-thumb>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="card " *ngIf="tableView" id="devices-table">
-                        <div class="content">
-                            <div class="content table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th><b>Id</b></th>
-                                        <th><b>Address</b></th>
-                                        <th><b>Device vendor</b></th>
-                                        <th><b>Device Version</b></th>
-                                        <th><b>System information</b></th>
-
-                                        <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
-                                    </tr>
-                                    </thead>
-                                    <tbody *ngFor="let dev of pagedItems | sortBy : sortItem : revert"  >
-                                     <tr class="activity-ok">
-                                        <td >  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.id}} </a> </td>
-                                        <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.address}}</a> </td>
-                                        <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_vendor}}</a> </td>
-                                        <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_version}} </a></td>
-                                         <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.system_info}} </a></td>
-
-                                     </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-              <!-- pager -->
-              <ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination">
-                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPage(1)">First</a>
-                </li>
-                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-                </li>
-                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                  <a (click)="setPage(page)">{{page}}</a>
-                </li>
-                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
-                </li>
-                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPage(pager.totalPages)">Last</a>
-                </li>
-              </ul>
-
-
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label class="pointer" (click)="changeSort('address')"><b>Address of the Device</b>
+                    <img *ngIf="sortItem != 'address'" class="sorted" src="../../../assets/img/both.png">
+                    <img *ngIf="sortItem == 'address' && revert" class="sorted" src="../../../assets/img/down.gif">
+                    <img *ngIf="sortItem == 'address' && !revert" class="sorted" src="../../../assets/img/up.gif">
+                  </label>
+                  <input class="form-control" placeholder="RPi 3.0"  type="text" formControlName="address">
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12 ">
+                <div class="form-group">
+                  <label><b>Show only</b></label>
+                  <select class="form-control"   formControlName="system_info" name="system_info">
+                    <option selected> All </option>
+                    <option> Running </option>
+                    <option> Not running </option>
+                  </select>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+        <div class="card" *ngIf="!tableView" id="devices-thumbs">
+          <div>
+            <div class="row">
+              <device-thumb *ngFor="let dev of pagedItems | sortBy : sortItem : revert" [device]="dev"></device-thumb>
+            </div>
+          </div>
+        </div>
+        <div class="card " *ngIf="tableView" >
+          <div class="content">
+            <div class="content table-responsive">
+              <table class="table table-hover" id="devices-table">
+                <thead>
+                <tr>
+                  <th><b>Id</b></th>
+                  <th><b>Address</b></th>
+                  <th><b>Device vendor</b></th>
+                  <th><b>Device Version</b></th>
+                  <th><b>System information</b></th>
+                  <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
+                </tr>
+                </thead>
+                <tbody *ngFor="let dev of pagedItems | sortBy : sortItem : revert"  >
+                <tr class="activity-ok">
+                  <td >  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.id}} </a> </td>
+                  <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.address}}</a> </td>
+                  <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_vendor}}</a> </td>
+                  <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.device_version}} </a></td>
+                  <td>  <a [routerLink]="['/device-profile', dev?.id]"> {{dev?.system_info}} </a></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- pager -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination" id="devices-pager">
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+          </li>
+          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </div>
+

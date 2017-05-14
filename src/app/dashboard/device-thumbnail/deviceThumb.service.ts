@@ -11,14 +11,15 @@ import {devicesUrl} from "../../configuration"
 
 @Injectable()
 export class DeviceThumbService {
-
     private devicesUrl = devicesUrl;  // URL to web api
     eventsNotSearched: Boolean = true; //Optimalization in deviceEventsList searches
     capabilitiesNotSearched: Boolean = true; //Optimalization in deviceCapabilitiesList searches
     deviceEventsList: Observable<DeviceEvent[]>;
     deviceCapabilitiesList: Observable<DeviceCapability[]>;
     devices: Observable<Device[]>;
-    private devicesList: Observable < Device[] > = this.http.get(this.devicesUrl)
+    private devicesList: Observable < Device[] > = this.http.get(this.devicesUrl,{
+      headers: this.getHeaders()
+    })
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
       // .do(console.log(Response))
@@ -34,9 +35,8 @@ export class DeviceThumbService {
     }
 
     getDevices(filter: any = ""): Observable<Device[]> {
-      // console.log(filter);
-      // console.log(filter.device_vendor);
-      // console.log(filter.address);
+
+
       if(filter != "") { //no filter causes error in "toLowerCase" + optimalization
         var deviceVendorFilter = filter.device_vendor.toLowerCase();
         var addressFilter = filter.address.toLowerCase();
@@ -77,20 +77,26 @@ export class DeviceThumbService {
 
     getDevice(id: number) {
         const url = `${this.devicesUrl}/${id}`;
-        return this.http.get(url)
+        return this.http.get(url, {
+          headers: this.getHeaders()
+        })
             .map((response:Response) => response.json());
     }
 
 
 
   getDeviceCapabilities(id: number | string, filter: any = "") {
-
     if(this.capabilitiesNotSearched) {
+
+
       this.capabilitiesNotSearched = false;
       const url = `${this.devicesUrl}/${id}/capabilities`;
-      return this.deviceCapabilitiesList = this.http.get(url)
+      return this.deviceCapabilitiesList = this.http.get(url,{
+        headers: this.getHeaders()
+      })
         .map((response:Response) => response.json()).filter(item => item != null);
     }
+    return this.deviceCapabilitiesList;
 
 
 
@@ -103,19 +109,40 @@ export class DeviceThumbService {
 
   getDeviceEvents(id: number| string, filter: any = "") {
 
+
     if(this.eventsNotSearched) {
       this.eventsNotSearched = false;
       const url = `${this.devicesUrl}/${id}/events`;
-      return this.deviceEventsList = this.http.get(url)
+      return this.deviceEventsList = this.http.get(url,{
+        headers: this.getHeaders()
+      })
         .map((response:Response) => response.json()).filter(item => item != null);
     }
 
 
+
+
+
     var deviceEvents: Observable<DeviceEvent[]>;
+    deviceEvents = this.getDeviceEventsList();
 
     if(filter) { //no filter causes error in "toLowerCase" + optimalization
       var statusMessageFilter: string = filter.event_message.toLowerCase();
-      deviceEvents = this.getDeviceEventsList();
+      var typeFilter: string = filter.event_type.toLowerCase();
+      var timeFromFilter;
+      var timeToFilter;
+      try {
+        timeFromFilter = filter.time_from.jsdate.getTime();
+      }
+      catch (e) {
+        timeFromFilter = "";
+      }
+      try {
+        timeToFilter = filter.time_to.jsdate.getTime();
+      }
+      catch (e) {
+        timeToFilter = "";
+      }
 
 
       if(statusMessageFilter !== "") //if filter does not exist, dont lose time worrying about it
@@ -126,11 +153,36 @@ export class DeviceThumbService {
           item.event_message.toLowerCase().indexOf(statusMessageFilter) !== -1
           ));
 
+      if(typeFilter !== "" && typeFilter != "all")
+        deviceEvents = deviceEvents
+          .map(events => events.filter(item =>
+            item != null &&
+            item.event_type != null &&
+            item.event_type.toLowerCase().indexOf(typeFilter) !== -1
+          ));
 
+      if(timeFromFilter != "" && timeFromFilter != null) {
+        deviceEvents = deviceEvents
+          .map(events => events.filter(item =>
+          item != null &&
+          item.event_timestamp != null &&
+          /^([0-9]+)$/.test(item.event_timestamp) &&
+            timeFromFilter <= item.event_timestamp
+          ));
+      }
 
-      return deviceEvents;
+      if(timeToFilter != "" && timeToFilter != null) {
+        deviceEvents = deviceEvents
+          .map(events => events.filter(item =>
+            item != null &&
+            item.event_timestamp != null &&
+            /^([0-9]+)$/.test(item.event_timestamp) &&
+            timeToFilter >= item.event_timestamp
+          ));
+      }
+
     }
-    return this.getDeviceEventsList();
+    return deviceEvents;
 
   }
 
@@ -140,7 +192,7 @@ export class DeviceThumbService {
   deleteDevice(deviceId: number|string) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer + token');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
 
     const url = `${this.devicesUrl}${deviceId}`;
     return this.http.delete(url, {
@@ -150,4 +202,10 @@ export class DeviceThumbService {
   }
 
 
+
+  getHeaders(): Headers {
+    var headers = new Headers()
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
+    return headers;
+  }
 }

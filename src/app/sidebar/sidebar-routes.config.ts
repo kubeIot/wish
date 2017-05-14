@@ -15,7 +15,7 @@ export interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'pe-7s-graph' },
     { path: 'devices', title: 'Devices', menuType: MenuType.LEFT, icon:'pe-7s-config' },
-    { path: 'events-log', title: 'Events log', menuType: MenuType.LEFT, icon:'pe-7s-note2' },
+    // { path: 'events-log', title: 'Events log', menuType: MenuType.LEFT, icon:'pe-7s-note2' },
     { path: 'applications', title: 'Applications', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
    { path: 'capabilities', title: 'Capabilities', menuType: MenuType.LEFT, icon:'pe-7s-usb' },
   { path: 'images', title: 'Images', menuType: MenuType.LEFT, icon:'pe-7s-disk' },

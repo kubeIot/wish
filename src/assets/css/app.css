@@ -25,7 +25,17 @@ a { color: inherit; }
     background-color: #fff45b;
     /*cursor: pointer;*/
 }
+.pe-icon {
+  width: 20px;
+}
+.pe-icon.pe-7s-usb {
+  padding-left:6px;
+}
 
+.pe-7s-info {
+  padding-left: 3px;
+  padding-top: 4px;
+}
 ul hr {
     padding: 0px;
     margin: 0px;

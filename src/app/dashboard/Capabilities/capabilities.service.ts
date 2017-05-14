@@ -16,7 +16,9 @@ export class CapabilitiesService {
 
   private capabilitiesUrl = capabilitiesUrl;  // URL to web api
 
-  private capabilitiesList: Observable < Capability[] > = this.http.get(this.capabilitiesUrl)
+  private capabilitiesList: Observable < Capability[] > = this.http.get(this.capabilitiesUrl, {
+    headers:this.getHeaders()
+  })
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
     // .do(console.log(Response))
@@ -29,7 +31,7 @@ export class CapabilitiesService {
 
 
 
-  getCapabilities(Capabilityfilter: any) {
+  getCapabilities(Capabilityfilter: any = "") {
     var capabilities = this.getList();
 
 
@@ -71,7 +73,9 @@ export class CapabilitiesService {
 
   getCapability(capabilityId: number | string) {
     const url = `${this.capabilitiesUrl}${capabilityId}`;
-    return this.http.get(url)
+    return this.http.get(url, {
+      headers:this.getHeaders()
+    })
       .map((response:Response) => response.json());
   }
 
@@ -85,12 +89,19 @@ export class CapabilitiesService {
   deleteCapability(capabilityId: number|string) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer + token');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
 
     const url = `${this.capabilitiesUrl}${capabilityId}`;
     return this.http.delete(url, {
       headers: headers
     })
       .map(res => res.json());
+  }
+
+
+  getHeaders(): Headers {
+    var headers = new Headers()
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
+    return headers;
   }
 }

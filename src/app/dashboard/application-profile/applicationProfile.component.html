@@ -1,3 +1,5 @@
+
+
 <!--<div id="map" [@maps]></div>-->
 <div class="main-content" [@profile] id="application-profile">
   <div *ngIf="application" class="container-fluid">
@@ -15,181 +17,164 @@
         <a [routerLink]="['/application-add', application?.id]">
           <button class="btn right-button btn-primary" data-toggle="modal">Edit Application</button>
         </a>
-
       </div>
     </div>
-
-
-    <div class="row">
-      <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12" id="information">
+    <div class="row" id="application-main-information">
+      <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12" >
         <img class="profile-pic" src="../../../assets/img/250x250.png" alt="..."/>
       </div>
-
       <div class="profile-status col-lg-9 col-md-7 col-sm-6 col-xs-12">
         <h3 class="title">{{application?.name}}</h3>
         <p class="category">Service IP: {{application?.service_ip}}</p>
         <p class="category">Status Message: {{application?.status_message}}</p>
-
         <p class="profile-description">This is profesional description of an application.</p>
         <hr>
       </div>
     </div>
-
-      <div class="card contact-info col-lg-3 col-md-5 col-sm-6 col-xs-12">
-        <div class="header">
-          <h4 class="title">Application info</h4>
-        </div>
-        <div class="content">
-          <ul>
-            <!--<li>-->
-            <!--<i class="pe-icon pe-7s-power"></i><span>Status: <span class="status-indicator on"></span></span>-->
-            <!--</li>-->
-            <li>
-              <i class="pe-icon pe-7s-door-lock"></i>
-              <span *ngIf="applicationStatus(application?.status_message)">Status: <span class="status-indicator on"></span></span>
-              <span *ngIf="!applicationStatus(application?.status_message)">Status: <span class="status-indicator off"></span></span>
-            </li>
-            <hr/>
-            <li>
-              <i class="pe-icon pe-7s-door-lock"></i><span>Base Image: </span>
-
-              <ul>
-                <li>
-                  <i class="pe-7s-info" title="Base Image: {{image?.base_image}}&#013;Description: {{image?.description}}"></i>
-                  <span class="info-with-icon">
-                    {{ image?.name }}
-                  </span>
-                </li>
-              </ul>
-            </li><hr/>
-
-
-            <li>
-              <i class="pe-icon pe-7s-door-lock"></i><span>Device ID:</span>
-              <ul>
-                <li>
-                  <i class="pe-7s-info" title="Device Address: {{device?.address}}&#013;Device Vendor: {{device?.device_vendor}}&#013;Device Version: {{device?.device_version}}"></i>
-                  <span style="cursor: pointer" [routerLink]="['/device-profile', application.device_id]" class="info-with-icon">{{ application.device_id}}</span>
-                </li>
-              </ul>
-            </li><hr/>
-
-
-            <li>
-              <i class="pe-icon pe-7s-door-lock"></i><span>Ports: <br/></span>
-              <ul *ngFor="let port of application?.ports">
-                <li class="info-without-icon">
-                  {{port}}
-                </li>
-
-              </ul>
-            </li><hr/>
-            <li>
-              <i class="pe-icon pe-7s-door-lock"></i><span>Capabilities:</span>
-              <ul *ngFor="let capability of capabilities">
-                <li> <i class="pe-7s-info" title="Peripheral device: {{capability.peripherial_device}}&#013;Protocol: {{capability.protocol}}"></i>
-                  <span class="info-with-icon">{{capability.name}}</span>
-                </li>
-              </ul>
-            </li><hr/>
-          </ul>
-        </div>
+    <div class="card contact-info col-lg-3 col-md-5 col-sm-6 col-xs-12" id="application-information">
+      <div class="header">
+        <h4 class="title">Application info</h4>
       </div>
-
-    <div class="col-lg-9 col-md-7 col-sm-6 col-xs-12" id="device-profile-header">
-      <div class="card" id="device-profile-actions">
-        <div class="header">
-          <h4 class="title">Actions</h4>
-        </div>
-        <div class="content">
-          <div class="row">
-            <div class="col-md-4 ">
-              <div class="form-group">
-                <label><b>Time - From</b></label>
-                <input class="form-control datepicker" placeholder="Click to choose" type="text">
-              </div>
-
-            </div>
-            <div class="col-md-4 ">
-              <div class="form-group">
-                <label><b>Time - To</b></label>
-                <input class="form-control datepicker" placeholder="Click to choose" type="text">
-              </div>
-
-            </div>
-            <div class="col-md-4 ">
-              <div class="form-group">
-                <label><b>Actions</b></label>
-                <select class="form-control" value="Present">
-                  <option selected> All </option>
-                  <option> Error </option>
-                  <option> Warning </option>
-                  <option> Error and Warning </option>
-                  <option> OK </option>
-                </select>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-              <tr><th>ID</th>
-                <th>Time</th>
-                <th>Type</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr class="activity-error">
-                <td>391</td>
-                <td>16:20:21</td>
-                <td>ERROR</td>
-              </tr>
-              <tr class="activity-warning">
-                <td>390</td>
-                <td>16:15:21</td>
-                <td>WARNING</td>
-              </tr>
-              <tr class="activity-ok">
-                <td>389</td>
-                <td>16:10:21</td>
-                <td>OK</td>
-              </tr>
-              </tbody>
-            </table>
-
-
-
-            <nav class="my-pager" aria-label="Page navigation">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link"  aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" >1</a></li>
-                <li class="page-item"><a class="page-link" >2</a></li>
-                <li class="page-item"><a class="page-link" >3</a></li>
-                <li class="page-item"><a class="page-link" >4</a></li>
-                <li class="page-item"><a class="page-link" >5</a></li>
-                <li class="page-item">
-                  <a class="page-link"  aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
+      <div class="content">
+        <ul>
+          <!--<li>-->
+          <!--<i class="pe-icon pe-7s-power"></i><span>Status: <span class="status-indicator on"></span></span>-->
+          <!--</li>-->
+          <li>
+            <i class="pe-icon pe-7s-power"></i>
+            <span *ngIf="applicationStatus(application?.status_message)">Status: <span class="status-indicator on"></span></span>
+            <span *ngIf="!applicationStatus(application?.status_message)">Status: <span class="status-indicator off"></span></span>
+          </li>
+          <hr/>
+          <li>
+            <i class="pe-icon pe-7s-disk"></i><span>Base Image: </span>
+            <ul>
+              <li>
+                <i class="pe-7s-info" title="Base Image: {{image?.base_image}}&#013;Description: {{image?.description}}"></i>
+                <span class="info-with-icon">
+              {{ image?.name }}
+              </span>
+              </li>
+            </ul>
+          </li>
+          <hr/>
+          <li>
+            <i class="pe-icon pe-7s-config"></i><span>Device ID:</span>
+            <ul>
+              <li>
+                <i class="pe-7s-info" title="Device Address: {{device?.address}}&#013;Device Vendor: {{device?.device_vendor}}&#013;Device Version: {{device?.device_version}}"></i>
+                <span style="cursor: pointer" [routerLink]="['/device-profile', application.device_id]" class="info-with-icon">{{ application.device_id}}</span>
+              </li>
+            </ul>
+          </li>
+          <hr/>
+          <li>
+            <i style="width: 20px;" class="pe-icon pe-7s-network"></i><span>Ports: <br/></span>
+            <ul *ngFor="let port of application?.ports">
+              <li class="info-without-icon">
+                {{port}}
+              </li>
+            </ul>
+          </li>
+          <hr/>
+          <li>
+            <i class="pe-icon pe-7s-usb"></i><span>Capabilities:</span>
+            <ul *ngFor="let capability of capabilities">
+              <li> <i class="pe-7s-info" title="Peripheral device: {{capability.peripherial_device}}&#013;Protocol: {{capability.protocol}}"></i>
+                <span class="info-with-icon">{{capability.name}}</span>
+              </li>
+            </ul>
+          </li>
+          <hr/>
+        </ul>
       </div>
     </div>
+    <!--<div class="col-lg-9 col-md-7 col-sm-6 col-xs-12" id="device-profile-header">-->
+      <!--<div class="card" id="device-profile-actions">-->
+        <!--<div class="header">-->
+          <!--<h4 class="title">Actions</h4>-->
+        <!--</div>-->
+        <!--<div class="content">-->
+          <!--<div class="row">-->
+            <!--<div class="col-md-4 ">-->
+              <!--<div class="form-group">-->
+                <!--<label><b>Time - From</b></label>-->
+                <!--<input class="form-control datepicker" placeholder="Click to choose" type="text">-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 ">-->
+              <!--<div class="form-group">-->
+                <!--<label><b>Time - To</b></label>-->
+                <!--<input class="form-control datepicker" placeholder="Click to choose" type="text">-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 ">-->
+              <!--<div class="form-group">-->
+                <!--<label><b>Actions</b></label>-->
+                <!--<select class="form-control" value="Present">-->
+                  <!--<option selected> All </option>-->
+                  <!--<option> Error </option>-->
+                  <!--<option> Warning </option>-->
+                  <!--<option> Error and Warning </option>-->
+                  <!--<option> OK </option>-->
+                <!--</select>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="table-responsive">-->
+            <!--<table class="table table-hover">-->
+              <!--<thead>-->
+              <!--<tr>-->
+                <!--<th>ID</th>-->
+                <!--<th>Time</th>-->
+                <!--<th>Type</th>-->
+              <!--</tr>-->
+              <!--</thead>-->
+              <!--<tbody>-->
+              <!--<tr class="activity-error">-->
+                <!--<td>391</td>-->
+                <!--<td>16:20:21</td>-->
+                <!--<td>ERROR</td>-->
+              <!--</tr>-->
+              <!--<tr class="activity-warning">-->
+                <!--<td>390</td>-->
+                <!--<td>16:15:21</td>-->
+                <!--<td>WARNING</td>-->
+              <!--</tr>-->
+              <!--<tr class="activity-ok">-->
+                <!--<td>389</td>-->
+                <!--<td>16:10:21</td>-->
+                <!--<td>OK</td>-->
+              <!--</tr>-->
+              <!--</tbody>-->
+            <!--</table>-->
+            <!--<nav class="my-pager" aria-label="Page navigation">-->
+              <!--<ul class="pagination">-->
+                <!--<li class="page-item">-->
+                  <!--<a class="page-link"  aria-label="Previous">-->
+                    <!--<span aria-hidden="true">&laquo;</span>-->
+                    <!--<span class="sr-only">Previous</span>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li class="page-item"><a class="page-link" >1</a></li>-->
+                <!--<li class="page-item"><a class="page-link" >2</a></li>-->
+                <!--<li class="page-item"><a class="page-link" >3</a></li>-->
+                <!--<li class="page-item"><a class="page-link" >4</a></li>-->
+                <!--<li class="page-item"><a class="page-link" >5</a></li>-->
+                <!--<li class="page-item">-->
+                  <!--<a class="page-link"  aria-label="Next">-->
+                    <!--<span aria-hidden="true">&raquo;</span>-->
+                    <!--<span class="sr-only">Next</span>-->
+                  <!--</a>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</nav>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </div>
-
-
 <modal [animation]="true" [keyboard]="true" [backdrop]="true"
        #modal  >
   <modal-header [show-close]="true">
@@ -205,3 +190,4 @@
     <button type="button" class="btn btn-danger" autofocus (click)="deleteApplication(application.id)">Delete</button>
   </modal-footer>
 </modal>
+

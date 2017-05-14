@@ -22,7 +22,7 @@ export class NewDeviceService {
     var headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer + token');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
 
     // console.log(params);
     return this._http.post(this.devicesUrl, params, {
@@ -35,7 +35,7 @@ export class NewDeviceService {
     var params= JSON.stringify(data);
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer + token');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     // console.log(params);
     return this._http.put(this.devicesUrl, params, {
       headers: headers

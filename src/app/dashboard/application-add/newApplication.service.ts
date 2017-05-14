@@ -14,18 +14,16 @@ import {applicationsUrl} from "../../configuration"
 @Injectable()
 export class NewApplicationService {
   private applicationsUrl = applicationsUrl;  // URL to web api
-   constructor (private _http: Http) {
-    }
+  constructor(private _http: Http) {
+  }
 
 
+  putApplication(data: string, id: string | number) {
 
-
-  putApplication(data:string, id: string|number) {
-
-    var params= JSON.stringify(data);
+    var params = JSON.stringify(data);
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    // headers.append('Authorization', 'Bearer + token');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     // console.log(params);
     return this._http.put(this.applicationsUrl + id, params, {
       headers: headers
@@ -35,19 +33,19 @@ export class NewApplicationService {
   }
 
 
-    postApplication(data:string) {
-     console.log(data);
-      var params=JSON.stringify(data);
-      var headers = new Headers();
+  postApplication(data: string) {
+    console.log(data);
+    var params = JSON.stringify(data);
+    var headers = new Headers();
 
-      headers.append('Content-Type', 'application/json');
-      headers.append('Authorization', 'Bearer + token');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
 
-      // console.log(params);
-      return this._http.post(this.applicationsUrl, params, {
-        headers: headers
-      })
-        .map(res => res.json());
-    }
+    // console.log(params);
+    return this._http.post(this.applicationsUrl, params, {
+      headers: headers
+    })
+      .map(res => res.json());
+  }
 
 }

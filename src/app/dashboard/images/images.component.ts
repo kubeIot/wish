@@ -3,7 +3,7 @@
  */
 
 import {Component, trigger, transition, style, animate, group, state, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {PagerService} from "../../helper-services/pager.service";
@@ -42,14 +42,15 @@ import {Capability} from "../Capabilities/capabilities.metadata";
 })
 
 export class ImagesComponent  implements OnInit{
-  searchNameInput = new FormControl();
+  public searchNameInput: FormGroup;
   images: Observable<Image[]>;
+  private imageList: Image[];
+
   capabilities: Capability[];
   sortItem = "name";
   revert = false;
   //pager variables
   // array of all items to be paged
-  private allItems: any[];
   // pager object
   pager: any = {};
   // paged items
@@ -69,6 +70,7 @@ export class ImagesComponent  implements OnInit{
   constructor (
                private pagerService: PagerService,
                private applicationService: ApplicationService,
+               private _fb: FormBuilder,
                private capabilitiesService: CapabilitiesService) {
 
   }
@@ -85,16 +87,22 @@ export class ImagesComponent  implements OnInit{
 
 
   ngOnInit(): void {
+    this.searchNameInput = this._fb.group({
+      name: [''],
+      base_image: [''],
+      description: [''],
+    });
+
     this.images = this.searchNameInput.valueChanges
       .startWith('')
       .debounce(() => Observable.interval(200))
       .distinctUntilChanged()
-      .flatMap(term => this.applicationService.getFilteredImages(term));
+      .flatMap(term => this.applicationService.getImages(term));
 
     this.capabilitiesService.getCapabilities([])
       .subscribe(capabilities => this.capabilities = capabilities);
 
-    this.images.subscribe(result => {this.pagedItems = result;
+    this.images.subscribe(result => {this.imageList = result;
       this.setPage(1);});
   }
 
@@ -119,15 +127,15 @@ export class ImagesComponent  implements OnInit{
   }
 
   setPage(page: number) {
-    // if (page < 1 || page > this.pager.totalPages) {
-    //   return;
-    // }
-    //
-    // // get pager object from service
-    // this.pager = this.pagerService.getPager(this.pagedItems.length, page, 20);
-    //
-    // // get current page of items
-    // this.pagedItems = this.pagedItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.imageList.length, page, 20);
+
+    // get current page of items
+    this.pagedItems = this.imageList.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
 

@@ -23,6 +23,8 @@ import {ApplicationService} from "../Applications/applications.service";
 import {PagerService} from "../../helper-services/pager.service";
 import {CapabilitiesService} from "../Capabilities/capabilities.service";
 import {Capability} from "../Capabilities/capabilities.metadata";
+import {IMyOptions} from "mydatepicker";
+import {logging} from "selenium-webdriver";
 
 //Used capabilities comes with two Ids
 export interface usedCapability {
@@ -64,17 +66,14 @@ export class DeviceProfileComponent implements OnInit {
   modal: ModalComponent;
   selected: string;
   index: number = 0;
-  backdropOptions = [true, false, 'static'];
-  animation: boolean = true;
-  keyboard: boolean = true;
-  backdrop: string | boolean = true;
 
 
   //pager variables
   // array of all items to be paged
-  private allItems: any[];
+  private pagedEvents: any[];
   // pager object
   pager: any = {};
+  eventsPager: any = {};
   // paged items
   pagedItems: any[];
 
@@ -91,6 +90,7 @@ export class DeviceProfileComponent implements OnInit {
     searchInput = new FormControl();
 
 
+
     constructor(
         private deviceThumbService: DeviceThumbService,
         private applicationService: ApplicationService,
@@ -104,7 +104,8 @@ export class DeviceProfileComponent implements OnInit {
 
     changeSubPage(change: profileSubPages): void {
         this.subPage = change;
-      this.setPage(1);
+      this.setApplicationPage(1);
+      this.setEventsPage(1);
     }
 
 
@@ -117,29 +118,20 @@ export class DeviceProfileComponent implements OnInit {
       });
 
 
-
       this.route.params
             .switchMap((params: Params) => this.deviceThumbService.getDevice(+params['id']))
             // .subscribe(device => this.doMagic(device),
-            .subscribe(device => this.setVariables(device),
-                () => console.log("finished"));
-
-
-      // this.shownDeviceEvents = this.eventsFilter.valueChanges
-      //   .startWith('')
-      //   .debounce(() => Observable.interval(200))
-      //   .distinctUntilChanged()
-      //   .flatMap(term => this.deviceThumbService.getFilteredDeviceEvents(term));
+            .subscribe(device => this.setVariables(device));
 
     }
 
     getClass(status: any) {
-        return true; // activity-ok ,warning, error according to status TODO
+        return true;
     }
 
+    //after device is loaded, other variables are set
     setVariables(device: Device){
         this.device = device;
-
 
       this.eventsFilter.valueChanges
         .startWith('')
@@ -149,7 +141,10 @@ export class DeviceProfileComponent implements OnInit {
           this.route.params
             .switchMap((params: Params) => this.deviceThumbService.getDeviceEvents(+params['id'], term))
         )
-        .subscribe(events => this.deviceEvents = events.filter(event => event != null));
+        .subscribe(events => {this.deviceEvents = events.filter(event => event != null);
+          this.setEventsPage(1);
+
+        });
 
       // this.route.params
       //   .switchMap((params: Params) => this.deviceThumbService.getDeviceEvents(+params['id']))
@@ -188,22 +183,32 @@ export class DeviceProfileComponent implements OnInit {
 
     }
 
-  setPage(page: number) {
+  setApplicationPage(page: number) {
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
+
 
     if (this.apps == []) {
       return;
     }
 
-
-
     // get pager object from service
     this.pager = this.pagerService.getPager(this.apps.length, page, 20);
-
     // get current page of items
     this.pagedItems = this.apps.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
+
+
+  setEventsPage(page: number) {
+    if (page < 1 || page > this.eventsPager.totalPages) {
+      return;
+    }
+
+    // get pager object from service
+    this.eventsPager = this.pagerService.getPager(this.deviceEvents.length, page, 20);
+    // get current page of items
+    this.shownDeviceEvents = this.deviceEvents.slice(this.eventsPager.startIndex, this.eventsPager.endIndex + 1);
   }
 
 
@@ -253,6 +258,15 @@ export class DeviceProfileComponent implements OnInit {
       // return epochTime;
 
   }
+
+  changeSort(sort: string): void {
+    if(this.logSortItem == sort)
+      this.logRevert = !this.logRevert;
+    else
+      this.logSortItem = sort;
+
+  }
+
 
     goBack(): void {
         this.location.back();

@@ -44,11 +44,10 @@ export class CapabilitiesComponent  implements OnInit{
   filterGroup: FormGroup;
 
   capabilities: Observable<Capability[]>;
+  listOfCapabilities: Capability[];
   sortItem = "name";
   revert = false;
   //pager variables
-  // array of all items to be paged
-  private allItems: any[];
   // pager object
   pager: any = {};
   // paged items
@@ -101,7 +100,7 @@ export class CapabilitiesComponent  implements OnInit{
       .distinctUntilChanged()
       .flatMap(term => this.capabilitiesService.getCapabilities(term));
 
-    this.capabilities.subscribe(result => {this.pagedItems = result;
+    this.capabilities.subscribe(result => {this.listOfCapabilities = result;
       this.setPage(1);});
   }
 
@@ -113,15 +112,15 @@ export class CapabilitiesComponent  implements OnInit{
   }
 
   setPage(page: number) {
-    // if (page < 1 || page > this.pager.totalPages) {
-    //   return;
-    // }
-    //
-    // // get pager object from service
-    // this.pager = this.pagerService.getPager(this.pagedItems.length, page, 20);
-    //
-    // // get current page of items
-    // this.pagedItems = this.pagedItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.listOfCapabilities.length, page, 20);
+
+    // get current page of items
+    this.pagedItems = this.listOfCapabilities.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
 

@@ -1,24 +1,20 @@
 <div class="main-content" [@capabilities] id="capabilities">
   <div class="container-fluid">
     <div class="row">
-
       <div class="col-md-12">
-        <div class="card" id="capabilities-filter">
+        <div class="card" id="capabilities-header">
           <div class="header">
             <a routerLink="/capability-add">
               <button style="float: right; " class="btn btn-primary">Add Capability</button>
             </a>
-
             <!--<div  style="float: right;" class="switch has-switch" data-on-label="Thumbs" data-off-label="OFF">-->
             <!--<div class="switch-animate switch-on"><input checked="" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div>-->
             <!--</div>-->
             <h4 class="title">Capabilities</h4>
             <p class="category">You can find list of all your capabilities here!</p>
-
           </div>
           <div class="content">
-            <div class="row" [formGroup]="filterGroup">
-
+            <div class="row" [formGroup]="filterGroup" id="capabilities-filter">
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label class="pointer" (click)="changeSort('name')"><b>Name of the Capability</b>
@@ -26,7 +22,7 @@
                     <img *ngIf="sortItem == 'name' && revert" class="sorted" src="../../../assets/img/down.gif">
                     <img *ngIf="sortItem == 'name' && !revert" class="sorted" src="../../../assets/img/up.gif">
                   </label>
-                  <input class="form-control" placeholder="Name" type="text" formControlName="name">
+                  <input class="form-control" placeholder="Name" type="text" formControlName="name" name="name">
                 </div>
               </div>
               <div class="col-md-4 col-sm-6 col-xs-12">
@@ -36,31 +32,26 @@
                     <img *ngIf="sortItem == 'protocol' && revert" class="sorted" src="../../../assets/img/down.gif">
                     <img *ngIf="sortItem == 'protocol' && !revert" class="sorted" src="../../../assets/img/up.gif">
                   </label>
-                  <input class="form-control" placeholder="Protocol"  type="text" formControlName="protocol">
+                  <input class="form-control" placeholder="Protocol"  type="text" formControlName="protocol" name="protocol">
                 </div>
               </div>
               <div class="col-md-4 col-sm-6 col-xs-12 ">
                 <div class="form-group">
-                  <label class="pointer" (click)="changeSort('peripherial_device')"><b>Peripheral Device</b>
+                  <label class="pointer" (click)="changeSort('peripherial_device')"><b>Peripherial Device</b>
                     <img *ngIf="sortItem != 'peripherial_device'" class="sorted" src="../../../assets/img/both.png">
                     <img *ngIf="sortItem == 'peripherial_device' && revert" class="sorted" src="../../../assets/img/down.gif">
                     <img *ngIf="sortItem == 'peripherial_device' && !revert" class="sorted" src="../../../assets/img/up.gif">
                   </label>
-                  <input class="form-control" placeholder="Peripherial Device"  type="text" formControlName="peripherial_device">
+                  <input class="form-control" placeholder="Peripherial Device"  type="text" formControlName="peripherial_device" name="peripherial_device">
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-
-
-
-
-        <div class="card" id="capabilities-table">
+        <div class="card" >
           <div class="content">
             <div class="content table-responsive">
-              <table class="table table-hover">
+              <table class="table table-hover" id="capabilities-table">
                 <thead>
                 <tr>
                   <th><b>Name</b></th>
@@ -68,12 +59,10 @@
                   <th><b>Protocol</b></th>
                   <th><b>Edit</b></th>
                   <th><b>Delete</b></th>
-
                   <!--Todo: Pekny obrazek k action vytvorit --- cervene,zlute a zelene-->
                 </tr>
                 </thead>
                 <tbody *ngFor="let capability of pagedItems | sortBy : sortItem : revert"  >
-
                 <tr class="activity-ok">
                   <td > {{capability?.name}}  </td>
                   <td > {{capability?.peripherial_device}}  </td>
@@ -87,44 +76,27 @@
             </div>
           </div>
         </div>
-
-        <!--<ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination">-->
-          <!--<li [ngClass]="{disabled:pager.currentPage === 1}">-->
-            <!--<a (click)="setPage(1)">First</a>-->
-          <!--</li>-->
-          <!--<li [ngClass]="{disabled:pager.currentPage === 1}">-->
-            <!--<a (click)="setPage(pager.currentPage - 1)">Previous</a>-->
-          <!--</li>-->
-          <!--<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">-->
-            <!--<a (click)="setPage(page)">{{page}}</a>-->
-          <!--</li>-->
-          <!--<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">-->
-            <!--<a (click)="setPage(pager.currentPage + 1)">Next</a>-->
-          <!--</li>-->
-          <!--<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">-->
-            <!--<a (click)="setPage(pager.totalPages)">Last</a>-->
-          <!--</li>-->
-        <!--</ul>-->
-
-        <!--<div class="row product-tabs">-->
-        <!--<ul class="nav nav-tabs">-->
-        <!--<li class=""> ttt</li>-->
-        <!--&lt;!&ndash;<button class="btn-primary"> devices</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button class="btn-navbar"> applications</button>&ndash;&gt;-->
-        <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="card">-->
-        <!--<div class="row">-->
-
-        <!--<device-thumb *ngFor="let dev of devices" [device]="dev"></device-thumb>-->
-        <!--</div>-->
-        <!--</div>-->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pager-align pagination" id="capabilities-pager">
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+          </li>
+          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
-
-
 <modal [animation]="true" [keyboard]="true" [backdrop]="true" #modal  >
   <modal-header [show-close]="true">
     <h4 class="modal-title">Delete Capability</h4>
@@ -139,3 +111,4 @@
     <button type="button" class="btn btn-danger" autofocus (click)="deleteCapability(idInModal)">Delete</button>
   </modal-footer>
 </modal>
+

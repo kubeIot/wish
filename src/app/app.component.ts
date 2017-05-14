@@ -9,7 +9,7 @@ import * as $ from 'jquery';
     templateUrl: './app.component.html'
 })
 
-export class AppComponent implements OnInit, DoCheck {
+export class AppComponent implements DoCheck {
 
 public logged: boolean = false;
 
@@ -19,9 +19,7 @@ public logged: boolean = false;
     ngDoCheck() {
         this.loggedIn = localStorage.getItem('isLoggedIn');
     }
-    ngOnInit(){
-         // $.getScript('../assets/js/light-bootstrap-dashboard.js'); //already gotten in index.html
-    }
+
     public isMaps(path){
         if(path == window.location.pathname){
             return true;

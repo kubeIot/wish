@@ -45,11 +45,7 @@ ul hr {
     font-size: 26px;
 }
 .icon-back span{
-    /*position: absolute;*/
-    /*top: 65px;*/
-    /*left: 29px;*/
-    /*padding-left: 0;*/
-    /*padding-right: 6px;*/
+
     margin-bottom: 10px;
     height: 25px;
     line-height: 25px;
@@ -141,16 +137,10 @@ ul hr {
     background-color: #c70669;
 }
 
-/*.nav.nav-tabs{*/
-    /*margin: -10px -10px 0 -10px;*/
-    /*padding: 10px 10px 0 10px;*/
-/*}*/
 
 .nav.nav-tabs>li>a {
-    /*padding: 5px 10px 3px 10px;*/
-    /*margin-bottom: 0;*/
+
     text-transform: uppercase;
-    /*border-radius: 0;*/
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
@@ -161,11 +151,6 @@ span.icon-back span {
     padding-right: 8px;
 }
 
-/*.nav-option {*/
-    /*background-color: #cc0000;*/
-    /*border-radius: 4px;*/
-    /*padding: 1px;*/
-/*}*/
 
 .maxwidth {
     max-width: 50px;
@@ -204,7 +189,7 @@ span.icon-back span {
 
 .numberCircle {
   border-radius: 50%;
-  /*behavior: url(PIE.htc); !* remove if you don't care about IE8 *!*/
+  /*behavior: url(PIE.htc); !* add this line and pie.htc for IE8 *!*/
 
   width: 36px;
   height: 36px;
@@ -216,7 +201,7 @@ span.icon-back span {
   text-align: center;
 
   font: 32px Arial, sans-serif;
-  /*margin-left: 3px;*/
+
 }
 
 .numberCircle.ok {

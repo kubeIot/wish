@@ -4,6 +4,7 @@ Tento repozitář obsahuje zdrojový kód bakalářské práce ** Marka Hrvola *
 
 V budoucnosti bude tento repozitář obsahovat taktéž Backend implementovaný ** Mirkem Jarošem **.
 
+
 ## Požadavky
 
 Node.js a npm jsou nezbytné pro spuštění tohoto projektu.
@@ -13,16 +14,18 @@ Pokud nemáte nainstalovaný node.js, nainstalujte ho dle návodu na www.nodejs.
 **Ověřte, že máte verzi node alespoň 'v6.9.x' a npm '4.x.x'**
 spuštěním příkazů 'node -v' a 'npm -v' v terminálu. Starší verze mohou způsobovat chyby.
 
+Back-end je dostupný na https://github.com/kubeIot/api-docs. Pro správnou funkcionalitu aplikace bez úprav souboru configuration.ts je potřeba spustit back-end serveru na portu 8080.
+
 ## Instalace npm balíčků
 
 Nainstalujte balíčky specifikované v 'package.json' a ověřte že fungují:
 
 ```bash
 npm install
-npm start
+ng serve
 ```
 
-Příkaz 'npm start' zkompiluje aplikaci a zároveň spustí server. Veškeré změny souborů jsou ihned zaznamenány.
+Příkaz 'ng serve' zkompiluje aplikaci a zároveň spustí server. Veškeré změny souborů jsou ihned zaznamenány.
 
 Server zastavíte manualně klávesovou zkratkou 'Ctrl-C'
 

@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
+var deviceThumb_service_1 = require("./devices.service");
 var forms_1 = require("@angular/forms");
 var rxjs_1 = require("rxjs");
 // import {sortPipe} from "../sorting.pipe";
@@ -48,7 +48,7 @@ DevicesComponent = __decorate([
         moduleId: module.id,
         selector: 'devices',
         templateUrl: 'devices.component.html',
-        providers: [deviceThumb_service_1.DeviceThumbService],
+        providers: [deviceThumb_service_1.DevicesService],
         styleUrls: ['../../../assets/css/device.css', '../../../assets/css/app.css'],
         // pipes: [sortPipe],
         animations: [
@@ -74,7 +74,7 @@ DevicesComponent = __decorate([
             ])
         ]
     }),
-    __metadata("design:paramtypes", [deviceThumb_service_1.DeviceThumbService])
+    __metadata("design:paramtypes", [deviceThumb_service_1.DevicesService])
 ], DevicesComponent);
 exports.DevicesComponent = DevicesComponent;
 //# sourceMappingURL=devices.component.js.map

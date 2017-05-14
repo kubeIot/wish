@@ -160,7 +160,7 @@
               </tr>
               </thead>
               <tbody>
-              <tbody *ngFor="let event of shownDeviceEvents | sortBy : logSortItem : logRevert">
+              <tbody *ngFor="let event of deviceEvents | sortBy : logSortItem : logRevert">
               <tr *ngIf="systemEvent(event)" class="activity-warning">
                 <td>{{event?.id}}</td>
                 <td>{{getTime(event?.id) | date:'yyyy-MM-dd hh:mm:ss'}}</td>

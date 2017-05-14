@@ -8,14 +8,15 @@ import {Observable} from "rxjs";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {PagerService} from "../../helper-services/pager.service";
 import {ApplicationService} from "../Applications/applications.service";
-import {Image} from "../Applications/applications.metadata";
+import {Image} from "./images.metadata";
 import {CapabilitiesService} from "../Capabilities/capabilities.service";
 import {Capability} from "../Capabilities/capabilities.metadata";
+import {ImagesService} from "./images.service";
 
 @Component({
   moduleId: module.id,
   selector: 'images',
-  providers: [ApplicationService, PagerService, CapabilitiesService],
+  providers: [ApplicationService, PagerService, CapabilitiesService, ImagesService],
   templateUrl: 'images.component.html',
   styleUrls: ['../../../assets/css/app.css'],
   animations: [
@@ -70,6 +71,7 @@ export class ImagesComponent  implements OnInit{
   constructor (
                private pagerService: PagerService,
                private applicationService: ApplicationService,
+               private imagesService: ImagesService,
                private _fb: FormBuilder,
                private capabilitiesService: CapabilitiesService) {
 
@@ -97,7 +99,7 @@ export class ImagesComponent  implements OnInit{
       .startWith('')
       .debounce(() => Observable.interval(200))
       .distinctUntilChanged()
-      .flatMap(term => this.applicationService.getImages(term));
+      .flatMap(term => this.imagesService.getImages(term));
 
     this.capabilitiesService.getCapabilities([])
       .subscribe(capabilities => this.capabilities = capabilities);

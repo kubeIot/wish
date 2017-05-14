@@ -4,14 +4,16 @@
 import {Component, trigger, transition, style, animate, group, state, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
-import {Application, Image} from "./applications.metadata";
+import {Application} from "./applications.metadata";
 import {ApplicationService} from "./applications.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {PagerService} from "../../helper-services/pager.service";
+import {Image} from "../images/images.metadata";
+import {ImagesService} from "../images/images.service";
 @Component({
     moduleId: module.id,
     selector: 'applications',
-    providers: [ApplicationService, PagerService],
+    providers: [ApplicationService, PagerService, ImagesService],
     templateUrl: 'applications.component.html',
     styleUrls: ['../../../assets/css/app.css'],
     animations: [
@@ -64,6 +66,7 @@ export class ApplicationsComponent  implements OnInit{
   //modal variables
 
   constructor (private applicationService: ApplicationService,
+               private imagesService: ImagesService,
                private _fb: FormBuilder,
                private pagerService: PagerService) {
 
@@ -85,7 +88,7 @@ export class ApplicationsComponent  implements OnInit{
         status_message: [''],
       });
 
-      this.applicationService.getImages().subscribe(images => this.images = images);
+      this.imagesService.getImages().subscribe(images => this.images = images);
 
 
       this.applications = this.searchNameInput.valueChanges

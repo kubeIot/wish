@@ -8,7 +8,7 @@ import {BrowserModule} from '@angular/platform-browser'
 import {FormsModule} from '@angular/forms'
 import {testService} from "./test.service";
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import {Device} from '../device-thumbnail/deviceThumb.metadata'
+import {Device} from '../devices/devices.metadata'
 import {Router} from "@angular/router";
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {IMyOptions} from 'mydatepicker';

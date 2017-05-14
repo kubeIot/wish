@@ -19,7 +19,7 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var newApplication_service_1 = require("./newApplication.service");
 var common_1 = require("@angular/common");
-var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
+var deviceThumb_service_1 = require("../devices/devices.service");
 var router_1 = require("@angular/router");
 var applications_service_1 = require("../Applications/applications.service");
 //TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
@@ -132,7 +132,7 @@ NewApplicationComponent = __decorate([
         selector: 'application-add',
         templateUrl: 'newApplication.component.html',
         styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-        providers: [newApplication_service_1.NewApplicationService, deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService],
+        providers: [newApplication_service_1.NewApplicationService, deviceThumb_service_1.DevicesService, applications_service_1.ApplicationService],
         animations: [
             core_1.trigger('newapplication', [
                 core_1.state('*', core_1.style({
@@ -159,7 +159,7 @@ NewApplicationComponent = __decorate([
     __metadata("design:paramtypes", [newApplication_service_1.NewApplicationService,
         forms_1.FormBuilder,
         common_1.Location,
-        deviceThumb_service_1.DeviceThumbService,
+        deviceThumb_service_1.DevicesService,
         applications_service_1.ApplicationService,
         router_1.ActivatedRoute])
 ], NewApplicationComponent);

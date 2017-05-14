@@ -1,6 +1,6 @@
 import {Component, OnInit, trigger, state, style, transition, animate, keyframes, group, DoCheck} from '@angular/core';
-import {Device} from "../device-thumbnail/deviceThumb.metadata";
-import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
+import {Device} from "../devices/devices.metadata";
+import {DevicesService} from "../devices/devices.service";
 import {ApplicationService} from "../Applications/applications.service";
 import {Application} from "../Applications/applications.metadata";
 // import initDemo = require('../../../assets/js/charts.js');
@@ -13,7 +13,7 @@ import {Application} from "../Applications/applications.metadata";
     moduleId: module.id,
     selector: 'dashboard',
     templateUrl: 'dashboard.component.html',
-  providers: [DeviceThumbService, ApplicationService ],
+  providers: [DevicesService, ApplicationService ],
   styleUrls: [ '../../../assets/css/app.css'],
   animations: [
         trigger('dashboard', [
@@ -78,7 +78,7 @@ export class DashboadrComponent implements OnInit{
 
 
 
-  constructor(private deviceThumbService: DeviceThumbService,
+  constructor(private deviceThumbService: DevicesService,
               private applicationService: ApplicationService){
 
   }

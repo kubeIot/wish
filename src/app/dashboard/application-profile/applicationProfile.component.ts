@@ -12,27 +12,29 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
 
-import {Application, Image} from "../Applications/applications.metadata";
+import {Application} from "../Applications/applications.metadata";
 
 import 'rxjs/add/operator/switchMap';
 import {Observable} from "rxjs";
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 
-import {Device} from "../device-thumbnail/deviceThumb.metadata";
+import {Device} from "../devices/devices.metadata";
 import {FormControl} from "@angular/forms";
 import {ApplicationService} from "../Applications/applications.service";
 import {PagerService} from "../../helper-services/pager.service";
 import {CapabilitiesService} from "../Capabilities/capabilities.service";
 import {Capability} from "../Capabilities/capabilities.metadata";
-import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
+import {DevicesService} from "../devices/devices.service";
+import {Image} from "../images/images.metadata";
+import {ImagesService} from "../images/images.service";
 
 
 @Component({
   moduleId: module.id,
   selector: 'application-profile',
   templateUrl: 'applicationProfile.component.html',
-  providers: [ApplicationService, PagerService, CapabilitiesService, DeviceThumbService],
+  providers: [ApplicationService, PagerService, CapabilitiesService, DevicesService, ImagesService],
   styleUrls: ['../../../assets/css/device.css' , '../../../assets/css/app.css'],
   animations: [
     trigger('profile', [
@@ -56,11 +58,10 @@ export class ApplicationProfileComponent implements OnInit {
 
   //pager variables
   // array of all items to be paged
-  private allItems: any[];
   // pager object
   pager: any = {};
   // paged items
-  pagedItems: any[];
+  // pagedItems: any[];
 
   //end of pager variables
 
@@ -69,13 +70,13 @@ export class ApplicationProfileComponent implements OnInit {
   device: Device;
   image: Image;
   capabilities: Capability[] = [];
-  searchInput = new FormControl();
 
 
   constructor(
     private applicationService: ApplicationService,
     private capabilitiesService: CapabilitiesService,
-    private deviceThumbService: DeviceThumbService,
+    private deviceThumbService: DevicesService,
+    private imagesService: ImagesService,
     private pagerService: PagerService,
     private route: ActivatedRoute,
     private location: Location
@@ -107,7 +108,7 @@ export class ApplicationProfileComponent implements OnInit {
       .subscribe(device => this.device = device,
         () => console.log("finished"));
 
-    this.applicationService.getImage(this.application.base_image)
+    this.imagesService.getImage(this.application.base_image)
       .subscribe(image => this.image = image,
         () => console.log("finished"));
 
@@ -154,7 +155,7 @@ export class ApplicationProfileComponent implements OnInit {
       return false;
     return status.toLowerCase( ) == "ok";
   }
-  
+
 
   open() {
     this.modal.open();

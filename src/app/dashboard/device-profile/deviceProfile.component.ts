@@ -8,7 +8,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { Location } from '@angular/common';
 
-import { DeviceThumbService } from '../device-thumbnail/deviceThumb.service';
+import { DevicesService } from '../devices/devices.service';
 
 import {Application} from "../Applications/applications.metadata";
 
@@ -17,7 +17,7 @@ import {Observable} from "rxjs";
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 
-import {Device, DeviceEvent} from "../device-thumbnail/deviceThumb.metadata";
+import {Device, DeviceEvent} from "../devices/devices.metadata";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ApplicationService} from "../Applications/applications.service";
 import {PagerService} from "../../helper-services/pager.service";
@@ -41,7 +41,7 @@ export enum profileSubPages {
     moduleId: module.id,
     selector: 'device-profile',
     templateUrl: 'deviceProfile.component.html',
-    providers: [DeviceThumbService, ApplicationService, PagerService, CapabilitiesService],
+    providers: [DevicesService, ApplicationService, PagerService, CapabilitiesService],
     styleUrls: ['../../../assets/css/device.css' , '../../../assets/css/app.css'],
     animations: [
         trigger('profile', [
@@ -92,7 +92,7 @@ export class DeviceProfileComponent implements OnInit {
 
 
     constructor(
-        private deviceThumbService: DeviceThumbService,
+        private deviceThumbService: DevicesService,
         private applicationService: ApplicationService,
         private capabilitiesService: CapabilitiesService,
         private pagerService: PagerService,

@@ -4,7 +4,7 @@
  */
 import {Component, Input} from '@angular/core';
 import {ApplicationService} from "../Applications/applications.service";
-import {Application, Image} from "../Applications/applications.metadata";
+import {Application} from "../Applications/applications.metadata";
 @Component({
     moduleId: module.id,
     selector: 'application-thumb',

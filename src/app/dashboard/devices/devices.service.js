@@ -49,4 +49,4 @@ DeviceThumbService = __decorate([
     __metadata("design:paramtypes", [http_1.Http])
 ], DeviceThumbService);
 exports.DeviceThumbService = DeviceThumbService;
-//# sourceMappingURL=deviceThumb.service.js.map
+//# sourceMappingURL=devices.service.js

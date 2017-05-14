@@ -13,5 +13,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //     owner: number;
 //     system_info: string;
 //     used_capabilities: any[];
-// } 
-//# sourceMappingURL=deviceThumb.metadata.js.map
+// }
+//# sourceMappingURL=devices.metadata.js.map

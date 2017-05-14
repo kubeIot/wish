@@ -4,13 +4,13 @@
 import { Injectable } from '@angular/core';
 import { Http,Response, Headers} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
-import {Device, DeviceEvent, DeviceCapability} from "./deviceThumb.metadata";
+import {Device, DeviceEvent, DeviceCapability} from "./devices.metadata";
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
 import {devicesUrl} from "../../configuration"
 
 @Injectable()
-export class DeviceThumbService {
+export class DevicesService {
     private devicesUrl = devicesUrl;  // URL to web api
     eventsNotSearched: Boolean = true; //Optimalization in deviceEventsList searches
     capabilitiesNotSearched: Boolean = true; //Optimalization in deviceCapabilitiesList searches
@@ -103,12 +103,14 @@ export class DeviceThumbService {
   }
 
     getDeviceEventsList() {
-      return this.deviceEventsList.filter(item => item != null);
+      return this.deviceEventsList.map(event => event.filter(item => item != null));
+
+      // return this.deviceEventsList.filter(item => item != null);
+
     }
 
 
   getDeviceEvents(id: number| string, filter: any = "") {
-
 
     if(this.eventsNotSearched) {
       this.eventsNotSearched = false;
@@ -143,6 +145,7 @@ export class DeviceThumbService {
       catch (e) {
         timeToFilter = "";
       }
+
 
 
       if(statusMessageFilter !== "") //if filter does not exist, dont lose time worrying about it
@@ -180,6 +183,10 @@ export class DeviceThumbService {
             timeToFilter >= item.event_timestamp
           ));
       }
+
+
+      deviceEvents.subscribe(item =>
+      console.log(item));
 
     }
     return deviceEvents;

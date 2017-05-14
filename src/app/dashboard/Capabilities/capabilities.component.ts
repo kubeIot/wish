@@ -7,14 +7,14 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {PagerService} from "../../helper-services/pager.service";
-import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
+import {DevicesService} from "../devices/devices.service";
 import {CapabilitiesService} from "./capabilities.service";
 import {Capability} from "./capabilities.metadata";
 
 @Component({
   moduleId: module.id,
   selector: 'capabilities',
-  providers: [DeviceThumbService, PagerService, CapabilitiesService],
+  providers: [DevicesService, PagerService, CapabilitiesService],
   templateUrl: 'capabilities.component.html',
   styleUrls: ['../../../assets/css/app.css'],
   animations: [
@@ -64,7 +64,7 @@ export class CapabilitiesComponent  implements OnInit{
   idInModal: number | string;
   //modal variables
 
-  constructor (private deviceThumbService: DeviceThumbService,
+  constructor (private deviceThumbService: DevicesService,
                private pagerService: PagerService,
                private _fb: FormBuilder,
                private capabilitiesService: CapabilitiesService) {

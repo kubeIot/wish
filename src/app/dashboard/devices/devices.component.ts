@@ -1,6 +1,6 @@
 import { Component, trigger,transition,style,animate,group,state, OnInit } from '@angular/core';
-import { Device } from "../device-thumbnail/deviceThumb.metadata"
-import { DeviceThumbService } from "../device-thumbnail/deviceThumb.service";
+import { Device } from "./devices.metadata"
+import { DevicesService } from "./devices.service";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {PagerService} from "../../helper-services/pager.service";
@@ -12,7 +12,7 @@ import {UserService} from "../profile/profile.service";
     moduleId: module.id,
     selector: 'devices',
     templateUrl: 'devices.component.html',
-    providers: [DeviceThumbService, PagerService, UserService],
+    providers: [DevicesService, PagerService, UserService],
     styleUrls: ['../../../assets/css/device.css' , '../../../assets/css/app.css'],
     // pipes: [sortPipe],
     animations: [
@@ -58,7 +58,7 @@ export class DevicesComponent implements OnInit {
   //end of pager variables
 
 
-    constructor (private deviceThumbService: DeviceThumbService,
+    constructor (private deviceThumbService: DevicesService,
                  private pagerService: PagerService,
                   private userService: UserService,
                  private _fb: FormBuilder,) {

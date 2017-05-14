@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var common_1 = require("@angular/common");
-var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
+var deviceThumb_service_1 = require("../devices/devices.service");
 require("rxjs/add/operator/switchMap");
 var forms_1 = require("@angular/forms");
 var applications_service_1 = require("../Applications/applications.service");
@@ -66,7 +66,7 @@ DeviceProfileComponent = __decorate([
         moduleId: module.id,
         selector: 'device-profile',
         templateUrl: 'deviceProfile.component.html',
-        providers: [deviceThumb_service_1.DeviceThumbService, applications_service_1.ApplicationService],
+        providers: [deviceThumb_service_1.DevicesService, applications_service_1.ApplicationService],
         styleUrls: ['../../../assets/css/device.css', '../../../assets/css/app.css'],
         animations: [
             core_1.trigger('profile', [
@@ -81,7 +81,7 @@ DeviceProfileComponent = __decorate([
             ])
         ]
     }),
-    __metadata("design:paramtypes", [deviceThumb_service_1.DeviceThumbService,
+    __metadata("design:paramtypes", [deviceThumb_service_1.DevicesService,
         applications_service_1.ApplicationService,
         router_1.ActivatedRoute,
         common_1.Location])

@@ -7,8 +7,8 @@ import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { NewDeviceService } from "./newDevice.service"
 import { Location } from '@angular/common';
 import {ActivatedRoute, Params} from "@angular/router";
-import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
-import {Device, DeviceCapability} from "../device-thumbnail/deviceThumb.metadata";
+import {DevicesService} from "../devices/devices.service";
+import {Device, DeviceCapability} from "../devices/devices.metadata";
 import {NewCapabilityService} from "../capability-add/newCapabilityService";
 import {CapabilitiesService} from "../Capabilities/capabilities.service";
 import {Capability} from "../Capabilities/capabilities.metadata";
@@ -26,7 +26,7 @@ export interface deviceCapabilityPost {
     selector: 'device-add',
     templateUrl: 'newDevice.component.html',
     styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-    providers: [NewDeviceService, DeviceThumbService, CapabilitiesService],
+    providers: [NewDeviceService, DevicesService, CapabilitiesService],
     animations: [
         trigger('newdevice', [
             state('*', style({
@@ -61,7 +61,7 @@ export class NewDeviceComponent implements OnInit {
                 private _fb: FormBuilder,
                 private location: Location,
                 private route: ActivatedRoute,
-                private deviceThumbService: DeviceThumbService,
+                private deviceThumbService: DevicesService,
                 private newDeviceService: NewDeviceService,
                 private capabilitiesService: CapabilitiesService) {
 

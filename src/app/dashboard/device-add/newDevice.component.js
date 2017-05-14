@@ -17,7 +17,7 @@ var forms_1 = require("@angular/forms");
 var newDevice_service_1 = require("./newDevice.service");
 var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
-var deviceThumb_service_1 = require("../device-thumbnail/deviceThumb.service");
+var deviceThumb_service_1 = require("../devices/devices.service");
 //TODO:export const addDeviceFields - interface : string:string --- prvni pro ng promennou, druha pro vypis GUI
 var NewDeviceComponent = (function () {
     function NewDeviceComponent(_httpService, _fb, location, route, deviceThumbService) {
@@ -132,7 +132,7 @@ NewDeviceComponent = __decorate([
         selector: 'device-add',
         templateUrl: 'newDevice.component.html',
         styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-        providers: [newDevice_service_1.NewDeviceService, deviceThumb_service_1.DeviceThumbService],
+        providers: [newDevice_service_1.NewDeviceService, deviceThumb_service_1.DevicesService],
         animations: [
             core_1.trigger('newdevice', [
                 core_1.state('*', core_1.style({
@@ -160,7 +160,7 @@ NewDeviceComponent = __decorate([
         forms_1.FormBuilder,
         common_1.Location,
         router_1.ActivatedRoute,
-        deviceThumb_service_1.DeviceThumbService])
+        deviceThumb_service_1.DevicesService])
 ], NewDeviceComponent);
 exports.NewDeviceComponent = NewDeviceComponent;
 //# sourceMappingURL=newDevice.component.js.map

@@ -11,14 +11,16 @@ import {
 import {Validators, FormGroup, FormArray, FormBuilder} from '@angular/forms';
 import {NewApplicationService} from "./newApplication.service";
 import {Location} from '@angular/common';
-import {Device} from "../device-thumbnail/deviceThumb.metadata";
+import {Device} from "../devices/devices.metadata";
 import {Observable} from "rxjs";
-import {DeviceThumbService} from "../device-thumbnail/deviceThumb.service";
+import {DevicesService} from "../devices/devices.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {ApplicationService} from "../Applications/applications.service";
-import {Application, Image} from "../Applications/applications.metadata";
+import {Application} from "../Applications/applications.metadata";
 import {AvailableCapabilities} from "./newApplication.metadata";
 import * as _ from 'underscore';
+import {Image} from "../images/images.metadata";
+import {ImagesService} from "../images/images.service";
 
 
 @Component({
@@ -26,7 +28,7 @@ import * as _ from 'underscore';
   selector: 'application-add',
   templateUrl: 'newApplication.component.html',
   styleUrls: ['../../../assets/css/app.css', '../../../assets/css/device.css'],
-  providers: [NewApplicationService, DeviceThumbService, ApplicationService],
+  providers: [NewApplicationService, DevicesService, ApplicationService, ImagesService],
   animations: [
     trigger('newapplication', [
       state('*', style({
@@ -65,7 +67,8 @@ export class NewApplicationComponent implements OnInit {
   constructor(private _httpService: NewApplicationService,
               private _fb: FormBuilder,
               private location: Location,
-              private deviceThumbService: DeviceThumbService,
+              private deviceThumbService: DevicesService,
+              private imagesService: ImagesService,
               private applicationService: ApplicationService,
               private route: ActivatedRoute,
               private newApplicationService: NewApplicationService) {
@@ -108,7 +111,7 @@ export class NewApplicationComponent implements OnInit {
       .startWith('')
       .debounce(() => Observable.interval(200))
       .distinctUntilChanged()
-      .flatMap(term => this.applicationService.getImages());
+      .flatMap(term => this.imagesService.getImages());
     this.listOfImages.subscribe(images => {
       this.filteredImages = images;
       entitiesReady[1] = true;

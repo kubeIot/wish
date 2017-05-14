@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by skylele on 3.3.17.
  */
 var core_1 = require("@angular/core");
-var deviceThumb_service_1 = require("./deviceThumb.service");
+var deviceThumb_service_1 = require("../devices/devices.service");
 var DeviceThumbComponent = (function () {
     function DeviceThumbComponent() {
     }
@@ -28,7 +28,7 @@ DeviceThumbComponent = __decorate([
         moduleId: module.id,
         selector: 'device-thumb',
         templateUrl: 'deviceThumb.component.html',
-        providers: [deviceThumb_service_1.DeviceThumbService],
+        providers: [deviceThumb_service_1.DevicesService],
         styleUrls: ['../../../assets/css/device.css']
     })
 ], DeviceThumbComponent);

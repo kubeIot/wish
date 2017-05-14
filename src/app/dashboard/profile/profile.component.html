@@ -17,7 +17,9 @@
       </div>
       <div class="profile-status col-lg-9 col-md-7 col-sm-6 col-xs-12" >
         <h3 class="title">Username: {{user?.username}}</h3>
-        <p class="category">Email: {{user?.email}}</p>
+        <p class="category">Email: {{user?.email}}
+          <span *ngIf="!user?.email_verified" style="color: red"> <br/> Please Verify your E-Mail!</span>
+        </p>
         <p class="category">Last Logged In: {{user?.last_logged_in}}</p>
         <p class="profile-description">Welcome to the application.</p>
         <hr>
